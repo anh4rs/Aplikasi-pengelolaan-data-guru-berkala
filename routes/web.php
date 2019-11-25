@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin/index', 'adminController@index')->name('adminIndex');
 
+//halaman data sekolah
+Route::get('/sekolah/index', 'adminController@sekolahIndex')->name('sekolahIndex');
