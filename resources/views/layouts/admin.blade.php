@@ -25,42 +25,67 @@
       </a>
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-          <li class="nav-item  class="active">
-          <a class=" nav-link active " href="{{Route('adminIndex')}}"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
+          <li class="nav-item">
+            <a class="nav-link " href="{{Route('golonganIndex')}}">
+              <i class="ni ni-bullet-list-67 "></i> golongan
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{Route('jabatanIndex')}}">
+              <i class="ni ni-bullet-list-67 "></i> Jabatan
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link " href="{{Route('sekolahIndex')}}">
-              <i class="ni ni-planet text-blue"></i> Sekolah
+              <i class="ni ni-building "></i> Sekolah
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link " href="{{Route('sekolahIndex')}}">
+              <i class="ni ni-book-bookmark "></i> Mata Pelajaran
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
+            <a class="nav-link " href="{{Route('sekolahIndex')}}">
+              <i class="ni ni-single-02 "></i> Guru
             </a>
           </li>
         </ul>
         <hr class="my-3">
-        <h6 class="navbar-heading text-muted">Documentation</h6>
+        <h6 class="navbar-heading text-muted">Berkala</h6>
         <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-              <i class="ni ni-spaceship"></i> Getting started
+        <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="ni ni-satisfied"></i> Data Gajih Guru
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-              <i class="ni ni-palette"></i> Foundation
+            <a class="nav-link" href="#">
+              <i class="ni ni-archive-2"></i> Data Permohonan
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-              <i class="ni ni-ui-04"></i> Components
+            <a class="nav-link" href="">
+              <i class="ni ni-paper-diploma"></i> Jenjang karir
+            </a>
+          </li>
+        </ul>
+        <hr class="my-3">
+        <h6 class="navbar-heading text-muted">Dinas pendidikan</h6>
+        <ul class="navbar-nav mb-md-3">
+        <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="ni ni-single-copy-04"></i> Berita
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="ni ni-circle-08"></i> Karyawan
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="ni ni-active-40"></i> Pejabat Struktural
             </a>
           </li>
         </ul>
@@ -136,7 +161,6 @@
   <script src="{{asset('admin/js/argon-dashboard.min.js?v=1.1.0')}}"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="{{asset('js/datatable/dataTable.bootstrap.js')}}"></script>
-  <script src="{{asset('js/datatable/jquery-3.3.1.js')}}"></script>
   <script src="{{asset('js/datatable/jquery.dataTable.js')}}"></script>
 @yield('script')
   <script>
