@@ -29,3 +29,6 @@ Route::get('/jabatan/index', 'adminController@jabatanIndex')->name('jabatanIndex
 
 //halaman data sekolah
 Route::get('/sekolah/index', 'adminController@sekolahIndex')->name('sekolahIndex');
+
+//halaman data Mata Pelajaran
+Route::get('/mp/index', 'adminController@mpIndex')->name('mpIndex');

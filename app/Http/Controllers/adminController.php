@@ -21,4 +21,8 @@ class adminController extends Controller
     public function sekolahIndex(){
         return view('admin.sekolah.index');
     }
+
+    public function mpIndex(){
+        return view('admin.mataPelajaran.index');
+    }
 }

@@ -41,7 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('sekolahIndex')}}">
+            <a class="nav-link " href="{{Route('mpIndex')}}">
               <i class="ni ni-book-bookmark "></i> Mata Pelajaran
             </a>
           </li>
