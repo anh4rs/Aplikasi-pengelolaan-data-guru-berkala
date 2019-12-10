@@ -78,4 +78,24 @@ class JabatanController extends APIController
         Redis::set("jabatan:$id", $jabatan);
         return $this->returnController("ok", $jabatan);
     }
+
+    public function delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $jabatan = jabatan::find($id);
+        if (!$jabatan) {
+            return $this->returnController("error", "failed find data jabatan");
+        }
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+        $delete = $jabatan->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data jabatan");
+        }
+        Redis::del("jabatan:all");
+        Redis::del("jabatan:$id");
+        return $this->returnController("ok", "success delete data jabatan");
+    }
 }
