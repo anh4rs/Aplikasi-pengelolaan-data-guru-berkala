@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Golongan extends Model
 {
-    //
+    protected $fillable = [
+        'uuid','kode_golongan', 'nama'
+    ];
+
+    protected $hidden = [
+        'id'
+    ];
 }
