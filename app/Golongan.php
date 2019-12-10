@@ -13,4 +13,9 @@ class Golongan extends Model
     protected $hidden = [
         'id'
     ];
+
+    public function jabatan()
+    {
+        return $this->HasMany('App\Jabatan');
+    }
 }
