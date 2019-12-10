@@ -11,6 +11,6 @@ class Jabatan extends Model
     ];
 
     protected $hidden = [
-        'id'
+        'id','golongan_id'
     ];
 }
