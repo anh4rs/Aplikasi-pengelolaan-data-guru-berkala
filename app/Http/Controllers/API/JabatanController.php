@@ -37,4 +37,26 @@ class JabatanController extends APIController
         }
         return $this->returnController("ok", $jabatan);
     }
+
+    public function create(Request $req){
+        // $jabatan = jabatan::create($req->all());
+        $jabatan = new jabatan;
+        $jabatan->kode_jabatan = $req->kode_jabatan;
+        $jabatan->jabatan = $req->jabatan;
+        // decrypt bidang id
+        $jabatan->golongan_id = Hcrypt::decrypt($req->golongan_id);
+        $jabatan->save();
+        //set uuid
+        $jabatan_id = $jabatan->id;
+        $uuid = HCrypt::encrypt($jabatan_id);
+        $setuuid = jabatan::findOrFail($jabatan_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$jabatan) {
+            return $this->returnController("error", "failed create data jabatan");
+        }
+        Redis::del("jabatan:all");
+        Redis::set("jabatan:all", $jabatan);
+        return $this->returnController("ok", $jabatan);
+    }
 }
