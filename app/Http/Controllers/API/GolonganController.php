@@ -35,4 +35,20 @@ class GolonganController extends APIController
         }
         return $this->returnController("ok", $golongan);
     }
+
+    public function create(Request $req){
+        $golongan = golongan::create($req->all());
+        //set uuid
+        $golongan_id = $golongan->id;
+        $uuid = HCrypt::encrypt($golongan_id);
+        $setuuid = golongan::findOrFail($golongan_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$golongan) {
+            return $this->returnController("error", "failed create data golongan");
+        }
+        Redis::del("golongan:all");
+        Redis::set("golongan:all", $golongan);
+        return $this->returnController("ok", $golongan);
+    }
 }
