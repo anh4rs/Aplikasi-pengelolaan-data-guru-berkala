@@ -51,4 +51,23 @@ class GolonganController extends APIController
         Redis::set("golongan:all", $golongan);
         return $this->returnController("ok", $golongan);
     }
+
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $golongan = golongan::findOrFail($id);
+
+        $golongan->kode_golongan    = $req->kode_golongan;
+        $golongan->nama    = $req->nama;
+        
+        $golongan->update();
+        if (!$golongan) {
+            return $this->returnController("error", "failed find data golongan");
+        }
+        Redis::del("golongan:all");
+        Redis::set("golongan:$id", $golongan);
+        return $this->returnController("ok", $golongan);
+    }
 }
