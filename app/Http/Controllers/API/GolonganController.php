@@ -70,4 +70,24 @@ class GolonganController extends APIController
         Redis::set("golongan:$id", $golongan);
         return $this->returnController("ok", $golongan);
     }
+
+    public function delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $golongan = golongan::findOrFail($id);
+        if (!$golongan) {
+            return $this->returnController("error", "failed find data golongan");
+        }
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+        $delete = $golongan->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data golongan");
+        }
+        Redis::del("golongan:all");
+        Redis::del("golongan:$id");
+        return $this->returnController("ok", "success delete data golongan");
+    }
 }
