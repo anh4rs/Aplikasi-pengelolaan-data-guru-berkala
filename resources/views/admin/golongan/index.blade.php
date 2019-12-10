@@ -27,29 +27,12 @@
               <table id="datatable" class="table align-items-center table-flush text-center">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">golongan</th>
-                    <th scope="col">Keterangan </th>
+                    <th scope="col">Kode gologan</th>
+                    <th scope="col">Nama </th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                   <td>II/a</td>
-                    <td>
-                      Anggota
-                    </td>
-                    <td>
-                    <button class="btn btn-sm  btn-outline-success" type="button">
-	                    <span class="btn-inner--icon">detail</span>
-                    </button>
-                    <button class="btn btn-sm  btn-outline-primary" type="button">
-	                    <span class="btn-inner--icon">edit</span>
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger" type="button">
-	                    <span class="btn-inner--icon">hapus</span>
-                    </button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -71,11 +54,11 @@
             <div class="modal-body">
                 <form action="" method="post">
                     <div class="form-group">
-                        <label for="golongan">Golongan</label>
+                        <label for="golongan">Kode Golongan</label>
                         <input type="text" class="form-control" name="golongan" id="golongan">
                     </div>
                     <div class="form-group">
-                        <label for="golongan">Keterangan</label>
+                        <label for="golongan">Nama </label>
                         <input type="text" class="form-control" name="keterangan" id="keterangan">
                     </div>
                 </form> 
@@ -90,14 +73,142 @@
 </div>
 @endsection
 @section('script')
+
 <script>
+function hapus(uuid, nama){
+    var csrf_token=$('meta[name="csrf_token"]').attr('content');
+    Swal.fire({
+                title: 'apa anda yakin?',
+                text: " Menghapus  Data golongan " + nama,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'hapus data',
+                cancelButtonText: 'batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url : "{{ url('/api/golongan')}}" + '/' + uuid,
+                        type : "POST",
+                        data : {'_method' : 'DELETE', '_token' :csrf_token},
+                        success: function (response) {
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    $('#datatable').DataTable().ajax.reload(null, false);
+                },
+            })
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                'Dibatalkan',
+                'data batal dihapus',
+                'error'
+                )
+            }
+        })
+    }
+    $('#tambah').click(function(){
+        $('.modal-title').text('Tambah Data');
+        $('#kode_golongan').val('');
+        $('#nama').val('');  
+        $('#btn-form').text('Simpan Data');
+        $('#mediumModal').modal('show');
+    })
+    function edit(uuid){
+        $.ajax({
+            type: "GET",
+            url: "{{ url('/api/golongan')}}" + '/' + uuid,
+            beforeSend: false,
+            success : function(returnData) {
+                $('.modal-title').text('Edit Data');
+                $('#id').val(returnData.data.uuid);
+                $('#kode_golongan').val(returnData.data.kode_golongan);
+                $('#nama').val(returnData.data.nama);
+                $('#btn-form').text('Ubah Data');
+                $('#mediumModal').modal('show');
+            }
+        })
+    }
 $(document).ready(function() {
-    $('#datatable').DataTable();
-} );
-$('#tambah').click(function(){
-    $('.modal-title').text('Tambah Data');
-    $('#btn-form').text('Simpan Data');
-    $('#mediumModal').modal('show');
-});
-</script>
+    $('#datatable').DataTable( {
+        responsive: true,
+        processing: true,
+        serverSide: false,
+        searching: true,
+        ajax: {
+            "type": "GET",
+            "url": "{{route('API.golongan.get')}}",
+            "dataSrc": "data",
+            "contentType": "application/json; charset=utf-8",
+            "dataType": "json",
+            "processData": true
+        },
+        columns: [
+            {"data": "kode_golongan"},
+            {"data": "nama"},
+            {data: null , render : function ( data, type, row, meta ) {
+                var uuid = row.uuid;
+                var nama = row.nama;
+                return type === 'display'  ?
+                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+            data;
+            }}
+        ]
+    });
+    $("form").submit(function (e) {
+        e.preventDefault()
+        var form = $('#modal-body form');
+        if($('.modal-title').text() == 'Edit Data'){
+            var url = '{{route("API.golongan.update", '')}}'
+            var id = $('#id').val();
+            $.ajax({
+                url: url+'/'+id,
+                type: "put",
+                data: $(this).serialize(),
+                success: function (response) {
+                    form.trigger('reset');
+                    $('#mediumModal').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error:function(response){
+                    console.log(response);
+                }
+            })
+        }else{
+            $.ajax({
+                url: "{{Route('API.golongan.create')}}",
+                type: "post",
+                data: $(this).serialize(),
+                success: function (response) {
+                    form.trigger('reset');
+                    $('#mediumModal').modal('hide');
+                    $('#datatable').DataTable().ajax.reload();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Data Berhasil Disimpan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error:function(response){
+                    console.log(response);
+                }
+            })
+        }
+    } );
+    } );
+    </script>
 @endsection
