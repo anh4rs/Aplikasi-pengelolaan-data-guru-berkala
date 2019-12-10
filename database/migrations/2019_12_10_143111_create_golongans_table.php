@@ -17,7 +17,7 @@ class CreateGolongansTable extends Migration
             $table->bigIncrements('id');
             $table->text('uuid')->nullable();
             $table->string('kode_golongan')->length(25);
-            $table->string('nama')->length(100);
+            $table->string('golongan')->length(100);
             $table->timestamps();
         });
     }
