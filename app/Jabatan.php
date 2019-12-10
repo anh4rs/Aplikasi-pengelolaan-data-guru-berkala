@@ -13,4 +13,9 @@ class Jabatan extends Model
     protected $hidden = [
         'id','golongan_id'
     ];
+
+    public function golongan()
+    {
+        return $this->belongsTo('App\Golongan');
+    }
 }
