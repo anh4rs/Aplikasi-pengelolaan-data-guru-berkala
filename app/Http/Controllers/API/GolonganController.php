@@ -60,7 +60,7 @@ class GolonganController extends APIController
         $golongan = golongan::findOrFail($id);
 
         $golongan->kode_golongan    = $req->kode_golongan;
-        $golongan->nama    = $req->nama;
+        $golongan->golongan    = $req->golongan;
         
         $golongan->update();
         if (!$golongan) {
