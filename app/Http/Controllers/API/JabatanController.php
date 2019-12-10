@@ -43,7 +43,7 @@ class JabatanController extends APIController
         $jabatan = new jabatan;
         $jabatan->kode_jabatan = $req->kode_jabatan;
         $jabatan->jabatan = $req->jabatan;
-        // decrypt bidang id
+        // decrypt golongan id
         $jabatan->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $jabatan->save();
         //set uuid
@@ -57,6 +57,25 @@ class JabatanController extends APIController
         }
         Redis::del("jabatan:all");
         Redis::set("jabatan:all", $jabatan);
+        return $this->returnController("ok", $jabatan);
+    }
+
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $jabatan = jabatan::findOrFail($id);
+        $jabatan->kode_jabatan     = $req->kode_jabatan;
+        $jabatan->jabatan    = $req->jabatan;
+        $jabatan->golongan_id = Hcrypt::decrypt($req->golongan_id);
+        $jabatan->update();
+        if (!$jabatan) {
+            return $this->returnController("error", "failed find data jabatan");
+        }
+        $jabatan = jabatan::with('golongan')->where('id',$id)->first();
+        Redis::del("jabatan:all");
+        Redis::set("jabatan:$id", $jabatan);
         return $this->returnController("ok", $jabatan);
     }
 }
