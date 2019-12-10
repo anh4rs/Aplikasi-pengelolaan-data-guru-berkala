@@ -26,6 +26,14 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'JabatanController@update')->name('update');
         Route::delete('{uuid}', 'JabatanController@delete')->name('delete');
         });    
+    Route::prefix('sekolah')->name('sekolah.')->group(function(){
+        Route::get('', 'SekolahController@get')->name('get');
+        Route::get('{uuid}', 'SekolahController@find')->name('find');
+        Route::post('', 'SekolahController@create')->name('create');
+        Route::put('{uuid}', 'SekolahController@update')->name('update');
+        Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
+        });    
+
 });
 
 Route::get('/', function () {
