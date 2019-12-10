@@ -15,6 +15,15 @@ class CreateSekolahsTable extends Migration
     {
         Schema::create('sekolahs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('uuid')->nullable();
+            $table->string('NPSN')->length(20);
+            $table->string('status')->length(20);
+            $table->string('b_pendidikan')->length(20);
+            $table->string('status_pemilik')->length(50);
+            $table->string('sk')->length(50);
+            $table->date('tgl_sk');
+            $table->string('sk_izin')->length(50);
+            $table->date('tgl_sk_izin');
             $table->timestamps();
         });
     }
