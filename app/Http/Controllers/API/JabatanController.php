@@ -21,4 +21,20 @@ class JabatanController extends APIController
         }
         return $this->returnController("ok", $jabatan);
     }
+
+    public function find($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $jabatan = Redis::get("jabatan:$id");
+        if (!$jabatan) {
+            $jabatan = jabatan::with('golongan')->where('id',$id)->first();
+            if (!$jabatan){
+                return $this->returnController("error", "failed find data jabatan");
+            }
+            Redis::set("jabatan:$id", $jabatan);
+        }
+        return $this->returnController("ok", $jabatan);
+    }
 }
