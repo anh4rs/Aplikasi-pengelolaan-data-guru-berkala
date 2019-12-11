@@ -13,7 +13,7 @@ class SekolahController extends APIController
     public function get(){
         $sekolah = json_decode(redis::get("sekolah::all"));
         if (!$sekolah) {
-            $sekolah = sekolah::with('bidang')->get();
+            $sekolah = sekolah::all();
             if (!$sekolah) {
                 return $this->returnController("error", "failed get sekolah data");
             }
