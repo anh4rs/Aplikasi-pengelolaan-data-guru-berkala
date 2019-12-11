@@ -53,21 +53,21 @@
             </div>    
             <div class="modal-body">
                 <form action="" method="post">
+                <input type="hidden" class="form-control" name="id" id="id">
                     <div class="form-group">
                         <label for="golongan">Kode Golongan</label>
-                        <input type="text" class="form-control" name="golongan" id="golongan">
+                        <input type="text" class="form-control" name="kode_golongan" id="kode_golongan">
                     </div>
                     <div class="form-group">
                         <label for="golongan">Nama </label>
-                        <input type="text" class="form-control" name="keterangan" id="keterangan">
+                        <input type="text" class="form-control" name="golongan" id="golongan">
                     </div>
-                </form> 
             </div>   
             <div class="modal-footer">
                 <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
-                <button type="button" id="btn-form" class="btn btn-primary"></button>
+                <button type="submit" id="btn-form" class="btn btn-primary"></button>
             </div>
-            
+            </form>    
         </div>
     </div>
 </div>
@@ -115,7 +115,7 @@ function hapus(uuid, nama){
     $('#tambah').click(function(){
         $('.modal-title').text('Tambah Data');
         $('#kode_golongan').val('');
-        $('#nama').val('');  
+        $('#golongan').val('');  
         $('#btn-form').text('Simpan Data');
         $('#mediumModal').modal('show');
     })
@@ -128,7 +128,7 @@ function hapus(uuid, nama){
                 $('.modal-title').text('Edit Data');
                 $('#id').val(returnData.data.uuid);
                 $('#kode_golongan').val(returnData.data.kode_golongan);
-                $('#nama').val(returnData.data.nama);
+                $('#golongan').val(returnData.data.golongan);
                 $('#btn-form').text('Ubah Data');
                 $('#mediumModal').modal('show');
             }
@@ -150,12 +150,12 @@ $(document).ready(function() {
         },
         columns: [
             {"data": "kode_golongan"},
-            {"data": "nama"},
+            {"data": "golongan"},
             {data: null , render : function ( data, type, row, meta ) {
                 var uuid = row.uuid;
                 var nama = row.nama;
                 return type === 'display'  ?
-                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"> edit</i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash">hapus</i></button>':
             data;
             }}
         ]

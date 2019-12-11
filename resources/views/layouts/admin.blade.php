@@ -162,6 +162,8 @@
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="{{asset('js/datatable/dataTable.bootstrap.js')}}"></script>
   <script src="{{asset('js/datatable/jquery.dataTable.js')}}"></script>
+  <script src="{{asset('js/sweetalert/sweetalert.all.min.js')}}"></script>
+
 @yield('script')
   <script>
     window.TrackJS &&
