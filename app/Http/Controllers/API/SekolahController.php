@@ -53,4 +53,23 @@ class SekolahController extends APIController
         Redis::set("sekolah:all", $sekolah);
         return $this->returnController("ok", $sekolah);
     }
+
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $sekolah = Sekolah::findOrFail($id);
+
+        if (!$sekolah) {
+            return $this->returnController("error", "failed find data sekolah");
+        
+        }
+        $golongan->fill($req->all())->save();
+
+        Redis::del("sekolah:all");
+        Redis::set("sekolah:$id", $sekolah);
+        return $this->returnController("ok", $sekolah);
+    }
 }

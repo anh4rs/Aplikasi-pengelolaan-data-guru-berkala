@@ -59,15 +59,15 @@ class GolonganController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
+
         $golongan = golongan::findOrFail($id);
 
-        $golongan->kode_golongan    = $req->kode_golongan;
-        $golongan->golongan    = $req->golongan;
-        
-        $golongan->update();
         if (!$golongan) {
             return $this->returnController("error", "failed find data golongan");
         }
+        
+        $golongan->fill($req->all())->save();
+
         Redis::del("golongan:all");
         Redis::set("golongan:$id", $golongan);
         return $this->returnController("ok", $golongan);
