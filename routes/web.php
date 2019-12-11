@@ -59,6 +59,7 @@ Route::get('/golongan/cetak', 'adminController@golonganCetak')->name('golonganCe
 
 //halaman data jabatan
 Route::get('/jabatan/index', 'adminController@jabatanIndex')->name('jabatanIndex');
+Route::get('/jabatan/cetak', 'adminController@jabatanCetak')->name('jabatanCetak');
 
 //halaman data sekolah
 Route::get('/sekolah/index', 'adminController@sekolahIndex')->name('sekolahIndex');

@@ -13,10 +13,8 @@
             <div class="card-header border-0">
               <h3 class="mb-0">Tabel Data Jabatan</h3>
               <div class="text-right">
-              <button class="btn btn-icon btn-sm btn-outline-info" type="button">
-	            <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
-                <span class="btn-inner--text">Cetak Laporan</span>
-              </button>
+              <a href="{{Route('jabatanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+                <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
 	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
                 <span class="btn-inner--text">Tambah Data</span>
