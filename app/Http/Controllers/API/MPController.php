@@ -38,4 +38,20 @@ class MPController extends APIController
         return $this->returnController("ok", $mata_pelajaran);
     }
 
+    public function create(Request $req){
+        $mata_pelajaran = mata_pelajaran::create($req->all());
+        //set uuid
+        $mata_pelajaran_id = $mata_pelajaran->id;
+        $uuid = HCrypt::encrypt($mata_pelajaran_id);
+        $setuuid = mata_pelajaran::findOrFail($mata_pelajaran_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$mata_pelajaran) {
+            return $this->returnController("error", "failed create data mata_pelajaran");
+        }
+        Redis::del("mata_pelajaran:all");
+        Redis::set("mata_pelajaran:all", $mata_pelajaran);
+        return $this->returnController("ok", $mata_pelajaran);
+    }
+
 }
