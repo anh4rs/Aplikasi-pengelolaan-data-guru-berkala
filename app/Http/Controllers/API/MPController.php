@@ -54,4 +54,23 @@ class MPController extends APIController
         return $this->returnController("ok", $mata_pelajaran);
     }
 
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $mata_pelajaran = mata_pelajaran::findOrFail($id);
+
+        if (!$mata_pelajaran) {
+            return $this->returnController("error", "failed find data mata_pelajaran");
+        }
+        
+        $mata_pelajaran->fill($req->all())->save();
+
+        Redis::del("mata_pelajaran:all");
+        Redis::set("mata_pelajaran:$id", $mata_pelajaran);
+        return $this->returnController("ok", $mata_pelajaran);
+    }
+
 }
