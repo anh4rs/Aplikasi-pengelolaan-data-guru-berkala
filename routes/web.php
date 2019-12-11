@@ -62,6 +62,7 @@ Route::get('/admin/index', 'adminController@index')->name('adminIndex');
 
 //halaman data golongan
 Route::get('/golongan/index', 'adminController@golonganIndex')->name('golonganIndex');
+Route::get('/golongan/cetak', 'adminController@golonganCetak')->name('golonganCetak');
 
 //halaman data jabatan
 Route::get('/jabatan/index', 'adminController@jabatanIndex')->name('jabatanIndex');
