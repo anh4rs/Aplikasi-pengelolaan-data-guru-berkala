@@ -53,7 +53,7 @@ class GuruController extends APIController
         $guru->status = $req->status;
 
         $guru->save();
-        
+
         //set uuid
         $guru_id = $guru->id;
         $uuid = HCrypt::encrypt($guru_id);
@@ -65,6 +65,25 @@ class GuruController extends APIController
         }
         Redis::del("guru:all");
         Redis::set("guru:all", $guru);
+        return $this->returnController("ok", $guru);
+    }
+
+    public function update($uuid, Request $req){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $guru = guru::findOrFail($id);
+        $guru->kode_guru     = $req->kode_guru;
+        $guru->nama    = $req->nama;
+        $guru->bidang_id = Hcrypt::decrypt($req->bidang_id);
+        $guru->update();
+        if (!$guru) {
+            return $this->returnController("error", "failed find data guru");
+        }
+        $guru = guru::with('golongan','jabatan','sekolah','mata_pelajaran')->where('id',$id)->first();
+        Redis::del("guru:all");
+        Redis::set("guru:$id", $guru);
         return $this->returnController("ok", $guru);
     }
 }
