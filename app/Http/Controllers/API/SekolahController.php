@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Sekolah;
+use HCrypt;
+use Illuminate\Support\Facades\Redis;
 
-class SekolahController extends Controller
+class SekolahController extends APIController
 {
     //
 }
