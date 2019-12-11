@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Jabatan extends Model
 {
     protected $fillable = [
-        'golongan_id','uuid','kode_jabatan', 'jabatan'
+        'uuid','kode_jabatan', 'jabatan'
     ];
 
     protected $hidden = [
         'id','golongan_id'
     ];
 
-    public function golongan()
-    {
-        return $this->belongsTo('App\Golongan');
-    }
+    // public function golongan()
+    // {
+    //     return $this->belongsTo('App\Golongan');
+    // }
 }

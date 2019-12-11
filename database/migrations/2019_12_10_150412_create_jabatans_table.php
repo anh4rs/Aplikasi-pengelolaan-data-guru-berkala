@@ -15,12 +15,10 @@ class CreateJabatansTable extends Migration
     {
         Schema::create('jabatans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('golongan_id');
             $table->text('uuid')->nullable();
             $table->string('kode_jabatan')->length(25);
             $table->string('jabatan')->length(100);
             $table->timestamps();
-            $table->foreign('golongan_id')->references('id')->on('golongans')->onDelete('cascade');
         });
     }
 

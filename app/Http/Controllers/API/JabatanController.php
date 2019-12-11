@@ -13,7 +13,7 @@ class JabatanController extends APIController
     public function get(){
         $jabatan = json_decode(redis::get("jabatan::all"));
         if (!$jabatan) {
-            $jabatan = jabatan::with('golongan')->get();
+            $jabatan = jabatan::all();
             if (!$jabatan) {
                 return $this->returnController("error", "failed get jabatan data");
             }
@@ -29,7 +29,7 @@ class JabatanController extends APIController
         }
         $jabatan = Redis::get("jabatan:$id");
         if (!$jabatan) {
-            $jabatan = jabatan::with('golongan')->where('id',$id)->first();
+            $jabatan = jabatan::find($id);
             if (!$jabatan){
                 return $this->returnController("error", "failed find data jabatan");
             }
@@ -39,13 +39,8 @@ class JabatanController extends APIController
     }
 
     public function create(Request $req){
-        // $jabatan = jabatan::create($req->all());
-        $jabatan = new jabatan;
-        $jabatan->kode_jabatan = $req->kode_jabatan;
-        $jabatan->jabatan = $req->jabatan;
-        // decrypt golongan id
-        $jabatan->golongan_id = Hcrypt::decrypt($req->golongan_id);
-        $jabatan->save();
+        $jabatan = jabatan::create($req->all());
+        
         //set uuid
         $jabatan_id = $jabatan->id;
         $uuid = HCrypt::encrypt($jabatan_id);
@@ -65,15 +60,15 @@ class JabatanController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
+       
         $jabatan = jabatan::findOrFail($id);
-        $jabatan->kode_jabatan     = $req->kode_jabatan;
-        $jabatan->jabatan    = $req->jabatan;
-        $jabatan->golongan_id = Hcrypt::decrypt($req->golongan_id);
-        $jabatan->update();
+
         if (!$jabatan) {
             return $this->returnController("error", "failed find data jabatan");
         }
-        $jabatan = jabatan::with('golongan')->where('id',$id)->first();
+
+        $jabatan->fill($req->all())->save();
+
         Redis::del("jabatan:all");
         Redis::set("jabatan:$id", $jabatan);
         return $this->returnController("ok", $jabatan);
