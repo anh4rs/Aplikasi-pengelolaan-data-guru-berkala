@@ -37,4 +37,20 @@ class SekolahController extends APIController
         }
         return $this->returnController("ok", $sekolah);
     }
+
+    public function create(Request $req){
+        $sekolah = sekolah::create($req->all());
+        //set uuid
+        $sekolah_id = $sekolah->id;
+        $uuid = HCrypt::encrypt($sekolah_id);
+        $setuuid = sekolah::findOrFail($sekolah_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$sekolah) {
+            return $this->returnController("error", "failed create data sekolah");
+        }
+        Redis::del("sekolah:all");
+        Redis::set("sekolah:all", $sekolah);
+        return $this->returnController("ok", $sekolah);
+    }
 }
