@@ -37,4 +37,34 @@ class GuruController extends APIController
         }
         return $this->returnController("ok", $guru);
     }
+
+    public function create(Request $req){
+        // $seksi = Seksi::create($req->all());
+        $guru = new guru;
+        // decrypt foreign key id
+        $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
+        $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
+        $guru->sekolah_id = Hcrypt::decrypt($req->sekolah_id);
+        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);
+        $guru->telepon = $req->telepon;
+        $guru->tempat_lahir = $req->tempat_lahir;
+        $guru->tgl_lahir = $req->tgl_lahir;
+        $guru->alamat = $req->alamat;
+        $guru->status = $req->status;
+
+        $guru->save();
+        
+        //set uuid
+        $guru_id = $guru->id;
+        $uuid = HCrypt::encrypt($guru_id);
+        $setuuid = guru::findOrFail($guru_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->update();
+        if (!$guru) {
+            return $this->returnController("error", "failed create data guru");
+        }
+        Redis::del("guru:all");
+        Redis::set("guru:all", $guru);
+        return $this->returnController("ok", $guru);
+    }
 }
