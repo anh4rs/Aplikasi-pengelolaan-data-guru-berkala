@@ -15,6 +15,9 @@ class CreateMataPelajaransTable extends Migration
     {
         Schema::create('mata_pelajarans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('uuid')->nullable();
+            $table->string('kode_mp')->length(25);
+            $table->string('nama')->length(100);
             $table->timestamps();
         });
     }
