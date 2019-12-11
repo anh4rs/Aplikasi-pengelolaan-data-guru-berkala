@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table id="datatable" class="table align-items-center table-flush text-center">
+              <table id="datatable" class="table align-items-center table-striped text-center">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Kode gologan</th>
