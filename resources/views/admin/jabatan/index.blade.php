@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table id="datatable" class="table align-items-center table-flush text-center">
+              <table id="datatable" class="table table-striped align-items-center table-flush text-center">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Kode Jabatan</th>
@@ -54,20 +54,20 @@
             <div class="modal-body">
                 <form action="" method="post">
                     <div class="form-group">
+                        <input type="hidden" name="id" id="id">
                         <label for="jabatan">Kode Jabatan</label>
                         <input type="text" class="form-control" name="kode_jabatan" id="kode_jabatan">
                     </div>
                     <div class="form-group">
                         <label for="jabatan">Nama Jabatan</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input type="text" class="form-control" name="jabatan" id="jabatan">
                     </div>
-                </form> 
             </div>   
             <div class="modal-footer">
                 <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
-                <button type="button" id="btn-form" class="btn btn-primary"></button>
+                <button type="submit" id="btn-form" class="btn btn-primary"></button>
             </div>
-            
+        </form> 
         </div>
     </div>
 </div>
@@ -115,7 +115,7 @@ function hapus(uuid, nama){
     $('#tambah').click(function(){
         $('.modal-title').text('Tambah Data');
         $('#kode_jabatan').val('');
-        $('#nama').val('');  
+        $('#jabatan').val('');  
         $('#btn-form').text('Simpan Data');
         $('#mediumModal').modal('show');
     })
@@ -128,7 +128,7 @@ function hapus(uuid, nama){
                 $('.modal-title').text('Edit Data');
                 $('#id').val(returnData.data.uuid);
                 $('#kode_jabatan').val(returnData.data.kode_jabatan);
-                $('#nama').val(returnData.data.nama);
+                $('#jabatan').val(returnData.data.jabatan);
                 $('#btn-form').text('Ubah Data');
                 $('#mediumModal').modal('show');
             }
@@ -150,12 +150,12 @@ $(document).ready(function() {
         },
         columns: [
             {"data": "kode_jabatan"},
-            {"data": "nama"},
+            {"data": "jabatan"},
             {data: null , render : function ( data, type, row, meta ) {
                 var uuid = row.uuid;
-                var nama = row.nama;
+                var nama = row.jabatan;
                 return type === 'display'  ?
-                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i></button>':
+                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
             data;
             }}
         ]
