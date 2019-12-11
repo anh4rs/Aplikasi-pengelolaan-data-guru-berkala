@@ -40,6 +40,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'MPController@update')->name('update');
         Route::delete('{uuid}', 'MPController@delete')->name('delete');
         });    
+    Route::prefix('guru')->name('guru.')->group(function(){
+        Route::get('', 'GuruController@get')->name('get');
+        Route::get('{uuid}', 'GuruController@find')->name('find');
+        Route::post('', 'GuruController@create')->name('create');
+        Route::put('{uuid}', 'GuruController@update')->name('update');
+        Route::delete('{uuid}', 'GuruController@delete')->name('delete');
+        });    
 
 });
 
