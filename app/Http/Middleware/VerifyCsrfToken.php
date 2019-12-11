@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
-    ];
+        'api/*', //For All Route starting with api.
+        // 'your_url_here/', //For Specific url.
+   ];
 }
