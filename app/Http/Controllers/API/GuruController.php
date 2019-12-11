@@ -21,4 +21,20 @@ class GuruController extends APIController
         }
         return $this->returnController("ok", $guru);
     }
+
+    public function find($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $guru = Redis::get("guru:$id");
+        if (!$guru) {
+            $guru = guru::with('golongan','jabatan','sekolah','mata_pelajaran')->where('id',$id)->first();
+            if (!$guru){
+                return $this->returnController("error", "failed find data guru");
+            }
+            Redis::set("guru:$id", $guru);
+        }
+        return $this->returnController("ok", $guru);
+    }
 }
