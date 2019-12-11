@@ -33,6 +33,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'SekolahController@update')->name('update');
         Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
         });    
+    Route::prefix('mapel')->name('mapel.')->group(function(){
+        Route::get('', 'MPController@get')->name('get');
+        Route::get('{uuid}', 'MPController@find')->name('find');
+        Route::post('', 'MPController@create')->name('create');
+        Route::put('{uuid}', 'MPController@update')->name('update');
+        Route::delete('{uuid}', 'MPController@delete')->name('delete');
+        });    
 
 });
 
