@@ -73,4 +73,24 @@ class MPController extends APIController
         return $this->returnController("ok", $mata_pelajaran);
     }
 
+    public function delete($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $mata_pelajaran = mata_pelajaran::findOrFail($id);
+        if (!$mata_pelajaran) {
+            return $this->returnController("error", "failed find data mata_pelajaran");
+        }
+        // Need to check realational
+        // If there relation to other data, return error with message, this data has relation to other table(s)
+        $delete = $mata_pelajaran->delete();
+        if (!$delete) {
+            return $this->returnController("error", "failed delete data mata_pelajaran");
+        }
+        Redis::del("mata_pelajaran:all");
+        Redis::del("mata_pelajaran:$id");
+        return $this->returnController("ok", "success delete data mata_pelajaran");
+    }
+
 }
