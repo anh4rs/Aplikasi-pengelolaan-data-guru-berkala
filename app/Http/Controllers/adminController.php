@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use PDF;
 use Carbon\Carbon;
 Use App\golongan;
-Use App\jabatan;
+Use App\jabatan; 
 
 use Illuminate\Http\Request;
 
