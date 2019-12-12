@@ -6,7 +6,7 @@ use Carbon\Carbon;
 Use App\golongan;
 Use App\jabatan;
 Use App\sekolah; 
-
+Use App\mata_pelajaran; 
 
 use Illuminate\Http\Request;
 
@@ -54,5 +54,13 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.sekolahKeseluruhan', ['sekolah'=>$sekolah,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Sekolah Keseluruhan.pdf');
+    }
+
+    public function mpCetak(){
+        $mata_pelajaran=mata_pelajaran::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.mpKeseluruhan', ['mata_pelajaran'=>$mata_pelajaran,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data mata Pelajaran Keseluruhan.pdf');
     }
 }

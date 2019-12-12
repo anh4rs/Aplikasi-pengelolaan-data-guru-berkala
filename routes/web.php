@@ -75,3 +75,4 @@ Route::get('/sekolah/keseluruhanCetak', 'adminController@sekolahKeseluruhanCetak
 
 //halaman data Mata Pelajaran
 Route::get('/mp/index', 'adminController@mpIndex')->name('mpIndex');
+Route::get('/mp/cetak', 'adminController@mpCetak')->name('mpCetak');
