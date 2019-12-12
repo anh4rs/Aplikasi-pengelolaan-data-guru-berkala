@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use PDF;
 use Carbon\Carbon;
 Use App\golongan;
-Use App\jabatan; 
+Use App\jabatan;
+Use App\sekolah; 
+
 
 use Illuminate\Http\Request;
 
@@ -44,5 +46,13 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.jabatanKeseluruhan', ['jabatan'=>$jabatan,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data jabatan.pdf');
+    }
+
+    public function sekolahKeseluruhanCetak(){
+        $sekolah=sekolah::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.sekolahKeseluruhan', ['sekolah'=>$sekolah,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Sekolah Keseluruhan.pdf');
     }
 }

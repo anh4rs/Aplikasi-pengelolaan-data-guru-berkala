@@ -70,6 +70,8 @@ Route::get('/jabatan/cetak', 'adminController@jabatanCetak')->name('jabatanCetak
 
 //halaman data sekolah
 Route::get('/sekolah/index', 'adminController@sekolahIndex')->name('sekolahIndex');
+Route::get('/sekolah/keseluruhanCetak', 'adminController@sekolahKeseluruhanCetak')->name('sekolahKeseluruhanCetak');
+
 
 //halaman data Mata Pelajaran
 Route::get('/mp/index', 'adminController@mpIndex')->name('mpIndex');
