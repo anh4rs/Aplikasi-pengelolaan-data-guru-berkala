@@ -11,6 +11,27 @@ class Guru extends Model
     ];
 
     protected $hidden = [
-        'id','golongan_id','sekolah_id','jabatan_id','mata_pelajaran_id'
+        'id'
     ];
+
+    public function sekolah()
+    {
+     return $this->belongsTo('App\Sekolah');
+    }
+
+    public function jabatan()
+    {
+     return $this->belongsTo('App\Jabatan');
+    }
+
+    public function golongan()
+    {
+     return $this->belongsTo('App\Golongan');
+    }
+
+    public function mata_pelajaran()
+    {
+     return $this->belongsTo('App\Mata_pelajaran');
+    }
+
 }

@@ -21,6 +21,7 @@ class CreateGurusTable extends Migration
             $table->unsignedBigInteger('mata_pelajaran_id')->nullable();
             $table->text('uuid')->nullable();
             $table->string('NIP')->length(50);
+            $table->string('nama')->length(80);
             $table->string('telepon')->length(13);
             $table->string('tempat_lahir')->length(100);
             $table->date('tgl_lahir')->length(100);

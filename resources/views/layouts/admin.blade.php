@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('sekolahIndex')}}">
+            <a class="nav-link " href="{{Route('guruIndex')}}">
               <i class="ni ni-single-02 "></i> Guru
             </a>
           </li>

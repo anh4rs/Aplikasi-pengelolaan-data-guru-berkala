@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Golongan;
+use App\Guru;
 use HCrypt;
 
 class GuruController extends APIController
@@ -13,7 +13,7 @@ class GuruController extends APIController
     public function get(){
         $guru = json_decode(redis::get("guru::all"));
         if (!$guru) {
-            $guru = guru::all();
+            $guru = guru::with('sekolah','golongan','jabatan','mata_pelajaran')->get();
             if (!$guru) {
                 return $this->returnController("error", "failed get guru data");
             }
@@ -42,10 +42,13 @@ class GuruController extends APIController
         // $seksi = Seksi::create($req->all());
         $guru = new guru;
         // decrypt foreign key id
+        
         $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
         $guru->sekolah_id = Hcrypt::decrypt($req->sekolah_id);
-        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);
+        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);   
+        $guru->NIP = $req->NIP;
+        $guru->nama = $req->nama;
         $guru->telepon = $req->telepon;
         $guru->tempat_lahir = $req->tempat_lahir;
         $guru->tgl_lahir = $req->tgl_lahir;
