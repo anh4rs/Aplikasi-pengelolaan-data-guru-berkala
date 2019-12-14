@@ -13,7 +13,7 @@
             <div class="card-header border-0">
               <h3 class="mb-0">Tabel Data</h3>
               <div class="text-right"> 
-              <a href="" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+              <a href="{{Route('guruKeseluruhanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
 	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
@@ -25,9 +25,9 @@
               <table id="datatable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">Nama</th>
-                    <th scope="col">guru</th>
                     <th scope="col">NIP</th>
+                    <th scope="col">nama</th>
+                    <th scope="col">NPSN Sekolah</th>
                     <th scope="col">Telepon</th>
                     <th scope="col">Jabatan</th>
                     <th scope="col">Mata Pelajaran</th>
@@ -254,9 +254,10 @@ function hapus(uuid, nama){
                 $('#id').val(returnData.data.uuid);
                 $('#NIP').val(returnData.data.NIP);
                 $('#nama').val(returnData.data.nama);
+                $('#sekolah_id').val(returnData.data.sekolah.uuid); 
                 $('#golongan_id').val(returnData.data.golongan.uuid); 
                 $('#jabatan_id').val(returnData.data.jabatan.uuid);
-                $('#mata_pelajaran_id').val(returnData.data.mp.uuid);
+                $('#mata_pelajaran_id').val(returnData.data.mata_pelajaran.uuid);
                 $('#telepon').val(returnData.data.telepon);  
                 $('#tempat_lahir').val(returnData.data.tempat_lahir);
                 $('#tgl_lahir').val(returnData.data.tgl_lahir);
