@@ -110,158 +110,165 @@
 </div>
 @endsection
 @section('script')
-
-<script>
-function hapus(uuid, nama){
-    var csrf_token=$('meta[name="csrf_token"]').attr('content');
-    Swal.fire({
-                title: 'apa anda yakin?',
-                text: " Menghapus  Data sekolah " + nama,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'hapus data',
-                cancelButtonText: 'batal',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url : "{{ url('/api/sekolah')}}" + '/' + uuid,
-                        type : "POST",
-                        data : {'_method' : 'DELETE', '_token' :csrf_token},
-                        success: function (response) {
-                            Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Data Berhasil Dihapus',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    $('#datatable').DataTable().ajax.reload(null, false);
-                },
-            })
-            } else if (result.dismiss === swal.DismissReason.cancel) {
-                Swal.fire(
-                'Dibatalkan',
-                'data batal dihapus',
-                'error'
-                )
+    <script>
+        //fungsi hapus
+        hapus = (uuid, nama)=>{
+            let csrf_token=$('meta[name="csrf_token"]').attr('content');
+            Swal.fire({
+                        title: 'apa anda yakin?',
+                        text: " Menghapus  Data sekolah " + nama,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'hapus data',
+                        cancelButtonText: 'batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url : "{{ url('/api/sekolah')}}" + '/' + uuid,
+                                type : "POST",
+                                data : {'_method' : 'DELETE', '_token' :csrf_token},
+                                success: function (response) {
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Dihapus',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            $('#datatable').DataTable().ajax.reload(null, false);
+                        },
+                    })
+                    } else if (result.dismiss === swal.DismissReason.cancel) {
+                        Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                        )
+                    }
+                })
             }
-        })
-    }
-    $('#tambah').click(function(){
-        $('.modal-title').text('Tambah Data');
-        $('#NPSN').val('');
-        $('#status').val('');
-        $('#b_pendidikan').val('');  
-        $('#status_pemilik').val('');  
-        $('#sk').val('');
-        $('#tgl_sk').val('');    
-        $('#sk_izin').val('');
-        $('#tgl_sk_izin').val('');                
-        $('#btn-form').text('Simpan Data');
-        $('#mediumModal').modal('show');
-    })
-    function edit(uuid){
-        $.ajax({
-            type: "GET",
-            url: "{{ url('/api/sekolah')}}" + '/' + uuid,
-            beforeSend: false,
-            success : function(returnData) {
-                $('.modal-title').text('Edit Data');
-                $('#id').val(returnData.data.uuid);
-                $('#NPSN').val(returnData.data.NPSN);
-                $('#status').val(returnData.data.status);
-                $('#b_pendidikan').val(returnData.data.b_pendidikan); 
-                $('#status_pemilik').val(returnData.data.status_pemilik);
-                $('#sk').val(returnData.data.sk);
-                $('#tgl_sk').val(returnData.data.tgl_sk); 
-                $('#sk_izin').val(returnData.data.sk_izin);
-                $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);    
-                $('#btn-form').text('Ubah Data');
+    
+            //event btn tambah klik
+            $('#tambah').click(function(){
+                $('.modal-title').text('Tambah Data');
+                $('#NPSN').val('');
+                $('#status').val('');
+                $('#b_pendidikan').val('');  
+                $('#status_pemilik').val('');  
+                $('#sk').val('');
+                $('#tgl_sk').val('');    
+                $('#sk_izin').val('');
+                $('#tgl_sk_izin').val('');                
+                $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
+            })
+            //event btn edit klik         
+            edit = uuid =>{
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/sekolah')}}" + '/' + uuid,
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $('.modal-title').text('Edit Data');
+                        $('#id').val(returnData.data.uuid);
+                        $('#NPSN').val(returnData.data.NPSN);
+                        $('#status').val(returnData.data.status);
+                        $('#b_pendidikan').val(returnData.data.b_pendidikan); 
+                        $('#status_pemilik').val(returnData.data.status_pemilik);
+                        $('#sk').val(returnData.data.sk);
+                        $('#tgl_sk').val(returnData.data.tgl_sk); 
+                        $('#sk_izin').val(returnData.data.sk_izin);
+                        $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);    
+                        $('#btn-form').text('Ubah Data');
+                        $('#mediumModal').modal('show');
+                    }
+                })
             }
-        })
-    }
-$(document).ready(function() {
-    $('#datatable').DataTable( {
-        responsive: true,
-        processing: true,
-        serverSide: false,
-        searching: true,
-        ajax: {
-            "type": "GET",
-            "url": "{{route('API.sekolah.get')}}",
-            "dataSrc": "data",
-            "contentType": "application/json; charset=utf-8",
-            "dataType": "json",
-            "processData": true
-        },
-        columns: [
-            {"data": "NPSN"},
-            {"data": "status"},
-            {"data": "b_pendidikan"},
-            {"data": "status_pemilik"},
-            {"data": "sk"},
-            {"data": "sk_izin"},
-            {data: null , render : function ( data, type, row, meta ) {
-                var uuid = row.uuid;
-                var nama = row.NPSN;
-                return type === 'display'  ?
-                '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
-            data;
-            }}
-        ]
-    });
-    $("form").submit(function (e) {
-        e.preventDefault()
-        var form = $('#modal-body form');
-        if($('.modal-title').text() == 'Edit Data'){
-            var url = '{{route("API.sekolah.update", '')}}'
-            var id = $('#id').val();
-            $.ajax({
-                url: url+'/'+id,
-                type: "put",
-                data: $(this).serialize(),
-                success: function (response) {
-                    form.trigger('reset');
-                    $('#mediumModal').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Data Berhasil Tersimpan',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                },
-                error:function(response){
-                    console.log(response);
-                }
-            })
-        }else{
-            $.ajax({
-                url: "{{Route('API.sekolah.create')}}",
-                type: "post",
-                data: $(this).serialize(),
-                success: function (response) {
-                    form.trigger('reset');
-                    $('#mediumModal').modal('hide');
-                    $('#datatable').DataTable().ajax.reload();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Data Berhasil Disimpan',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                },
-                error:function(response){
-                    console.log(response);
-                }
-            })
-        }
-    } );
-    } );
+
+            //fungsi render datatable
+            $(document).ready(function() {
+                $('#datatable').DataTable( {
+                    responsive: true,
+                    processing: true,
+                    serverSide: false,
+                    searching: true,
+                    ajax: {
+                        "type": "GET",
+                        "url": "{{route('API.sekolah.get')}}",
+                        "dataSrc": "data",
+                        "contentType": "application/json; charset=utf-8",
+                        "dataType": "json",
+                        "processData": true
+                    },
+                    columns: [
+                        {"data": "NPSN"},
+                        {"data": "status"},
+                        {"data": "b_pendidikan"},
+                        {"data": "status_pemilik"},
+                        {"data": "sk"},
+                        {"data": "sk_izin"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let uuid = row.uuid;
+                            let nama = row.NPSN;
+                            return type === 'display'  ?
+                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
+                        data;
+                        }}
+                    ]
+                });
+
+                //event form submit
+                $("form").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                    if($('.modal-title').text() == 'Edit Data'){
+                        let url = '{{route("API.sekolah.update", '')}}'
+                        let id = $('#id').val();
+                        $.ajax({
+                            url: url+'/'+id,
+                            type: "put",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Tersimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }else{
+                        $.ajax({
+                            url: "{{Route('API.sekolah.create')}}",
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Disimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }
+                } );
+                } );
     </script>
 @endsection

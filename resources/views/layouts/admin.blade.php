@@ -7,7 +7,7 @@
   <title>
     Aplikasi Pengelolaan Data Guru Berkala
   </title>
-  <link href="{{asset('admin/img/brand/favicon.png')}}" rel="icon" type="image/png">
+  <link href="{{asset('img/logo.png')}}" rel="icon" type="image/png">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <link href="{{asset('admin/js/plugins/nucleo/css/nucleo.css')}}" rel="stylesheet" />
   <link href="{{asset('admin/js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
