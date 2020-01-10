@@ -125,6 +125,10 @@ Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
 Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
 });
 
+//middleware sekolah
+    Route::get('/adminSekolah/index', 'adminSekolahController@index')->name('adminSekolahIndex');
+//middleware sekolah
+
 Auth::routes();
 Route::get('/', 'adminController@depan')->name('depan');
 Route::get('/berita/all', 'adminController@beritaAll')->name('beritaAll');

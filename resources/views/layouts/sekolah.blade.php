@@ -23,19 +23,9 @@
       <a class="navbar-brand pt-0" href="{{Route('adminIndex')}}">
         <img src="{{asset('img/logo.png')}}" class="navbar-brand-img" alt="..."> Disdik Tapin
       </a>
-      <p style="text-align:center">Admin Disdik Tapin</p>
+      <p style="text-align:center">Admin Sekolah</p>
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link " href="{{Route('golonganIndex')}}">
-              <i class="ni ni-bullet-list-67 "></i> golongan
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{Route('jabatanIndex')}}">
-              <i class="ni ni-bullet-list-67 "></i> Jabatan
-            </a>
-          </li>
           <li class="nav-item">
             <a class="nav-link " href="{{Route('sekolahIndex')}}">
               <i class="ni ni-building "></i> Sekolah
@@ -68,25 +58,6 @@
           <li class="nav-item">
             <a class="nav-link" href="">
               <i class="ni ni-paper-diploma"></i> Jenjang karir
-            </a>
-          </li>
-        </ul>
-        <hr class="my-3">
-        <h6 class="navbar-heading text-muted">Dinas pendidikan</h6>
-        <ul class="navbar-nav mb-md-3">
-        <li class="nav-item">
-            <a class="nav-link" href="{{Route('beritaIndex')}}">
-              <i class="ni ni-single-copy-04"></i> Berita
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="ni ni-circle-08"></i> Karyawan
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{Route('pejabatStrukturalIndex')}}">
-              <i class="ni ni-active-40"></i> Pejabat Struktural
             </a>
           </li>
         </ul>
@@ -141,9 +112,6 @@
           </div>
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-              </li>
               <li class="nav-item">
                 <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
               </li>
