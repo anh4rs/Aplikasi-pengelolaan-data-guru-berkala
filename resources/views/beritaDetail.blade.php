@@ -35,127 +35,19 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
-    
-    <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image:url(depan/images/bg_1.jpg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-          <div class="col-md-7 ftco-animate">
-          	<span class="subheading">Aplikasi Pengelolaan</span>
-            <h1 class="mb-4">Data Guru berkala</h1>
-            <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Dinas Pendidikan Kabupaten Tapin</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
 
-      <div class="slider-item" style="background-image:url(depan/images/bg_2.jpg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-          <div class="col-md-7 ftco-animate">
-          	<span class="subheading">Todays Talent, Tommorow Success</span>
-            <h1 class="mb-4">We Help to Grow Your Business</h1>
-            <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Our Services</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
+    <section class="ftco-section bg-light">
+		<div class="container">
+            <img src="{{asset('/img/berita/'.$berita->foto)}}" alt="" style="width:1110px !important; height:600px !important;">
+            <h1 style="font-size:40px">{{$berita->judul}}</h1>
+            @php
+                $isi = $berita->isi;
+            @endphp
+            <p style="text-align:justify">{!! $isi !!}</p>
+		</div>
     </section>
+		
 
-		<section class="ftco-section">
-			<div class="container">
-				<div class="row d-flex">
-					<div class="col-md-5 order-md-last wrap-about align-items-stretch">
-						<div class="wrap-about-border ftco-animate">
-							<div class="img" style="background-image: url(depan/images/about.jpg); border"></div>
-							<div class="text">
-								<h3>Tujuan Aplikasi</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word.</p>
-								<p><a href="#" class="btn btn-primary py-3 px-4">Contact us</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-7 wrap-about pr-md-4 ftco-animate">
-          	<h2 class="mb-4">Tentang Aplikasi</h2>
-						<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word.</p>
-						<div class="row mt-5">
-							<div class="col-lg-6">
-								<div class="services active text-center">
-									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-collaboration"></span></div>
-									<div class="text media-body">
-										<h3>Organization</h3>
-										<p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
-									</div>
-								</div>
-								<div class="services text-center">
-									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-analysis"></span></div>
-									<div class="text media-body">
-										<h3>Risk Analysis</h3>
-										<p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="services text-center">
-									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-search-engine"></span></div>
-									<div class="text media-body">
-										<h3>Marketing Strategy</h3>
-										<p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
-									</div>
-								</div>
-								<div class="services text-center">
-									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-handshake"></span></div>
-									<div class="text media-body">
-										<h3>Capital Market</h3>
-										<p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="ftco-section bg-light">
-			<div class="container">
-				<div class="row justify-content-center mb-5 pb-2">
-          <div class="col-md-8 text-center heading-section ftco-animate">
-            <h2 class="mb-4">Berita</h2>
-          </div>
-        </div>
-				<div class="row">
-        @if($berita != null )
-            @foreach($berita as $b)
-              <div class="col-md-6 col-lg-4 ftco-animate">
-                <div class="blog-entry">
-                  <!-- <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url('/img/berita/'.$b->foto';"> -->
-                  <a href="#"><img width="342" class="block-20 d-flex align-items-end" src="{{asset('/img/berita/'.$b->foto)}}" alt=""></a>
-                  </a>
-                  <div class="text bg-white p-4">
-                    <h3 class="heading"><a href="#">{{$b->judul}}</a></h3>
-                    <p>{{$b->created_at}}</p>
-                    <div class="d-flex align-items-center mt-4">
-                      <p class="mb-0"><a href="{{Route('beritaDetail',['id'=> $b->id ])}}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
-                      <p class="ml-auto mb-0">
-                        <a href="#" class="mr-2">{{$b->user->name}}</a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            @endforeach
-          @endif
-        </div>
-        <div class="text-center">
-            <a href="" class="btn btn-primary">Lebih banyak Berita >></a>
-        </div>
-			</div>
-		</section>
 		
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">

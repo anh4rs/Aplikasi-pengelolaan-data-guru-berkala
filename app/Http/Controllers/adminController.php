@@ -8,11 +8,17 @@ Use App\jabatan;
 Use App\sekolah; 
 Use App\mata_pelajaran; 
 Use App\Guru; 
+Use App\Berita; 
 
 use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
+    public function depan(){
+        $berita = berita::paginate(3);
+        return view('welcome',compact('berita'));
+    }
+
     public function index(){
         return view('admin.index');
     }
@@ -43,6 +49,11 @@ class adminController extends Controller
 
     public function beritaIndex(){
         return view('admin.berita.index');
+    }
+
+    public function beritaDetail($id){
+        $berita = berita::findOrFail($id);
+        return view('beritaDetail',compact('berita'));
     }
 
     public function golonganCetak(){

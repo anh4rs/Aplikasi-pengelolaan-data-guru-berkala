@@ -71,11 +71,10 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+
+Route::get('/', 'adminController@depan')->name('depan');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -110,4 +109,5 @@ Route::get('/pejabatStruktural/keseluruhanCetak', 'adminController@pejabatStrukt
 
 //halaman data Mata Pelajaran
 Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
+Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
 Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
