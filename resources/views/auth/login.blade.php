@@ -9,8 +9,9 @@
               <div class=" text-center mt-2 mb-3"> <img src="{{asset('img/logo.png')}}" width="70" style="margin-bottom:10px"/> <p>Login</p></div>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form">
-                <div class="form-group mb-3">
+              <form method="POST" action="{{ route('login') }}">
+                  @csrf                
+                      <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
@@ -43,7 +44,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Masuk</button>
+                  <button type="submit" class="btn btn-primary my-4">Masuk</button>
                 </div>
               </form>
             </div>
