@@ -127,4 +127,7 @@ Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
 });
 
 Auth::routes();
+
 Route::get('/', 'adminController@depan')->name('depan');
+
+Route::get('/home', 'DashboardController@index')->name('home');
