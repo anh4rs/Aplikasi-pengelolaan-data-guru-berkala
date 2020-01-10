@@ -122,12 +122,11 @@ Route::get('/pejabatStruktural/keseluruhanCetak', 'adminController@pejabatStrukt
 
 //halaman data Mata Pelajaran
 Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
-Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
 Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
 });
 
 Auth::routes();
-
 Route::get('/', 'adminController@depan')->name('depan');
-
-Route::get('/home', 'DashboardController@index')->name('home');
+Route::get('/berita/all', 'adminController@beritaAll')->name('beritaAll');
+Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
+ 

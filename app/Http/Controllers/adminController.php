@@ -56,6 +56,11 @@ class adminController extends Controller
         return view('beritaDetail',compact('berita'));
     }
 
+    public function beritaAll(){
+        $berita = berita::all();
+        return view('beritaAll',compact('berita'));
+    }
+
     public function golonganCetak(){
         $golongan=golongan::all();
         $tgl= Carbon::now()->format('d-m-Y');
