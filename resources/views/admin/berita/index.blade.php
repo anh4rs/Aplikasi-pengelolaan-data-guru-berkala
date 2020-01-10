@@ -26,8 +26,8 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Judul</th>
-                    <th scope="col">Isi </th>
-                    <th scope="col">Tanggal</th>
+                    <th scope="col">Tanggal </th>
+                    <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -162,8 +162,8 @@
                     "processData": true
                 },
                 columns: [
-                    {"data": "created_at"},
                     {"data": "judul"},
+                    {"data": "created_at"},
                     {data: null , render : function ( data, type, row, meta ) {
                         let uuid = row.uuid;
                         let nama = row.nama;
