@@ -122,7 +122,7 @@
             })
 
             //event btn edit klik
-            edit(uuid){
+            edit =(uuid)=>{
                 $.ajax({
                     type: "GET",
                     url: "{{ url('/api/jabatan')}}" + '/' + uuid,
