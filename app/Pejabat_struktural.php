@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PejabatStruktural extends Model
+class Pejabat_struktural extends Model
 {
     protected $fillable = [
         'uuid','nama','NIP', 'jabatan'
