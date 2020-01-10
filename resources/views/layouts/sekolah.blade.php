@@ -19,20 +19,20 @@
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button> 
-      <a class="navbar-brand pt-0" href="{{Route('adminIndex')}}">
+      </button>
+      <a class="navbar-brand pt-0" href="#">
         <img src="{{asset('img/logo.png')}}" class="navbar-brand-img" alt="..."> Disdik Tapin
       </a>
       <p style="text-align:center">Admin Sekolah</p>
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('sekolahIndex')}}">
+            <a class="nav-link " href="#">
               <i class="ni ni-building "></i> Sekolah
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('guruIndex')}}">
+            <a class="nav-link " href="#">
               <i class="ni ni-single-02 "></i> Guru
             </a>
           </li>
