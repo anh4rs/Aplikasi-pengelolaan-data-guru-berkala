@@ -122,8 +122,9 @@
             //event btn tambah klik
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
-                $('#kode_mp').val('');
-                $('#nama').val('');  
+                $('#NIP').val('');
+                $('#nama').val('');
+                $('#jabatan').val('');    
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -137,9 +138,9 @@
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
-                        $('#kode_mp').val(returnData.data.NIP);
+                        $('#NIP').val(returnData.data.NIP);
                         $('#nama').val(returnData.data.nama);
-                        $('#nama').val(returnData.data.jabatan);
+                        $('#jabatan').val(returnData.data.jabatan);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
