@@ -8,7 +8,9 @@ Use App\jabatan;
 Use App\sekolah; 
 Use App\mata_pelajaran; 
 Use App\Guru; 
-Use App\Berita; 
+Use App\Berita;
+Use App\Pejabat_struktural; 
+
 
 use Illuminate\Http\Request;
 
@@ -99,5 +101,13 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.guruKeseluruhan', ['guru'=>$guru,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Guru Keseluruhan.pdf');
+    }
+
+    public function pejabatStrukturalCetak(){
+        $pejabat=pejabat_struktural::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.pejabatKeseluruhan', ['pejabat'=>$pejabat,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Pejabat Keseluruhan.pdf');
     }
 }

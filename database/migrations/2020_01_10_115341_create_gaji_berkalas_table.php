@@ -32,7 +32,7 @@ class CreateGajiBerkalasTable extends Migration
             $table->string('status')->default('0');
             $table->timestamps();
             $table->foreign('guru_id')->references('id')->on('gurus')->onDelete('cascade');
-            $table->foreign('pejabat_struktural_id')->references('id')->on('pejabat_srukturals')->onDelete('pejabat_strukturalade');
+            $table->foreign('pejabat_struktural_id')->references('id')->on('pejabat_srukturals')->onDelete('cascade');
         });
     }
 
