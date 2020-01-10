@@ -93,12 +93,6 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 });
 
 
-Auth::routes();
-
-Route::get('/', 'adminController@depan')->name('depan');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/admin/index', 'adminController@index')->name('adminIndex');
 
 //halaman data golongan
@@ -130,3 +124,7 @@ Route::get('/pejabatStruktural/keseluruhanCetak', 'adminController@pejabatStrukt
 Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
 Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
 Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
+});
+
+Auth::routes();
+Route::get('/', 'adminController@depan')->name('depan');
