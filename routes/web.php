@@ -115,6 +115,10 @@ Route::get('/mp/cetak', 'adminController@mpCetak')->name('mpCetak');
 //halaman data Mata Pelajaran
 Route::get('/guru/index', 'adminController@guruIndex')->name('guruIndex');
 Route::get('/guru/keseluruhanCetak', 'adminController@guruKeseluruhanCetak')->name('guruKeseluruhanCetak');
+Route::get('/guru/filter', 'adminController@guruFilter')->name('guruFilter');
+Route::post('/guru/filter', 'adminController@guruFilterCetak')->name('guruFilterCetak');
+
+
 
 //halaman data Mata Pelajaran
 Route::get('/pejabatStruktural/index', 'adminController@pejabatStrukturalIndex')->name('pejabatStrukturalIndex');

@@ -45,6 +45,11 @@ class adminController extends Controller
         return view('admin.guru.index');
     }
 
+    public function guruFilter(){
+        $sekolah = sekolah::all();
+        return view('admin.guru.filter',compact('sekolah'));
+    }
+
     public function pejabatStrukturalIndex(){
         return view('admin.pejabatStruktural.index');
     }
@@ -117,5 +122,13 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.beritaKeseluruhan', ['berita'=>$berita,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data berita Keseluruhan.pdf');
+    }
+
+    public function guruFilterCetak(Request $request){
+        $guru=Guru::where('sekolah_id',$request->sekolah_id)->get();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.guruFilter', ['guru'=>$guru,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Guru filter Sekolah.pdf');
     }
 }
