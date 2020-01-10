@@ -37,6 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // cek role admin
+    public function isAdmin() {
+        if($this->role == 2) return true;
+  
+        return false;
+    }
+
     public function berita()
     {
         return $this->HasMany('App\Berita');
