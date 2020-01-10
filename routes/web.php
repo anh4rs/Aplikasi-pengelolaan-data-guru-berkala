@@ -89,3 +89,7 @@ Route::get('/mp/cetak', 'adminController@mpCetak')->name('mpCetak');
 //halaman data Mata Pelajaran
 Route::get('/guru/index', 'adminController@guruIndex')->name('guruIndex');
 Route::get('/guru/keseluruhanCetak', 'adminController@guruKeseluruhanCetak')->name('guruKeseluruhanCetak');
+
+//halaman data Mata Pelajaran
+Route::get('/pejabatStruktural/index', 'adminController@pejabatStrukturalIndex')->name('pejabatStrukturalIndex');
+Route::get('/pejabatStruktural/keseluruhanCetak', 'adminController@pejabatStrukturalKeseluruhanCetak')->name('pejabatStrukturalKeseluruhanCetak');

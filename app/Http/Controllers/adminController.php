@@ -37,6 +37,10 @@ class adminController extends Controller
         return view('admin.guru.index');
     }
 
+    public function pejabatStrukturalIndex(){
+        return view('admin.pejabatStruktural.index');
+    }
+
     public function golonganCetak(){
         $golongan=golongan::all();
         $tgl= Carbon::now()->format('d-m-Y');

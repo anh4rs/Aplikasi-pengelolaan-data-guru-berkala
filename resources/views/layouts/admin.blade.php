@@ -84,7 +84,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{Route('pejabatStrukturalIndex')}}">
               <i class="ni ni-active-40"></i> Pejabat Struktural
             </a>
           </li>
