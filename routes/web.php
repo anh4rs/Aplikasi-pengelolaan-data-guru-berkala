@@ -100,3 +100,7 @@ Route::get('/guru/keseluruhanCetak', 'adminController@guruKeseluruhanCetak')->na
 //halaman data Mata Pelajaran
 Route::get('/pejabatStruktural/index', 'adminController@pejabatStrukturalIndex')->name('pejabatStrukturalIndex');
 Route::get('/pejabatStruktural/keseluruhanCetak', 'adminController@pejabatStrukturalKeseluruhanCetak')->name('pejabatStrukturalKeseluruhanCetak');
+
+//halaman data Mata Pelajaran
+Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
+Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');

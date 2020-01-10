@@ -74,7 +74,7 @@
         <h6 class="navbar-heading text-muted">Dinas pendidikan</h6>
         <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{Route('beritaIndex')}}">
               <i class="ni ni-single-copy-04"></i> Berita
             </a>
           </li>
