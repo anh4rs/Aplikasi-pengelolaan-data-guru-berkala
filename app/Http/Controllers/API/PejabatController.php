@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\PejabatStruktural;
+use App\Pejabat_struktural;
 use HCrypt;
 use Illuminate\Support\Facades\Redis;
 
