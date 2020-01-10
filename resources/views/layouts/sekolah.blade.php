@@ -50,11 +50,11 @@
               <i class="ni ni-archive-2"></i> Data Permohonan
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="">
               <i class="ni ni-paper-diploma"></i> Jenjang karir
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

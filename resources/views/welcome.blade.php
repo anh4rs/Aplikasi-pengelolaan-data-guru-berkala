@@ -26,10 +26,10 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
-	        	<li class="nav-item active"><a href="index.html" class="nav-link pl-0">Home</a></li>
-	        	<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	        	<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        	<li class="nav-item active"><a href="{{Route('depan')}}" class="nav-link pl-0">Home</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="{{Route('beritaAll')}}" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -45,19 +45,6 @@
           	<span class="subheading">Aplikasi Pengelolaan</span>
             <h1 class="mb-4">Data Guru berkala</h1>
             <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Dinas Pendidikan Kabupaten Tapin</a></p>
-          </div>
-        </div>
-        </div>
-      </div>
-
-      <div class="slider-item" style="background-image:url(depan/images/bg_2.jpg);">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-          <div class="col-md-7 ftco-animate">
-          	<span class="subheading">Todays Talent, Tommorow Success</span>
-            <h1 class="mb-4">We Help to Grow Your Business</h1>
-            <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Our Services</a></p>
           </div>
         </div>
         </div>

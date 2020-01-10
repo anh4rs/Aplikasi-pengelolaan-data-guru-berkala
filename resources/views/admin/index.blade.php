@@ -123,10 +123,6 @@
             </div>
             <div class="card-body">
               <!-- Chart -->
-              <div class="chart">
-                <!-- Chart wrapper -->
-                <canvas id="chart-sales" class="chart-canvas"></canvas>
-              </div>
             </div>
           </div>
         </div>
@@ -142,13 +138,21 @@
             </div>
             <div class="card-body">
               <!-- Chart -->
-              <div class="chart">
-                <canvas id="chart-orders" class="chart-canvas"></canvas>
-              </div>
+            
             </div>
           </div>
         </div>
-      </div>
+      </div style="margin-bottom:300px">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <br>
       <br>
 @endsection
