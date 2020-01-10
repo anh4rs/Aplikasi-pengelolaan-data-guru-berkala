@@ -68,6 +68,27 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'KaryawanController@update')->name('update');
         Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });  
+    Route::prefix('admin')->name('admin.')->group(function(){
+        Route::get('', 'AdminController@get')->name('get');
+        Route::get('{uuid}', 'AdminController@find')->name('find');
+        Route::post('', 'AdminController@create')->name('create');
+        Route::put('{uuid}', 'AdminController@update')->name('update');
+        Route::delete('{uuid}', 'AdminController@delete')->name('delete');
+        });  
+    Route::prefix('user')->name('user.')->group(function(){
+        Route::get('', 'UserController@get')->name('get');
+        Route::get('{uuid}', 'UserController@find')->name('find');
+        Route::post('', 'UserController@create')->name('create');
+        Route::put('{uuid}', 'UserController@update')->name('update');
+        Route::delete('{uuid}', 'UserController@delete')->name('delete');
+        });  
+    Route::prefix('gaji')->name('gaji.')->group(function(){
+        Route::get('', 'GajiController@get')->name('get');
+        Route::get('{uuid}', 'GajiController@find')->name('find');
+        Route::post('', 'GajiController@create')->name('create');
+        Route::put('{uuid}', 'GajiController@update')->name('update');
+        Route::delete('{uuid}', 'GajiController@delete')->name('delete');
+        });  
 
 });
 

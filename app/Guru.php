@@ -34,4 +34,9 @@ class Guru extends Model
      return $this->belongsTo('App\Mata_pelajaran');
     }
 
+    public function gaji_berkala()
+    {
+        return $this->HasMany('App\Gaji_berkala');
+    }
+
 }

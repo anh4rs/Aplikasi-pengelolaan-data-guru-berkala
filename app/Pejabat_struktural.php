@@ -24,4 +24,9 @@ class Pejabat_struktural extends Model
     return \Carbon\Carbon::parse($this->attributes['updated_at'])
        ->diffForHumans();
     }
+
+    public function gaji_berkala()
+    {
+        return $this->HasMany('App\Gaji_berkala');
+    }
 }
