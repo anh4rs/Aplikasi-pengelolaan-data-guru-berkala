@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::group(['middleware' => 'admin'], function() {
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
     Route::prefix('golongan')->name('golongan.')->group(function(){
         Route::get('', 'GolonganController@get')->name('get');
@@ -113,10 +113,8 @@ Route::get('/jabatan/cetak', 'adminController@jabatanCetak')->name('jabatanCetak
 Route::get('/sekolah/index', 'adminController@sekolahIndex')->name('sekolahIndex');
 Route::get('/sekolah/keseluruhanCetak', 'adminController@sekolahKeseluruhanCetak')->name('sekolahKeseluruhanCetak');
 
-
 //halaman data Mata Pelajaran
 Route::get('/mp/index', 'adminController@mpIndex')->name('mpIndex');
-
 Route::get('/mp/cetak', 'adminController@mpCetak')->name('mpCetak');
 
 
