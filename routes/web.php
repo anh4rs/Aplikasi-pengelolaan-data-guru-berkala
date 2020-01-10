@@ -92,9 +92,6 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
 
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/admin/index', 'adminController@index')->name('adminIndex');
 
@@ -131,5 +128,9 @@ Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
 });
 
 Auth::routes();
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/home', 'DashboardController@index')->name('home');
