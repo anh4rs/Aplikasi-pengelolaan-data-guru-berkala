@@ -29,7 +29,7 @@
 	        	<li class="nav-item active"><a href="{{Route('depan')}}" class="nav-link pl-0">Home</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="{{Route('beritaAll')}}" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+	          <li class="nav-item"><a href="{{Route('login')}}" class="nav-link">login</a></li>
 	        </ul>
 	      </div>
 	    </div>
