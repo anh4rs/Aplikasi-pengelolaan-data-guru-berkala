@@ -110,4 +110,12 @@ class adminController extends Controller
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Pejabat Keseluruhan.pdf');
     }
+
+    public function beritaCetak(){
+        $berita=berita::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.beritaKeseluruhan', ['berita'=>$berita,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data berita Keseluruhan.pdf');
+    }
 }
