@@ -129,3 +129,4 @@ Auth::routes();
 Route::get('/', 'adminController@depan')->name('depan');
 Route::get('/berita/all', 'adminController@beritaAll')->name('beritaAll');
 Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
+ 
