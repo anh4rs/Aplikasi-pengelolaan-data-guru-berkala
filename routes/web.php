@@ -82,6 +82,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'UserController@update')->name('update');
         Route::delete('{uuid}', 'UserController@delete')->name('delete');
         });  
+    Route::prefix('gaji')->name('gaji.')->group(function(){
+        Route::get('', 'GajiController@get')->name('get');
+        Route::get('{uuid}', 'GajiController@find')->name('find');
+        Route::post('', 'GajiController@create')->name('create');
+        Route::put('{uuid}', 'GajiController@update')->name('update');
+        Route::delete('{uuid}', 'GajiController@delete')->name('delete');
+        });  
 
 });
 
