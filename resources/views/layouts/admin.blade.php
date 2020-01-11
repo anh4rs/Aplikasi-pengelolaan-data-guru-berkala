@@ -80,7 +80,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{Route('karyawanIndex')}}">
               <i class="ni ni-circle-08"></i> Karyawan
             </a>
           </li>

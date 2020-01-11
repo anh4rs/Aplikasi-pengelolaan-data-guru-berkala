@@ -20,19 +20,19 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button> 
-      <a class="navbar-brand pt-0" href="{{Route('adminIndex')}}">
+      <a class="navbar-brand pt-0" href="{{Route('adminSekolahIndex')}}">
         <img src="{{asset('img/logo.png')}}" class="navbar-brand-img" alt="..."> Disdik Tapin
       </a>
       <p style="text-align:center">Admin Sekolah</p>
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('sekolahIndex')}}">
+            <a class="nav-link " href="{{Route('adminDataSekolahIndex')}}">
               <i class="ni ni-building "></i> Sekolah
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('guruIndex')}}">
+            <a class="nav-link " href="{{Route('adminSekolahGuru')}}">
               <i class="ni ni-single-02 "></i> Guru
             </a>
           </li>
@@ -41,13 +41,13 @@
         <h6 class="navbar-heading text-muted">Berkala</h6>
         <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{Route('adminSekolahGajihBerkala')}}">
               <i class="ni ni-satisfied"></i> Data Gajih Guru
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <i class="ni ni-archive-2"></i> Data Permohonan
+              <i class="ni ni-archive-2"></i> Permohonan Berkala
             </a>
           </li>
           <!-- <li class="nav-item">

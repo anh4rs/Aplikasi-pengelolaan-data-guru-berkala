@@ -68,13 +68,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'KaryawanController@update')->name('update');
         Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });  
-    Route::prefix('admin')->name('admin.')->group(function(){
-        Route::get('', 'AdminController@get')->name('get');
-        Route::get('{uuid}', 'AdminController@find')->name('find');
-        Route::post('', 'AdminController@create')->name('create');
-        Route::put('{uuid}', 'AdminController@update')->name('update');
-        Route::delete('{uuid}', 'AdminController@delete')->name('delete');
-        });  
+    // Route::prefix('admin')->name('admin.')->group(function(){
+    //     Route::get('', 'AdminController@get')->name('get');
+    //     Route::get('{uuid}', 'AdminController@find')->name('find');
+    //     Route::post('', 'AdminController@create')->name('create');
+    //     Route::put('{uuid}', 'AdminController@update')->name('update');
+    //     Route::delete('{uuid}', 'AdminController@delete')->name('delete');
+    //     });  
     Route::prefix('user')->name('user.')->group(function(){
         Route::get('', 'UserController@get')->name('get');
         Route::get('{uuid}', 'UserController@find')->name('find');
@@ -127,10 +127,32 @@ Route::get('/pejabatStruktural/Cetak', 'adminController@pejabatStrukturalCetak')
 //halaman data Mata Pelajaran
 Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
 Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
+
+//halaman data Mata Pelajaran
+Route::get('/karyawan/index', 'adminController@karyawanIndex')->name('karyawanIndex');
+Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCetak');
 });
 
 //middleware sekolah
+
+    //beranda admin sekolah
     Route::get('/adminSekolah/index', 'adminSekolahController@index')->name('adminSekolahIndex');
+    //beranda admin sekolah
+
+    //data guru 
+    Route::get('/adminSekolah/sekolah', 'adminSekolahController@sekolahIndex')->name('adminDataSekolahIndex');
+    //data guru
+
+    //data guru 
+    Route::get('/adminSekolah/guru', 'adminSekolahController@guruIndex')->name('adminSekolahGuru');
+    //data guru
+
+    //data gajihBerkala 
+    Route::get('/adminSekolah/gajihBerkala', 'adminSekolahController@gajihBerkalaIndex')->name('adminSekolahGajihBerkala');
+    Route::get('/adminSekolah/permohonan', 'adminSekolahController@permohonanTambah')->name('permohonanTambah');
+
+    //data gajihBerkala
+
 //middleware sekolah
 
 Auth::routes();
@@ -138,4 +160,5 @@ Route::get('/', 'adminController@depan')->name('depan');
 Route::get('/home', 'DashboardController@index')->name('home');
 Route::get('/berita/all', 'adminController@beritaAll')->name('beritaAll');
 Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
+
  

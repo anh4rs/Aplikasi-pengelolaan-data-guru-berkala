@@ -13,7 +13,7 @@ class GajiController extends APIController
     public function get(){
         $gaji_berkala = json_decode(redis::get("gaji_berkala::all"));
         if (!$gaji_berkala) {
-            $gaji_berkala = gaji_berkala::with('guru','pejabat')->get();
+            $gaji_berkala = gaji_berkala::with('guru','pejabat_struktural')->get();
             if (!$gaji_berkala) {
                 return $this->returnController("error", "failed get gaji_berkala data");
             }
@@ -45,13 +45,13 @@ class GajiController extends APIController
         
         $gaji_berkala->guru_id = Hcrypt::decrypt($req->guru_id);
         $gaji_berkala->pejabat_struktural_id = Hcrypt::decrypt($req->pejabat_struktural_id);
-        $gaji_berkala->no_surat = $req->no_surat;
+        $gaji_berkala->nomor_surat = $req->nomor_surat;
         $gaji_berkala->lampiran = $req->lampiran;
         $gaji_berkala->perihal = $req->perihal;
         $gaji_berkala->gaji_lama = $req->gaji_lama;
         $gaji_berkala->tgl_keputusan = $req->tgl_keputusan;
         $gaji_berkala->no_keputusan = $req->no_keputusan;
-        $gaji_berkala->status = $req->status;
+        $gaji_berkala->status = 0;
         $gaji_berkala->tgl_gaji_berlaku = $req->tgl_gaji_berlaku;
         $gaji_berkala->mkg = $req->mkg;
         $gaji_berkala->gaji_baru = $req->gaji_baru;

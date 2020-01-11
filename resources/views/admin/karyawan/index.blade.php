@@ -1,4 +1,4 @@
-@extends('layouts.sekolah')
+@extends('layouts.admin')
 @section('content')    
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
@@ -11,9 +11,9 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">Tabel Data Guru Sekolah x</h3>
-              <div class="text-right"> 
-              <a href="{{Route('guruKeseluruhanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+              <h3 class="mb-0">Tabel Data karyawan</h3>
+              <div class="text-right">
+              <a href="{{Route('karyawanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
 	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
@@ -22,20 +22,19 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table id="datatable" class="table align-items-center table-flush">
+              <table id="datatable" class="table table-striped align-items-center table-flush text-center">
                 <thead class="thead-light">
                   <tr>
+                    <th scope="col">Nama</th>
                     <th scope="col">NIP</th>
-                    <th scope="col">nama</th>
-                    <th scope="col">NPSN Sekolah</th>
+                    <th scope="col">Tanggal Lahir</th>
+                    <th scope="col">tanggal Lahir</th>
+                    <th scope="col">Alamat</th>
                     <th scope="col">Telepon</th>
-                    <th scope="col">Jabatan</th>
-                    <th scope="col">Mata Pelajaran</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
- 
                 </tbody>
               </table>
             </div>
@@ -56,63 +55,36 @@
             </div>    
             <div class="modal-body">
                 <form action="" method="post">
-                <input type="hidden" name="id" id="id">
                     <div class="form-group">
-                        <label for="guru"> NIP</label>
+                        <input type="hidden" name="id" id="id">
+                        <label for="jabatan">Nama</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="jabatan">NIP</label>
                         <input type="text" class="form-control" name="NIP" id="NIP">
                     </div>
                     <div class="form-group">
-                        <label for="guru">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <label for="jabatan">Tempat Lahir</label>
+                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir">
+                    </div>                    <div class="form-group">
+                        <label for="jabatan">Tanggal Lahir</label>
+                        <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
+                    </div>                    <div class="form-group">
+                        <label for="jabatan">Alamat</label>
+                        <textarea class="form-control" name="alamat" id="alamat"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="guru">Sekolah</label>
-                        <select name="sekolah_id" class="form-control" id="sekolah_id">
-                          <option value="">-- pilih sekolah --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guru">Golongan</label>
-                        <select name="golongan_id" class="form-control" id="golongan_id">
-                          <option value="">-- pilih golongan --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guru">Jabatan</label>
-                        <select name="jabatan_id" class="form-control" id="jabatan_id">
-                          <option value="">-- pilih jabatan --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guru">Mata Pelajaran</label>
-                        <select name="mata_pelajaran_id" class="form-control" id="mata_pelajaran_id">
-                          <option value="">-- Isi Jika ada  --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guru">Status</label>
-                        <select name="status" class="form-control" id="status">
-                          <option value="">-- pilih Status --</option>
-                          <option value="PNS">-- PNS --</option>
-                          <option value="Kontrak">-- Kontrak --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guru">Telepon</label>
+                        <label for="jabatan">No HP</label>
                         <input type="text" class="form-control" name="telepon" id="telepon">
                     </div>
                     <div class="form-group">
-                        <label for="guru">Tempat lahir</label>
-                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir">
-                    </div>
-                    <div class="form-group">
-                        <label for="guru"> Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir">
-                    </div>
-                    <div class="form-group">
-                        <label for="guru">Alamat</label>
-                        <textarea name="alamat" id="alamat" class="form-control"></textarea>
-                    </div>
+                        <label for="jabatan">Email</label>
+                        <input type="text" class="form-control" name="email" id="email">
+                    </div>                      <div class="form-group">
+                        <label for="jabatan">Password</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>    
             </div>   
             <div class="modal-footer">
                 <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
@@ -125,81 +97,13 @@
 @endsection
 @section('script')
     <script>
-        //get data sekolah
-        getSekolah = () =>{
-            $.ajax({
-                    type: "GET",
-                    url: "{{ url('/api/sekolah')}}",
-                    beforeSend: false,
-                    success : function(returnData) {
-                        $.each(returnData.data, function (index, value) {
-                        $('#sekolah_id').append(
-                            '<option value="'+value.uuid+'">'+value.NPSN+'</option>'
-                        )
-                    })
-                }
-            })
-        }
 
-        //get data golongan
-        getGolongan = () =>{
-            $.ajax({
-                    type: "GET",
-                    url: "{{ url('/api/golongan')}}",
-                    beforeSend: false,
-                    success : function(returnData) {
-                        $.each(returnData.data, function (index, value) {
-                        $('#golongan_id').append(
-                            '<option value="'+value.uuid+'">'+value.golongan+'</option>'
-                        )
-                    })
-                }
-            })
-        }
-
-        //get data jabatan
-        getJabatan = () =>{
-            $.ajax({
-                    type: "GET",
-                    url: "{{ url('/api/jabatan')}}",
-                    beforeSend: false,
-                    success : function(returnData) {
-                        $.each(returnData.data, function (index, value) {
-                        $('#jabatan_id').append(
-                            '<option value="'+value.uuid+'">'+value.jabatan+'</option>'
-                        )
-                    })
-                }
-            })
-        }
-
-        //get data mata pelajar
-        getMp = () => {
-            $.ajax({
-                    type: "GET",
-                    url: "{{ url('/api/mapel')}}",
-                    beforeSend: false,
-                    success : function(returnData) {
-                        $.each(returnData.data, function (index, value) {
-                        $('#mata_pelajaran_id').append(
-                            '<option value="'+value.uuid+'">'+value.nama+'</option>'
-                        )
-                    })
-                }
-            })
-        }
-
-        getSekolah();
-        getGolongan();
-        getJabatan();
-        getMp();
-
-        //fungsi hapus        
+        //fungsi hapus
         hapus = (uuid, nama) =>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
             Swal.fire({
                         title: 'apa anda yakin?',
-                        text: " Menghapus  Data guru " + nama,
+                        text: " Menghapus  Data karyawan " + nama,
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
@@ -209,7 +113,7 @@
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : "{{ url('/api/guru')}}" + '/' + uuid,
+                                url : "{{ url('/api/karyawan')}}" + '/' + uuid,
                                 type : "POST",
                                 data : {'_method' : 'DELETE', '_token' :csrf_token},
                                 success: function (response) {
@@ -236,40 +140,34 @@
             //event btn tambah klik
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
+                $('#name').val('');
                 $('#NIP').val('');
-                $('#nama').val('');
-                $('#golongan_id').val('');  
-                $('#jabatan_id').val('');  
-                $('#mata_pelajaran_id').val('');
-                $('#telepon').val('');    
-                $('#tempat_lahir').val('');
-                $('#tgl_lahir').val('');
-                $('#alamat').val('');
-                $('#status').val('');                                                                
+                $('#tempat_lahir').val('');  
+                $('#tanggal_lahir').val('');  
+                $('#almat').val('');  
+                $('#telepon').val('');  
+                $('#email').val('');
+                $('#password').val('');    
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
 
-            //event btn edit klik        
+            //event btn edit klik
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/guru')}}" + '/' + uuid,
+                    url: "{{ url('/api/karyawan')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
+                        $('#name').val(returnData.data.user.name);
                         $('#NIP').val(returnData.data.NIP);
-                        $('#nama').val(returnData.data.nama);
-                        $('#sekolah_id').val(returnData.data.sekolah.uuid); 
-                        $('#golongan_id').val(returnData.data.golongan.uuid); 
-                        $('#jabatan_id').val(returnData.data.jabatan.uuid);
-                        $('#mata_pelajaran_id').val(returnData.data.mata_pelajaran.uuid);
-                        $('#telepon').val(returnData.data.telepon);  
                         $('#tempat_lahir').val(returnData.data.tempat_lahir);
-                        $('#tgl_lahir').val(returnData.data.tgl_lahir);
+                        $('#tanggal_lahir').val(returnData.data.tanggal_lahir);
                         $('#alamat').val(returnData.data.alamat);
-                        $('#status').val(returnData.data.status);                                                              
+                        $('#email').val(returnData.data.email);
+                        $('#password').val(returnData.data.password);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
@@ -285,35 +183,35 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.guru.get')}}",
+                        "url": "{{route('API.karyawan.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
                         "processData": true
                     },
                     columns: [
+                        {"data": "user.name"},
                         {"data": "NIP"},
-                        {"data": "nama"},
-                        {"data": "sekolah.NPSN"},
+                        {"data": "tempat_lahir"},
+                        {"data": "tanggal_lahir"},
+                        {"data": "alamat"},
                         {"data": "telepon"},
-                        {"data": "jabatan.jabatan"},
-                        {"data": "mata_pelajaran.nama"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
-                            let nama = row.nama;
+                            let nama = row.user.nama;
                             return type === 'display'  ?
                             '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]
                 });
-
+                
                 //event form submit            
                 $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.guru.update", '')}}'
+                        let url = '{{route("API.karyawan.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -337,7 +235,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.guru.create')}}",
+                            url: "{{Route('API.karyawan.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
