@@ -57,14 +57,18 @@
             </div>    
             <div class="modal-body">
                 <form action="" method="post">
+                <input type="hidden" name="id" id="id">
+                <div class="form-group">
+                        <label for="sekolah">Nama Sekolah</label>
+                        <input type="text" class="form-control" name="nama" id="nama">
+                    </div>
                     <div class="form-group">
-                        <input type="hidden" name="id" id="id">
                         <label for="sekolah">NPSN</label>
                         <input type="text" class="form-control" name="NPSN" id="NPSN">
                     </div>
                     <div class="form-group">
                         <label for="sekolah">Status</label>
-                        <select name="status" class="form-control" id="status">
+                        <select name="status_sekolah" class="form-control" id="status_sekolah">
                           <option value="">-- pilih status --</option>
                           <option value="Negeri">Negeri</option>
                           <option value="Swasta">Swasta</option>
@@ -73,7 +77,12 @@
                     <div class="form-group">
                         <input type="hidden" name="id" id="id">
                         <label for="sekolah">B Pendidikan</label>
-                        <input type="text" class="form-control" name="b_pendidikan" id="b_pendidikan">
+                        <select name="b_pendidikan" id="b_pendidikan" class="form-control">
+                            <option value="SD">SD</option>
+                            <option value="SMP">SMP</option>
+                            <option value="SMA">SMA</option>
+                            <option value="SMK">SMK</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="sekolah">Status Pemilik</label>
@@ -99,6 +108,18 @@
                     <div class="form-group">
                         <label for="sekolah">Tanggal SK Izin</label>
                         <input type="date" class="form-control" name="tgl_sk_izin" id="tgl_sk_izin">
+                    </div>
+                    <div class="form-group">
+                        <label for="sekolah"> Username</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>                    
+                    <div class="form-group">
+                        <label for="sekolah"> Email</label>
+                        <input type="email" class="form-control" name="email" id="email">
+                    </div>                    
+                    <div class="form-group">
+                        <label for="sekolah"> Password</label>
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
             </div>   
             <div class="modal-footer">
