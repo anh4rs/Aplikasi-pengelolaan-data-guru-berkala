@@ -55,7 +55,7 @@ class SekolahController extends APIController
             $FotoExt  = $img->getClientOriginalExtension();
             $FotoName = $user_id.' - '.$req->username;
             $foto   = $FotoName.'.'.$FotoExt;
-            $img->move('img/karyawan', $foto);
+            $img->move('img/sekolah', $foto);
             $setuuid->foto       = $foto;
         }else{
             $setuuid->foto       = $setuuid->foto;
@@ -77,7 +77,7 @@ class SekolahController extends APIController
         $merge = (['user' => $user, 'sekolah' => $sekolah]);
         
         Redis::set("user:all", $user);
-        Redis::set("karyawan:all", $karyawan);
+        Redis::set("sekolah:all", $sekolah);
         return $this->returnController("ok", $merge);
     }
 
