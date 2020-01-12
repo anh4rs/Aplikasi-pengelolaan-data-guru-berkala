@@ -15,6 +15,7 @@ class CreateSekolahsTable extends Migration
     {
         Schema::create('sekolahs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedbigInteger('user_id');
             $table->text('uuid')->nullable();
             $table->string('nama')->length(100);
             $table->string('NPSN')->length(20);
@@ -26,6 +27,7 @@ class CreateSekolahsTable extends Migration
             $table->string('sk_izin')->length(50);
             $table->date('tgl_sk_izin');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
