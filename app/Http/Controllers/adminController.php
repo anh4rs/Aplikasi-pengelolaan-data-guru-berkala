@@ -10,7 +10,7 @@ Use App\Mata_pelajaran;
 Use App\Guru; 
 Use App\Berita;
 Use App\Pejabat_struktural;
-Use App\gaji_berkala; 
+Use App\Gaji_berkala; 
 
 
 
