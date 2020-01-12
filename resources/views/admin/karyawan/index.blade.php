@@ -167,8 +167,9 @@
                         $('#tempat_lahir').val(returnData.data.tempat_lahir);
                         $('#tanggal_lahir').val(returnData.data.tanggal_lahir);
                         $('#alamat').val(returnData.data.alamat);
-                        $('#email').val(returnData.data.email);
-                        $('#password').val(returnData.data.password);
+                        $('#telepon').val(returnData.data.telepon);
+                        $('#email').val(returnData.data.user.email);
+                        $('#password').val(returnData.data.user.password);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
