@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->HasOne('App\Karyawan');
     }
+
+    public function sekolah()
+    {
+        return $this->HasOne('App\Sekolah');
+    }
 }

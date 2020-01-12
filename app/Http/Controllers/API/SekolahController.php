@@ -39,7 +39,31 @@ class SekolahController extends APIController
     }
 
     public function create(Request $req){
-        $sekolah = sekolah::create($req->all());
+        $user = User::create($req->all());
+        // hash password
+        $password=Hash::make($user->password);
+        //set uuid
+        $user_id = $user->id;
+        $uuid = HCrypt::encrypt($user_id);
+        $setuuid = User::findOrFail($user_id);
+        $setuuid->uuid = $uuid;
+        $setuuid->password = $password;
+        $setuuid->role = 2;
+        if($req->foto != null)
+        {
+            $img = $req->file('foto');
+            $FotoExt  = $img->getClientOriginalExtension();
+            $FotoName = $user_id.' - '.$req->username;
+            $foto   = $FotoName.'.'.$FotoExt;
+            $img->move('img/karyawan', $foto);
+            $setuuid->foto       = $foto;
+        }else{
+            $setuuid->foto       = $setuuid->foto;
+        }
+        $setuuid->update();
+
+        $sekolah = $user->sekolah()->create($req->all());
+        
         //set uuid
         $sekolah_id = $sekolah->id;
         $uuid = HCrypt::encrypt($sekolah_id);
@@ -49,9 +73,12 @@ class SekolahController extends APIController
         if (!$sekolah) {
             return $this->returnController("error", "failed create data sekolah");
         }
-        Redis::del("sekolah:all");
-        Redis::set("sekolah:all", $sekolah);
-        return $this->returnController("ok", $sekolah);
+
+        $merge = (['user' => $user, 'sekolah' => $sekolah]);
+        
+        Redis::set("user:all", $user);
+        Redis::set("karyawan:all", $karyawan);
+        return $this->returnController("ok", $merge);
     }
 
     public function update($uuid, Request $req){
