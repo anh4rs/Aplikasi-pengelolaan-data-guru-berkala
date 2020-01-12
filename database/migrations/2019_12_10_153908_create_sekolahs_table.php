@@ -18,7 +18,7 @@ class CreateSekolahsTable extends Migration
             $table->text('uuid')->nullable();
             $table->string('nama')->length(100);
             $table->string('NPSN')->length(20);
-            $table->string('status')->length(20);
+            $table->string('status_sekolah')->length(20);
             $table->string('b_pendidikan')->length(20);
             $table->string('status_pemilik')->length(50);
             $table->string('sk')->length(50);

@@ -116,7 +116,7 @@ class SekolahController extends APIController
 
            $sekolah->nama     = $req->nama;
            $sekolah->NPSN    = $req->NPSN;
-           $sekolah->status    = $req->status;
+           $sekolah->status_sekolah    = $req->status_sekolah;
            $sekolah->b_pendidikan    = $req->b_pendidikan;
            $sekolah->status_pemilik    = $req->status_pemilik;
            $sekolah->sk    = $req->sk;
