@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sekolah">Status</label>
-                        <select name="status_sekolah" class="form-control" id="status_sekolah">
+                        <select name="status_sekolah" class="form-control" id="status_sekolah ">
                           <option value="">-- pilih status --</option>
                           <option value="Negeri">Negeri</option>
                           <option value="Swasta">Swasta</option>
@@ -229,10 +229,10 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }},
                         {"data": "NPSN"},
-                        {"data": "status"},
+                        {"data": "status_sekolah"},
                         {"data": "b_pendidikan"},
-                        {"data": "status_pemilik"},
                         {"data": "sk"},
+                        {"data": "status_pemilik"},
                         {"data": "sk_izin"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
