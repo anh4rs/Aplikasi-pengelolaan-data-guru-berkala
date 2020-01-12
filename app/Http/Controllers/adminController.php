@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 use PDF;
 use Carbon\Carbon;
-Use App\golongan;
-Use App\jabatan;
-Use App\sekolah; 
-Use App\mata_pelajaran; 
+Use App\Golongan;
+Use App\Jabatan;
+Use App\Sekolah; 
+Use App\Mata_pelajaran; 
 Use App\Guru; 
 Use App\Berita;
 Use App\Pejabat_struktural;
