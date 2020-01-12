@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Sekolah;
+use App\User;
 use HCrypt;
 use Illuminate\Support\Facades\Redis;
 
@@ -110,8 +111,6 @@ class SekolahController extends APIController
             }else{
                 $user->password = $user->password;
             }
-            'uuid','nama','NPSN', 'status','b_pendidikan','status_pemilik', 'sk',
-        'tgl_sk','sk_izin', 'tgl_sk_izin',
 
            $user->update();
 
