@@ -26,6 +26,7 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">Nama</th>
+                    <th scope="col">Nama</th>
                     <th scope="col">NIP</th>
                     <th scope="col">Perihal</th>
                     <th scope="col">Nomor Keputusan</th>
@@ -129,17 +130,33 @@
                         "processData": true
                     },
                     columns: [
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let no = 1;
+                           return '<p>'+ no++ +' </p>'
+                        }},
                         {"data": "guru.nama"},
                         {"data": "guru.NIP"},
                         {"data": "perihal"},
                         {"data": "no_keputusan"},
-                        {"data": "gaji_baru"},
-                        {"data": "status"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let gaji = row.gaji_baru;
+                           return '<p>Rp.'+ gaji +' </p>'
+                        }},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let status = row.status;
+                            if(status == 0){
+                                return '<a class="btn btn-sm btn-warning"> Pending </a>';
+                            }else if(status == 1){
+                                return '<a class="btn btn-sm btn-primary"> Dalam Proses </a>';
+                            }else{
+                                return '<a class="btn btn-sm btn-success"> Terverifikasi </a>';
+                            }
+                        }},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
-                            '<button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            '<a class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]

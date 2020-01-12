@@ -25,6 +25,7 @@
               <table id="datatable" class="table table-striped align-items-center table-flush text-center">
                 <thead class="thead-light">
                   <tr>
+                    <th scope="col">No</th>
                     <th scope="col">Nama</th>
                     <th scope="col">NIP</th>
                     <th scope="col">Tanggal Lahir</th>
@@ -190,6 +191,9 @@
                         "processData": true
                     },
                     columns: [
+                        {data: null , render : function ( data, type, row, meta ) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }},
                         {"data": "user.name"},
                         {"data": "NIP"},
                         {"data": "tempat_lahir"},

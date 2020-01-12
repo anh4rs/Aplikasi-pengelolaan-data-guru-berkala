@@ -25,6 +25,7 @@
               <table id="datatable" class="table align-items-center table-striped text-center">
                 <thead class="thead-light">
                   <tr>
+                    <th scope="col">No</th>
                     <th scope="col">Judul</th>
                     <th scope="col">Tanggal </th>
                     <th scope="col">Aksi</th>
@@ -162,6 +163,9 @@
                     "processData": true
                 },
                 columns: [
+                    {data: null , render : function ( data, type, row, meta ) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }},
                     {"data": "judul"},
                     {"data": "created_at"},
                     {data: null , render : function ( data, type, row, meta ) {

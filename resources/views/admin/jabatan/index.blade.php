@@ -25,6 +25,7 @@
               <table id="datatable" class="table table-striped align-items-center table-flush text-center">
                 <thead class="thead-light">
                   <tr>
+                    <th scope="col">No</th>
                     <th scope="col">Kode Jabatan</th>
                     <th scope="col">Nama Jabatan</th>
                     <th scope="col">Aksi</th>
@@ -154,6 +155,9 @@
                         "processData": true
                     },
                     columns: [
+                        {data: null , render : function ( data, type, row, meta ) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }},
                         {"data": "kode_jabatan"},
                         {"data": "jabatan"},
                         {data: null , render : function ( data, type, row, meta ) {

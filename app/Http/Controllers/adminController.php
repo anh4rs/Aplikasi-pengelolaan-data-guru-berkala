@@ -9,7 +9,9 @@ Use App\sekolah;
 Use App\mata_pelajaran; 
 Use App\Guru; 
 Use App\Berita;
-Use App\Pejabat_struktural; 
+Use App\Pejabat_struktural;
+Use App\gaji_berkala; 
+
 
 
 use Illuminate\Http\Request;
@@ -22,7 +24,10 @@ class adminController extends Controller
     }
 
     public function index(){
-        return view('admin.index');
+        $sekolah = Sekolah::all();
+        $guru = Guru::all();
+        $permohonan = gaji_berkala::all();
+        return view('admin.index',compact('sekolah','guru','permohonan'));
     }
     
     public function golonganIndex(){
