@@ -26,9 +26,10 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">No</th>
+                    <th scope="col">Nama</th>
                     <th scope="col">npsn</th>
                     <th scope="col">Status</th>
-                    <th scope="col">B pendidikan</th>
+                    <th scope="col">Bentuk pendidikan</th>
                     <th scope="col">nomor SK</th>
                     <th scope="col">Status Pemilik</th>
                     <th scope="col">No SK Izin</th>
@@ -76,7 +77,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="id" id="id">
-                        <label for="sekolah">B Pendidikan</label>
+                        <label for="sekolah">Bentuk Pendidikan</label>
                         <select name="b_pendidikan" id="b_pendidikan" class="form-control">
                             <option value="SD">SD</option>
                             <option value="SMP">SMP</option>
@@ -175,6 +176,7 @@
             //event btn tambah klik
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
+                $('#nama').val('');
                 $('#NPSN').val('');
                 $('#status').val('');
                 $('#b_pendidikan').val('');  
@@ -195,14 +197,17 @@
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
+                        $('#nama').val(returnData.data.nama);
                         $('#NPSN').val(returnData.data.NPSN);
-                        $('#status').val(returnData.data.status);
+                        $('#status').val(returnData.data.status_sekolah);
                         $('#b_pendidikan').val(returnData.data.b_pendidikan); 
                         $('#status_pemilik').val(returnData.data.status_pemilik);
                         $('#sk').val(returnData.data.sk);
                         $('#tgl_sk').val(returnData.data.tgl_sk); 
                         $('#sk_izin').val(returnData.data.sk_izin);
-                        $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);    
+                        $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);   
+                        $('#name').val(returnData.data.user.name);   
+                        $('#email').val(returnData.data.user.email);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
@@ -228,8 +233,9 @@
                         {data: null , render : function ( data, type, row, meta ) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }},
+                        {"data": "nama"},
                         {"data": "NPSN"},
-                        {"data": "status"},
+                        {"data": "status_sekolah"},
                         {"data": "b_pendidikan"},
                         {"data": "status_pemilik"},
                         {"data": "sk"},

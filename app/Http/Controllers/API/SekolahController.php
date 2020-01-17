@@ -15,7 +15,7 @@ class SekolahController extends APIController
     public function get(){
         $sekolah = json_decode(redis::get("sekolah::all"));
         if (!$sekolah) {
-            $sekolah = sekolah::all();
+            $sekolah = sekolah::with('user')->get();
             if (!$sekolah) {
                 return $this->returnController("error", "failed get sekolah data");
             }
@@ -31,7 +31,7 @@ class SekolahController extends APIController
         }
         $sekolah = Redis::get("sekolah:$id");
         if (!$sekolah) {
-            $sekolah = sekolah::find($id);
+            $sekolah = sekolah::with('user')->where('id', $id)->first();
             if (!$sekolah){
                 return $this->returnController("error", "failed find data sekolah");
             }
@@ -50,7 +50,7 @@ class SekolahController extends APIController
         $setuuid = User::findOrFail($user_id);
         $setuuid->uuid = $uuid;
         $setuuid->password = $password;
-        $setuuid->role = 2;
+        $setuuid->role = 1;
         if($req->foto != null)
         {
             $img = $req->file('foto');
@@ -77,9 +77,12 @@ class SekolahController extends APIController
         }
 
         $merge = (['user' => $user, 'sekolah' => $sekolah]);
-        
-        Redis::set("user:all", $user);
-        Redis::set("sekolah:all", $sekolah);
+
+        Redis::del("user:all");
+        Redis::set("user:$user_id", $user);
+        Redis::del("sekolah:all");
+        Redis::set("sekolah:$sekolah_id", $sekolah);
+
         return $this->returnController("ok", $merge);
     }
 
