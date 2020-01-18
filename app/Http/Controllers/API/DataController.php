@@ -127,6 +127,7 @@ class DataController extends APIController
         $id = $req->data_berkala_id;
         $data_berkala = Data_berkala::findOrFail($id);
         $data_berkala->status = $req->status;
+        $data_berkala->update();
 
         $inbox = new Inbox;
         $inbox->sekolah_id = $req->sekolah_id;
