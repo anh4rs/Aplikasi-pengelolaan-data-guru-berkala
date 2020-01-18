@@ -41,13 +41,13 @@
         <h6 class="navbar-heading text-muted">Berkala</h6>
         <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('adminSekolahGajihBerkala')}}">
-              <i class="ni ni-satisfied"></i> Data Gajih Guru
+            <a class="nav-link" href="{{Route('adminSekolahDataBerkala')}}">
+              <i class="ni ni-satisfied"></i> Data Berkala
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <i class="ni ni-archive-2"></i> Permohonan Berkala
+              <i class="ni ni-archive-2"></i> Gajih Berkala
             </a>
           </li>
           <!-- <li class="nav-item">

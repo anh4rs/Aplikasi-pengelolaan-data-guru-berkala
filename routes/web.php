@@ -179,7 +179,7 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
     //data guru
 
     //data gajihBerkala 
-    Route::get('/adminSekolah/gajihBerkala', 'adminSekolahController@gajihBerkalaIndex')->name('adminSekolahGajihBerkala');
+    Route::get('/adminSekolah/dataBerkala', 'adminSekolahController@dataBerkalaIndex')->name('adminSekolahDataBerkala');
     Route::get('/adminSekolah/permohonan', 'adminSekolahController@permohonanTambah')->name('permohonanTambah');
 
     //data gajihBerkala

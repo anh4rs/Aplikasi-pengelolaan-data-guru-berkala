@@ -22,14 +22,14 @@ class adminSekolahController extends Controller
         return view('sekolah.sekolah.index');
     }
 
-    public function gajihBerkalaIndex(){
+    public function dataBerkalaIndex(){
 
-        return view('sekolah.gajihBerkala.index');
+        return view('sekolah.dataBerkala.index');
     }
 
     public function permohonanTambah(){
 
-        return view('sekolah.gajihBerkala.permohonan');
+        return view('sekolah.dataBerkala.permohonan');
     }
 
 
