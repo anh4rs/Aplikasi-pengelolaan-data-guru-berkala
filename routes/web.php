@@ -127,8 +127,8 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
             Route::put('{uuid}', 'GuruController@update')->name('update');
             Route::delete('{uuid}', 'GuruController@delete')->name('delete');
             });    
-        Route::prefix('sekolah')->name('sekolah.')->group(function(){
-            Route::get('', 'SekolahController@get')->name('get');
+        Route::prefix('sekolah-data')->name('sekolah-data.')->group(function(){
+            Route::get('', 'SekolahController@getSekolah')->name('get');
             Route::get('{uuid}', 'SekolahController@find')->name('find');
             Route::post('', 'SekolahController@create')->name('create');
             Route::put('{uuid}', 'SekolahController@update')->name('update');

@@ -21,9 +21,10 @@
               <table id="datatable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">npsn</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">B pendidikan</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">NPSN</th>
+                    <th scope="col">Status Sekolah</th>
+                    <th scope="col">Bentuk pendidikan</th>
                     <th scope="col">nomor SK</th>
                     <th scope="col">Status Pemilik</th>
                     <th scope="col">No SK Izin</th>
@@ -46,7 +47,7 @@
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/sekolah')}}" + '/' + uuid,
+                    url: "{{ url('/api/sekolah-data')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
@@ -74,18 +75,19 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.sekolah.get')}}",
+                        "url": "{{route('API.sekolah-data.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
                         "processData": true
                     },
                     columns: [
+                        {"data": "nama"},
                         {"data": "NPSN"},
-                        {"data": "status"},
+                        {"data": "status_sekolah"},
                         {"data": "b_pendidikan"},
-                        {"data": "status_pemilik"},
                         {"data": "sk"},
+                        {"data": "status_pemilik"},
                         {"data": "sk_izin"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
@@ -102,7 +104,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.sekolah.update", '')}}'
+                        let url = '{{route("API.sekolah-data.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -126,7 +128,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.sekolah.create')}}",
+                            url: "{{Route('API.sekolah-data.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
