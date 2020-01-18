@@ -164,7 +164,7 @@ Route::get('/permohonan/Cetak', 'adminController@dataBerkalaCetak')->name('dataB
             Route::get('', 'DataController@getData')->name('get');
             Route::get('{uuid}', 'DataController@find')->name('find');
             Route::post('', 'DataController@create')->name('create');
-            Route::put('', 'DataController@updateStatus')->name('updateStatus');
+            Route::put('/{id}', 'DataController@updateStatus')->name('updateStatus');
             Route::put('{uuid}', 'DataController@update')->name('update');
             Route::delete('{uuid}', 'DataController@delete')->name('delete');
             }); 
