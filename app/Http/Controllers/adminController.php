@@ -10,7 +10,7 @@ Use App\Mata_pelajaran;
 Use App\Guru;
 Use App\Berita;
 Use App\Pejabat_struktural;
-Use App\Gaji_berkala;
+Use App\Data_berkala;
 Use App\Karyawan;
 
 
@@ -27,7 +27,7 @@ class adminController extends Controller
     public function index(){
         $sekolah = Sekolah::all();
         $guru = Guru::all();
-        $permohonan = gaji_berkala::all();
+        $permohonan = data_berkala::all();
         return view('admin.index',compact('sekolah','guru','permohonan'));
     }
 
