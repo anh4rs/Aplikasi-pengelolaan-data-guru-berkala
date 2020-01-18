@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Data_berkala;
 use HCrypt;
+use Auth;
 
 class DataController extends APIController
 {
