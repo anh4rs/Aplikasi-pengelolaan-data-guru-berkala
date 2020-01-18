@@ -120,6 +120,7 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
 
 //halaman data Karyawan
 Route::get('/permohonan/index', 'adminController@dataBerkalaIndex')->name('dataBerkalaIndex');
+Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifikasi')->name('dataBerkalaVerifikasi');
 Route::get('/permohonan/Cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
 });
 

@@ -1,4 +1,4 @@
-@extends('layouts.sekolah')
+@extends('layouts.admin')
 @section('content')    
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
@@ -88,32 +88,6 @@
                 })
             }
 
-            // //event btn edit klik        
-            // edit = uuid =>{
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "{{ url('/api/data')}}" + '/' + uuid,
-            //         beforeSend: false,
-            //         success : function(returnData) {
-            //             $('.modal-title').text('Edit Data');
-            //             $('#id').val(returnData.data.uuid);
-            //             $('#NIP').val(returnData.data.NIP);
-            //             $('#nama').val(returnData.data.nama);
-            //             $('#sekolah_id').val(returnData.data.sekolah.uuid); 
-            //             $('#golongan_id').val(returnData.data.golongan.uuid); 
-            //             $('#jabatan_id').val(returnData.data.jabatan.uuid);
-            //             $('#mata_pelajaran_id').val(returnData.data.mata_pelajaran.uuid);
-            //             $('#telepon').val(returnData.data.telepon);  
-            //             $('#tempat_lahir').val(returnData.data.tempat_lahir);
-            //             $('#tgl_lahir').val(returnData.data.tgl_lahir);
-            //             $('#alamat').val(returnData.data.alamat);
-            //             $('#status').val(returnData.data.status);                                                              
-            //             $('#btn-form').text('Ubah Data');
-            //             $('#mediumModal').modal('show');
-            //         }
-            //     })
-            // }
-
             //fungsi render datatable            
             $(document).ready(function() {
                 $('#datatable').DataTable( {
@@ -155,7 +129,7 @@
                             let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
-                            '<a class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            '<a href="/verifikasi/permohonan/'+ uuid +' " class="text-white btn btn-sm btn-success"> verifikasi </a>  <a class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]
