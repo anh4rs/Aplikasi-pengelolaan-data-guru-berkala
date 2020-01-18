@@ -79,6 +79,10 @@ class adminController extends Controller
         return view('admin.karyawan.index');
     }
 
+    public function dataBerkalaIndex(){
+        return view('admin.dataBerkala.index');
+    }    
+
     public function golonganCetak(){
         $golongan=golongan::all();
         $pejabat_struktural=Pejabat_struktural::all()->first();

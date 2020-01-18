@@ -106,17 +106,21 @@ Route::post('/guru/filter', 'adminController@guruFilterCetak')->name('guruFilter
 
 
 
-//halaman data Mata Pelajaran
+//halaman data Mata pejabat Struktural
 Route::get('/pejabatStruktural/index', 'adminController@pejabatStrukturalIndex')->name('pejabatStrukturalIndex');
 Route::get('/pejabatStruktural/Cetak', 'adminController@pejabatStrukturalCetak')->name('pejabatCetak');
 
-//halaman data Mata Pelajaran
+//halaman data Mata berita
 Route::get('/berita/index', 'adminController@beritaIndex')->name('beritaIndex');
 Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
 
-//halaman data Mata Pelajaran
+//halaman data Mata Karyawan
 Route::get('/karyawan/index', 'adminController@karyawanIndex')->name('karyawanIndex');
 Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCetak');
+
+//halaman data Karyawan
+Route::get('/permohonan/index', 'adminController@dataBerkalaIndex')->name('dataBerkalaIndex');
+Route::get('/permohonan/Cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
 });
 
     Route::namespace('API')->prefix('api')->name('API.')->group(function(){
