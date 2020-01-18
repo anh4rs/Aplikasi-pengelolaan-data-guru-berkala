@@ -78,24 +78,32 @@
     </div>
     <div class="container">
         <div class="isi">
-        <h2 style="text-align:center;text-transform: uppercase;">DATA JABATAN GURU</h2>
+        <h2 style="text-align:center;text-transform: uppercase;">DATA KARYAWAN DINAS KABUPATEN TAPIN</h2>
                 <table  class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Jabatan</th>
-                                <th>Jabatan</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Tempat Lahir</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Alamat</th>
+                                <th>Telepon</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($jabatan as $p)
+                            @foreach($karyawan as $p)
                             <tr>
                                 @php
                                 $no=1;
                                 @endphp
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $p->kode_jabatan }}</td>
-                                <td>{{ $p->jabatan }}</td>
+                                <td>{{ $p->user->name }}</td>
+                                <td>{{ $p->NIP }}</td>
+                                <td>{{ $p->tempat_lahir }}</td>
+                                <td>{{ $p->tanggal_lahir }}</td>
+                                <td>{{ $p->alamat }}</td>
+                                <td>{{ $p->telepon }}</td>
                             </tr>
                             @endforeach
                         </tfoot>
@@ -104,11 +112,11 @@
                       <br>
                       <div class="ttd">
                         <h5> <p>Tapin, {{$tgl}}</p></h5>
-                        <h5>{{ $pejabat_struktural->jabatan }}</h5>
-                        <br>
-                        <br>
-                        <h5 style="text-decoration:underline;">{{ $pejabat_struktural->nama }}</h5>
-                        <h5>{{ $pejabat_struktural->NIP }}</h5>
+                      <h5>{{ $pejabat_struktural->jabatan }}</h5>
+                      <br>
+                      <br>
+                      <h5 style="text-decoration:underline;">{{ $pejabat_struktural->nama }}</h5>
+                      <h5>{{ $pejabat_struktural->NIP }}</h5>
                       </div>
                     </div>
         </div>

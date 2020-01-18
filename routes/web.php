@@ -26,27 +26,6 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'JabatanController@update')->name('update');
         Route::delete('{uuid}', 'JabatanController@delete')->name('delete');
         });    
-    Route::prefix('sekolah')->name('sekolah.')->group(function(){
-        Route::get('', 'SekolahController@get')->name('get');
-        Route::get('{uuid}', 'SekolahController@find')->name('find');
-        Route::post('', 'SekolahController@create')->name('create');
-        Route::put('{uuid}', 'SekolahController@update')->name('update');
-        Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
-        });    
-    Route::prefix('mapel')->name('mapel.')->group(function(){
-        Route::get('', 'MPController@get')->name('get');
-        Route::get('{uuid}', 'MPController@find')->name('find');
-        Route::post('', 'MPController@create')->name('create');
-        Route::put('{uuid}', 'MPController@update')->name('update');
-        Route::delete('{uuid}', 'MPController@delete')->name('delete');
-        });    
-    Route::prefix('guru')->name('guru.')->group(function(){
-        Route::get('', 'GuruController@get')->name('get');
-        Route::get('{uuid}', 'GuruController@find')->name('find');
-        Route::post('', 'GuruController@create')->name('create');
-        Route::put('{uuid}', 'GuruController@update')->name('update');
-        Route::delete('{uuid}', 'GuruController@delete')->name('delete');
-        });    
     Route::prefix('pejabat')->name('pejabat.')->group(function(){
         Route::get('', 'PejabatController@get')->name('get');
         Route::get('{uuid}', 'PejabatController@find')->name('find');
@@ -132,6 +111,44 @@ Route::get('/berita/Cetak', 'adminController@beritaCetak')->name('beritaCetak');
 Route::get('/karyawan/index', 'adminController@karyawanIndex')->name('karyawanIndex');
 Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCetak');
 });
+
+    Route::namespace('API')->prefix('api')->name('API.')->group(function(){
+        Route::prefix('guru')->name('guru.')->group(function(){
+            Route::get('', 'GuruController@get')->name('get');
+            Route::get('{uuid}', 'GuruController@find')->name('find');
+            Route::post('', 'GuruController@create')->name('create');
+            Route::put('{uuid}', 'GuruController@update')->name('update');
+            Route::delete('{uuid}', 'GuruController@delete')->name('delete');
+            });    
+        Route::prefix('sekolah')->name('sekolah.')->group(function(){
+            Route::get('', 'SekolahController@get')->name('get');
+            Route::get('{uuid}', 'SekolahController@find')->name('find');
+            Route::post('', 'SekolahController@create')->name('create');
+            Route::put('{uuid}', 'SekolahController@update')->name('update');
+            Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
+            });    
+        Route::prefix('mapel')->name('mapel.')->group(function(){
+            Route::get('', 'MPController@get')->name('get');
+            Route::get('{uuid}', 'MPController@find')->name('find');
+            Route::post('', 'MPController@create')->name('create');
+            Route::put('{uuid}', 'MPController@update')->name('update');
+            Route::delete('{uuid}', 'MPController@delete')->name('delete');
+            });    
+        Route::prefix('jabatan')->name('jabatan.')->group(function(){
+            Route::get('', 'JabatanController@get')->name('get');
+            Route::get('{uuid}', 'JabatanController@find')->name('find');
+            Route::post('', 'JabatanController@create')->name('create');
+            Route::put('{uuid}', 'JabatanController@update')->name('update');
+            Route::delete('{uuid}', 'JabatanController@delete')->name('delete');
+            });    
+        Route::prefix('golongan')->name('golongan.')->group(function(){
+            Route::get('', 'GolonganController@get')->name('get');
+            Route::get('{uuid}', 'GolonganController@find')->name('find');
+            Route::post('', 'GolonganController@create')->name('create');
+            Route::put('{uuid}', 'GolonganController@update')->name('update');
+            Route::delete('{uuid}', 'GolonganController@delete')->name('delete');
+            });
+    });    
 
 //middleware sekolah
 
