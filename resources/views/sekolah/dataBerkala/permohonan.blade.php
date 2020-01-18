@@ -129,7 +129,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.data.update", '')}}'
+                        let url = '{{route("API.data-sekolah.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -153,7 +153,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.data.create')}}",
+                            url: "{{Route('API.data-sekolah.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
