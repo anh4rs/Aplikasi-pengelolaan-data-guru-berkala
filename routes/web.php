@@ -70,6 +70,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         });  
     Route::prefix('data')->name('data.')->group(function(){
         Route::get('', 'DataController@get')->name('get');
+        Route::get('/getPending', 'DataController@getPending')->name('getPending');
         Route::get('{uuid}', 'DataController@find')->name('find');
         Route::post('', 'DataController@create')->name('create');
         Route::put('{uuid}', 'DataController@update')->name('update');
