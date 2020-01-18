@@ -26,9 +26,10 @@ class adminController extends Controller
 
     public function index(){
         $sekolah = Sekolah::all();
-        $guru = Guru::all();
+        $sekolah_sd = sekolah::where('b_pendidikan','SD')->get();
+        $sekolah_smp = sekolah::where('b_pendidikan','SMP')->get();
         $permohonan = data_berkala::all();
-        return view('admin.index',compact('sekolah','guru','permohonan'));
+        return view('admin.index',compact('sekolah_sd','sekolah_smp','permohonan'));
     }
 
     public function golonganIndex(){

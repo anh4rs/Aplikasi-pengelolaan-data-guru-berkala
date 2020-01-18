@@ -15,6 +15,10 @@ class Sekolah extends Model
         'id','user_id'
     ];
 
+    public function guru(){
+        return $this->hasMany('App\Guru');
+      }
+
     public function user(){
         return $this->belongsTo('App\User');
       }

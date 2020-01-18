@@ -96,8 +96,8 @@
                         <label for="guru">Status</label>
                         <select name="status" class="form-control" id="status">
                           <option value="">-- pilih Status --</option>
-                          <option value="PNS">-- PNS --</option>
-                          <option value="Kontrak">-- Kontrak --</option>
+                          <option value="PNS"> PNS </option>
+                          <option value="Kontrak"> Kontrak </option>
                         </select>
                     </div>
                     <div class="form-group">

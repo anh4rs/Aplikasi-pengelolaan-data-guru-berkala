@@ -81,8 +81,6 @@
                         <select name="b_pendidikan" id="b_pendidikan" class="form-control">
                             <option value="SD">SD</option>
                             <option value="SMP">SMP</option>
-                            <option value="SMA">SMA</option>
-                            <option value="SMK">SMK</option>
                         </select>
                     </div>
                     <div class="form-group">
