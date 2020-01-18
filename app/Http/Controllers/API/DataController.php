@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Data_berkala;
+use App\Inbox;
 use HCrypt;
 use Auth;
 
