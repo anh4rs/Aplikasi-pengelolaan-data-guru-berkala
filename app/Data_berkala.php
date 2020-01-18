@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gaji_berkala extends Model
+class Data_berkala extends Model
 {
     protected $fillable = [
         'uuid','guru_id','pejabat_struktural_id','no_surat','lampiran',
