@@ -29,4 +29,9 @@ class Data_berkala extends Model
     {
         return $this->BelongsTo('App\Pejabat_struktural');
     }
+
+    public function inbox()
+    {
+    	return $this->hasMany('App\Inbox');
+    }
 }
