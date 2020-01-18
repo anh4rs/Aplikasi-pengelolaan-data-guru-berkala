@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')    
+@section('content')
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
 
@@ -14,7 +14,7 @@
               <h3 class="mb-0">Tabel Data</h3>
               <div class="text-right">
               <a href="{{Route('guruFilter')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
-                <span class="btn-inner--text">Filter Cetak</span></a> 
+                <span class="btn-inner--text">Filter Cetak</span></a>
               <a href="{{Route('guruKeseluruhanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
@@ -38,7 +38,7 @@
                   </tr>
                 </thead>
                 <tbody>
- 
+
                 </tbody>
               </table>
             </div>
@@ -50,13 +50,13 @@
       <div class="modal fade" id="mediumModal"  role="dialog" aria-labelledby="modal-default" >
     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
         <div class="modal-content">
-        	
+
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-            </div>    
+            </div>
             <div class="modal-body">
                 <form action="" method="post">
                 <input type="hidden" name="id" id="id">
@@ -116,12 +116,12 @@
                         <label for="guru">Alamat</label>
                         <textarea name="alamat" id="alamat" class="form-control"></textarea>
                     </div>
-            </div>   
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
+                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button>
                 <button type="submit" id="btn-form" class="btn btn-primary"></button>
             </div>
-        </form> 
+        </form>
         </div>
     </div>
 </div>
@@ -137,7 +137,7 @@
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
                         $('#sekolah_id').append(
-                            '<option value="'+value.uuid+'">'+value.NPSN+'</option>'
+                            '<option value="'+value.uuid+'">'+value.nama+'</option>'
                         )
                     })
                 }
@@ -197,7 +197,7 @@
         getJabatan();
         getMp();
 
-        //fungsi hapus        
+        //fungsi hapus
         hapus = (uuid, nama) =>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
             Swal.fire({
@@ -241,19 +241,19 @@
                 $('.modal-title').text('Tambah Data');
                 $('#NIP').val('');
                 $('#nama').val('');
-                $('#golongan_id').val('');  
-                $('#jabatan_id').val('');  
+                $('#golongan_id').val('');
+                $('#jabatan_id').val('');
                 $('#mata_pelajaran_id').val('');
-                $('#telepon').val('');    
+                $('#telepon').val('');
                 $('#tempat_lahir').val('');
                 $('#tgl_lahir').val('');
                 $('#alamat').val('');
-                $('#status').val('');                                                                
+                $('#status').val('');
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
 
-            //event btn edit klik        
+            //event btn edit klik
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
@@ -264,22 +264,22 @@
                         $('#id').val(returnData.data.uuid);
                         $('#NIP').val(returnData.data.NIP);
                         $('#nama').val(returnData.data.nama);
-                        $('#sekolah_id').val(returnData.data.sekolah.uuid); 
-                        $('#golongan_id').val(returnData.data.golongan.uuid); 
+                        $('#sekolah_id').val(returnData.data.sekolah.uuid);
+                        $('#golongan_id').val(returnData.data.golongan.uuid);
                         $('#jabatan_id').val(returnData.data.jabatan.uuid);
                         $('#mata_pelajaran_id').val(returnData.data.mata_pelajaran.uuid);
-                        $('#telepon').val(returnData.data.telepon);  
+                        $('#telepon').val(returnData.data.telepon);
                         $('#tempat_lahir').val(returnData.data.tempat_lahir);
                         $('#tgl_lahir').val(returnData.data.tgl_lahir);
                         $('#alamat').val(returnData.data.alamat);
-                        $('#status').val(returnData.data.status);                                                              
+                        $('#status').val(returnData.data.status);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
                 })
             }
 
-            //fungsi render datatable            
+            //fungsi render datatable
             $(document).ready(function() {
                 $('#datatable').DataTable( {
                     responsive: true,
@@ -314,7 +314,7 @@
                     ]
                 });
 
-                //event form submit            
+                //event form submit
                 $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
