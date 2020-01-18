@@ -22,6 +22,19 @@ class DataController extends APIController
         return $this->returnController("ok", $data_berkala);
     }
 
+    public function getData(){
+        $sekolah_id = Auth::user()->sekolah->id;
+        $data_berkala = json_decode(redis::get("data_berkala::all"));
+        if (!$data_berkala) {
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->get();
+            if (!$data_berkala) {
+                return $this->returnController("error", "failed get data_berkala data");
+            }
+            Redis::set("data_berkala:all", $data_berkala);
+        }
+        return $this->returnController("ok", $data_berkala);
+    }
+
     public function find($uuid){
         $id = HCrypt::decrypt($uuid);
         if (!$id) {
@@ -40,9 +53,12 @@ class DataController extends APIController
 
     public function create(Request $req){
         // $seksi = Seksi::create($req->all());
+        $sekolah_id = Auth::user()->sekolah->id;
+
         $data_berkala = new data_berkala;
         // decrypt foreign key id
         
+        $data_berkala->sekolah_id = $sekolah_id;
         $data_berkala->guru_id = Hcrypt::decrypt($req->guru_id);
         $data_berkala->pejabat_struktural_id = Hcrypt::decrypt($req->pejabat_struktural_id);
         $data_berkala->nomor_surat = $req->nomor_surat;

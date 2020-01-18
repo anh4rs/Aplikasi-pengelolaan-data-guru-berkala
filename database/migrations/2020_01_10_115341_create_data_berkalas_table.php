@@ -15,6 +15,7 @@ class CreateDataBerkalasTable extends Migration
     {
         Schema::create('data_berkalas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('sekolah_id');
             $table->unsignedBigInteger('guru_id');
             $table->unsignedBigInteger('pejabat_struktural_id');
             $table->text('uuid')->nullable();
@@ -31,6 +32,7 @@ class CreateDataBerkalasTable extends Migration
             $table->string('mks')->length(50);
             $table->string('status')->default('0');
             $table->timestamps();
+            $table->foreign('sekolah_id')->references('id')->on('sekolahs')->onDelete('cascade');
             $table->foreign('guru_id')->references('id')->on('gurus')->onDelete('cascade');
             $table->foreign('pejabat_struktural_id')->references('id')->on('pejabat_strukturals')->onDelete('cascade');
         });

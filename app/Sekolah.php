@@ -22,4 +22,9 @@ class Sekolah extends Model
     public function user(){
         return $this->belongsTo('App\User');
       }
+
+    public function data_berkala()
+    {
+        return $this->HasMany('App\Data_berkala');
+    }
 }
