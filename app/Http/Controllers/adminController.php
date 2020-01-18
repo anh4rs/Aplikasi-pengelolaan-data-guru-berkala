@@ -80,6 +80,10 @@ class adminController extends Controller
         return view('admin.karyawan.index');
     }
 
+    public function dataPermohonanIndex(){
+        return view('admin.permohonan.index');
+    }
+
     public function dataBerkalaIndex(){
         return view('admin.dataBerkala.index');
     }
