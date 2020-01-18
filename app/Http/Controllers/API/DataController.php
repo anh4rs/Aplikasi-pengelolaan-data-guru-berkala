@@ -64,13 +64,13 @@ class DataController extends APIController
         $data_berkala->nomor_surat = $req->nomor_surat;
         $data_berkala->lampiran = $req->lampiran;
         $data_berkala->perihal = $req->perihal;
-        $data_berkala->data_lama = $req->data_lama;
+        $data_berkala->gaji_lama = $req->gaji_lama;
         $data_berkala->tgl_keputusan = $req->tgl_keputusan;
         $data_berkala->no_keputusan = $req->no_keputusan;
         $data_berkala->status = 0;
-        $data_berkala->tgl_data_berlaku = $req->tgl_data_berlaku;
+        $data_berkala->tgl_gaji_berlaku = $req->tgl_gaji_berlaku;
         $data_berkala->mkg = $req->mkg;
-        $data_berkala->data_baru = $req->data_baru;
+        $data_berkala->gaji_baru = $req->gaji_baru;
         $data_berkala->terbilang = $req->terbilang;
         $data_berkala->mks = $req->mks;
 
@@ -101,13 +101,13 @@ class DataController extends APIController
         $data_berkala->no_surat = $req->no_surat;
         $data_berkala->lampiran = $req->lampiran;
         $data_berkala->perihal = $req->perihal;
-        $data_berkala->data_lama = $req->data_lama;
+        $data_berkala->gaji_lama = $req->gaji_lama;
         $data_berkala->tgl_keputusan = $req->tgl_keputusan;
         $data_berkala->no_keputusan = $req->no_keputusan;
         $data_berkala->status = $req->status;
-        $data_berkala->tgl_data_berlaku = $req->tgl_data_berlaku;
+        $data_berkala->tgl_gaji_berlaku = $req->tgl_gaji_berlaku;
         $data_berkala->mkg = $req->mkg;
-        $data_berkala->data_baru = $req->data_baru;
+        $data_berkala->gaji_baru = $req->gaji_baru;
         $data_berkala->terbilang = $req->terbilang;
         $data_berkala->mks = $req->mks;
         $data_berkala->update();

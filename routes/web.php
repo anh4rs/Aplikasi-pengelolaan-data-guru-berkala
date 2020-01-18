@@ -162,6 +162,13 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
             Route::put('{uuid}', 'DataController@update')->name('update');
             Route::delete('{uuid}', 'DataController@delete')->name('delete');
             }); 
+        Route::prefix('pejabat-sekolah')->name('pejabat-sekolah.')->group(function(){
+            Route::get('', 'PejabatController@get')->name('get');
+            Route::get('{uuid}', 'PejabatController@find')->name('find');
+            Route::post('', 'PejabatController@create')->name('create');
+            Route::put('{uuid}', 'PejabatController@update')->name('update');
+            Route::delete('{uuid}', 'PejabatController@delete')->name('delete');
+            });   
     });    
 
 //middleware sekolah
