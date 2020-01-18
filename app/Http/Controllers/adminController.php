@@ -12,6 +12,7 @@ Use App\Berita;
 Use App\Pejabat_struktural;
 Use App\Data_berkala;
 Use App\Karyawan;
+use HCrypt;
 
 
 
@@ -81,6 +82,14 @@ class adminController extends Controller
 
     public function dataBerkalaIndex(){
         return view('admin.dataBerkala.index');
+    }
+    
+    public function dataBerkalaVerifikasi($uuid){
+        $id = HCrypt::decrypt($uuid);
+
+        $permohonan = Data_berkala::findOrFail($id);
+
+        return view('admin.dataBerkala.verifikasi',compact('permohonan'));
     }    
 
     public function golonganCetak(){
