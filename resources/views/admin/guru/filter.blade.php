@@ -20,7 +20,7 @@
                     <select class="form-control" name="sekolah_id" id="sekolah_id">
                     <option value="">-- pilih sekolah --</option>
                     @foreach($sekolah as $s)
-                        <option value="{{$s->id}}">{{$s->npsn}}</option>
+                        <option value="{{$s->id}}">{{$s->nama}}</option>
                     @endforeach
                     </select>
                 </div>
