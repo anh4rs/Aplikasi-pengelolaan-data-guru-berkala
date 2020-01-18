@@ -93,7 +93,7 @@
         getGuru = () =>{
             $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/guru')}}",
+                    url: "{{ url('/api/guru-sekolah')}}",
                     beforeSend: false,
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
@@ -109,7 +109,7 @@
         getPejabat = () =>{
             $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/pejabat')}}",
+                    url: "{{ url('/api/pejabat-sekolah')}}",
                     beforeSend: false,
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
@@ -157,16 +157,7 @@
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                form.trigger('reset');
-                                $('#mediumModal').modal('hide');
-                                $('#datatable').DataTable().ajax.reload();
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Data Berhasil Disimpan',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
+                                window.location.replace("/adminSekolah/dataBerkala");
                             },
                             error:function(response){
                                 console.log(response);

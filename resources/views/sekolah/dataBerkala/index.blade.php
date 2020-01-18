@@ -25,7 +25,7 @@
               <table id="datatable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">Nama</th>
+                    <th scope="col">No</th>
                     <th scope="col">Nama</th>
                     <th scope="col">NIP</th>
                     <th scope="col">Perihal</th>
@@ -131,8 +131,7 @@
                     },
                     columns: [
                         {data: null , render : function ( data, type, row, meta ) {
-                            let no = 1;
-                           return '<p>'+ no++ +' </p>'
+                            return meta.row + meta.settings._iDisplayStart + 1;
                         }},
                         {"data": "guru.nama"},
                         {"data": "guru.NIP"},
