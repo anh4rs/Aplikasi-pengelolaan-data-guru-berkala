@@ -5,12 +5,13 @@ use PDF;
 use Carbon\Carbon;
 Use App\Golongan;
 Use App\Jabatan;
-Use App\Sekolah; 
-Use App\Mata_pelajaran; 
-Use App\Guru; 
+Use App\Sekolah;
+Use App\Mata_pelajaran;
+Use App\Guru;
 Use App\Berita;
 Use App\Pejabat_struktural;
-Use App\Gaji_berkala; 
+Use App\Gaji_berkala;
+Use App\Karyawan;
 
 
 
@@ -29,7 +30,7 @@ class adminController extends Controller
         $permohonan = gaji_berkala::all();
         return view('admin.index',compact('sekolah','guru','permohonan'));
     }
-    
+
     public function golonganIndex(){
         return view('admin.golongan.index');
     }
@@ -79,32 +80,36 @@ class adminController extends Controller
 
     public function golonganCetak(){
         $golongan=golongan::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.golonganKeseluruhan', ['golongan'=>$golongan,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.golonganKeseluruhan', ['golongan'=>$golongan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data golongan.pdf');
       }
-      
+
     public function jabatanCetak(){
         $jabatan=jabatan::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.jabatanKeseluruhan', ['jabatan'=>$jabatan,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.jabatanKeseluruhan', ['jabatan'=>$jabatan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data jabatan.pdf');
     }
 
     public function sekolahKeseluruhanCetak(){
         $sekolah=sekolah::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.sekolahKeseluruhan', ['sekolah'=>$sekolah,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.sekolahKeseluruhan', ['sekolah'=>$sekolah,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Sekolah Keseluruhan.pdf');
     }
 
     public function mpCetak(){
         $mata_pelajaran=mata_pelajaran::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.mpKeseluruhan', ['mata_pelajaran'=>$mata_pelajaran,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.mpKeseluruhan', ['mata_pelajaran'=>$mata_pelajaran,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data mata Pelajaran Keseluruhan.pdf');
     }
@@ -112,7 +117,8 @@ class adminController extends Controller
     public function guruKeseluruhanCetak(){
         $guru=Guru::all();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.guruKeseluruhan', ['guru'=>$guru,'tgl'=>$tgl]);
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.guruKeseluruhan', ['guru'=>$guru,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Guru Keseluruhan.pdf');
     }
@@ -120,7 +126,8 @@ class adminController extends Controller
     public function pejabatStrukturalCetak(){
         $pejabat=pejabat_struktural::all();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.pejabatKeseluruhan', ['pejabat'=>$pejabat,'tgl'=>$tgl]);
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.pejabatKeseluruhan', ['pejabat'=>$pejabat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Pejabat Keseluruhan.pdf');
     }
@@ -128,16 +135,27 @@ class adminController extends Controller
     public function beritaCetak(){
         $berita=berita::all();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.beritaKeseluruhan', ['berita'=>$berita,'tgl'=>$tgl]);
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.beritaKeseluruhan', ['berita'=>$berita,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data berita Keseluruhan.pdf');
     }
 
     public function guruFilterCetak(Request $request){
         $guru=Guru::where('sekolah_id',$request->sekolah_id)->get();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.guruFilter', ['guru'=>$guru,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.guruFilter', ['guru'=>$guru,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Guru filter Sekolah.pdf');
+    }
+
+    public function karyawanCetak(){
+        $karyawan=karyawan::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.karyawanKeseluruhan', ['karyawan'=>$karyawan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data karyawan Keseluruhan.pdf');
     }
 }

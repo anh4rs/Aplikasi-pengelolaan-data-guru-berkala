@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')    
+@section('content')
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
 
@@ -12,7 +12,7 @@
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
               <h3 class="mb-0">Tabel Data</h3>
-              <div class="text-right"> 
+              <div class="text-right">
               <a href="{{Route('sekolahKeseluruhanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
@@ -37,7 +37,7 @@
                   </tr>
                 </thead>
                 <tbody>
- 
+
                 </tbody>
               </table>
             </div>
@@ -49,13 +49,13 @@
       <div class="modal fade" id="mediumModal"  role="dialog" aria-labelledby="modal-default" >
     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
         <div class="modal-content">
-        	
+
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-            </div>    
+            </div>
             <div class="modal-body">
                 <form action="" method="post">
                 <input type="hidden" name="id" id="id">
@@ -113,21 +113,21 @@
                     <div class="form-group">
                         <label for="sekolah"> Username</label>
                         <input type="text" class="form-control" name="name" id="name">
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         <label for="sekolah"> Email</label>
                         <input type="email" class="form-control" name="email" id="email">
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         <label for="sekolah"> Password</label>
                         <input type="password" class="form-control" name="password" id="password">
                     </div>
-            </div>   
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
+                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button>
                 <button type="submit" id="btn-form" class="btn btn-primary"></button>
             </div>
-        </form> 
+        </form>
         </div>
     </div>
 </div>
@@ -172,23 +172,23 @@
                     }
                 })
             }
-    
+
             //event btn tambah klik
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
                 $('#nama').val('');
                 $('#NPSN').val('');
                 $('#status').val('');
-                $('#b_pendidikan').val('');  
-                $('#status_pemilik').val('');  
+                $('#b_pendidikan').val('');
+                $('#status_pemilik').val('');
                 $('#sk').val('');
-                $('#tgl_sk').val('');    
+                $('#tgl_sk').val('');
                 $('#sk_izin').val('');
-                $('#tgl_sk_izin').val('');                
+                $('#tgl_sk_izin').val('');
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
-            //event btn edit klik         
+            //event btn edit klik
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
@@ -200,13 +200,13 @@
                         $('#nama').val(returnData.data.nama);
                         $('#NPSN').val(returnData.data.NPSN);
                         $('#status').val(returnData.data.status_sekolah);
-                        $('#b_pendidikan').val(returnData.data.b_pendidikan); 
+                        $('#b_pendidikan').val(returnData.data.b_pendidikan);
                         $('#status_pemilik').val(returnData.data.status_pemilik);
                         $('#sk').val(returnData.data.sk);
-                        $('#tgl_sk').val(returnData.data.tgl_sk); 
+                        $('#tgl_sk').val(returnData.data.tgl_sk);
                         $('#sk_izin').val(returnData.data.sk_izin);
-                        $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);   
-                        $('#name').val(returnData.data.user.name);   
+                        $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);
+                        $('#name').val(returnData.data.user.name);
                         $('#email').val(returnData.data.user.email);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
