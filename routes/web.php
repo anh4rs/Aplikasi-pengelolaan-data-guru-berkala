@@ -33,6 +33,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'PejabatController@update')->name('update');
         Route::delete('{uuid}', 'PejabatController@delete')->name('delete');
         });    
+    Route::prefix('guru')->name('guru.')->group(function(){
+        Route::get('', 'GuruController@get')->name('get');
+        Route::get('{uuid}', 'GuruController@find')->name('find');
+        Route::post('', 'GuruController@create')->name('create');
+        Route::put('{uuid}', 'GuruController@update')->name('update');
+        Route::delete('{uuid}', 'GuruController@delete')->name('delete');
+        });    
     Route::prefix('berita')->name('berita.')->group(function(){
         Route::get('', 'BeritaController@get')->name('get');
         Route::get('{uuid}', 'BeritaController@find')->name('find');
@@ -113,8 +120,8 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
 });
 
     Route::namespace('API')->prefix('api')->name('API.')->group(function(){
-        Route::prefix('guru')->name('guru.')->group(function(){
-            Route::get('', 'GuruController@get')->name('get');
+        Route::prefix('guru-sekolah')->name('guru-sekolah.')->group(function(){
+            Route::get('', 'GuruController@getGuru')->name('get');
             Route::get('{uuid}', 'GuruController@find')->name('find');
             Route::post('', 'GuruController@create')->name('create');
             Route::put('{uuid}', 'GuruController@update')->name('update');

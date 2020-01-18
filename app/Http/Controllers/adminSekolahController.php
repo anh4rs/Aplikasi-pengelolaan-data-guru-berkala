@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class adminSekolahController extends Controller
 {
@@ -12,8 +13,8 @@ class adminSekolahController extends Controller
     }
 
     public function guruIndex(){
-
-        return view('sekolah.guru.index');
+        $sekolah = Auth::user()->sekolah;
+        return view('sekolah.guru.index',compact('sekolah'));
     }
 
     public function sekolahIndex(){
