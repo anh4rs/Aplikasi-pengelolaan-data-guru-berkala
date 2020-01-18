@@ -155,8 +155,8 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
             Route::put('{uuid}', 'GolonganController@update')->name('update');
             Route::delete('{uuid}', 'GolonganController@delete')->name('delete');
             });
-        Route::prefix('data')->name('data.')->group(function(){
-            Route::get('', 'DataController@get')->name('get');
+        Route::prefix('data-sekolah')->name('data-sekolah.')->group(function(){
+            Route::get('', 'DataController@getData')->name('get');
             Route::get('{uuid}', 'DataController@find')->name('find');
             Route::post('', 'DataController@create')->name('create');
             Route::put('{uuid}', 'DataController@update')->name('update');
