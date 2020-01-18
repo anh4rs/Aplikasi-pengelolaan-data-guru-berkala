@@ -15,7 +15,19 @@ class DataController extends APIController
     public function get(){
         $data_berkala = json_decode(redis::get("data_berkala::all"));
         if (!$data_berkala) {
-            $data_berkala = data_berkala::with('guru','pejabat_struktural')->get();
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->where('status',1)->get();
+            if (!$data_berkala) {
+                return $this->returnController("error", "failed get data_berkala data");
+            }
+            Redis::set("data_berkala:all", $data_berkala);
+        }
+        return $this->returnController("ok", $data_berkala);
+    }
+
+    public function getPending(){
+        $data_berkala = json_decode(redis::get("data_berkala::all"));
+        if (!$data_berkala) {
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->whereIn('status',[0,2])->get();
             if (!$data_berkala) {
                 return $this->returnController("error", "failed get data_berkala data");
             }
