@@ -11,7 +11,7 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">Tabel Data Permohonan Gajih Berkala</h3>
+              <h3 class="mb-0">Tabel Data Permohonan datah Berkala</h3>
               <div class="text-right"> 
               <a href="#" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
@@ -30,7 +30,7 @@
                     <th scope="col">NIP</th>
                     <th scope="col">Perihal</th>
                     <th scope="col">Nomor Keputusan</th>
-                    <th scope="col">Gajih Baru</th>
+                    <th scope="col">Gaji Baru</th>
                     <th scope="col">Status</th>
                     <th scope="col">Aksi</th>
                   </tr>
@@ -64,7 +64,7 @@
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : "{{ url('/api/gaji')}}" + '/' + uuid,
+                                url : "{{ url('/api/data')}}" + '/' + uuid,
                                 type : "POST",
                                 data : {'_method' : 'DELETE', '_token' :csrf_token},
                                 success: function (response) {
@@ -92,7 +92,7 @@
             // edit = uuid =>{
             //     $.ajax({
             //         type: "GET",
-            //         url: "{{ url('/api/gaji')}}" + '/' + uuid,
+            //         url: "{{ url('/api/data')}}" + '/' + uuid,
             //         beforeSend: false,
             //         success : function(returnData) {
             //             $('.modal-title').text('Edit Data');
@@ -123,7 +123,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.gaji.get')}}",
+                        "url": "{{route('API.data.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
@@ -167,7 +167,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.gaji.update", '')}}'
+                        let url = '{{route("API.data.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -191,7 +191,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.gaji.create')}}",
+                            url: "{{Route('API.data.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
