@@ -121,6 +121,20 @@ class DataController extends APIController
         return $this->returnController("ok", $data_berkala);
     }
 
+    public function updateStatus(Request $req)
+    {
+        $id = $req->data_berkala_id;
+        $data_berkala = Data_berkala::findOrFail($id);
+        $data_berkala->status = $req->status;
+
+        $inbox = new Inbox;
+        $inbox->sekolah_id = $req->sekolah_id;
+        $inbox->data_berkala_id = $id;
+        $inbox->subjek = $req->subjek;
+        $inbox->keterangan = $req->keterangan;
+        $inbox->save();
+    }
+
     public function delete($uuid){
         $id = HCrypt::decrypt($uuid);
         if (!$id) {
