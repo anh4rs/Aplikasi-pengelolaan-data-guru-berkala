@@ -27,4 +27,9 @@ class Sekolah extends Model
     {
         return $this->HasMany('App\Data_berkala');
     }
+
+    public function inbox()
+    {
+    	return $this->hasMany('App\Inbox');
+    }
 }
