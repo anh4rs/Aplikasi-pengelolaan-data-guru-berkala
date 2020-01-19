@@ -198,4 +198,13 @@ class adminController extends Controller
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Permohonan filter Status.pdf');
     }
+    
+    public function dataBerkalaCetak(){
+        $dataBerkala = data_berkala::with('guru','pejabat_struktural')->where('status',1)->get();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.dataBerkalaKeseluruhan', ['dataBerkala'=>$dataBerkala,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data berkala.pdf');
+    }
 }

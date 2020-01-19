@@ -126,6 +126,8 @@ Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifika
 Route::get('/permohonan/Cetak', 'adminController@permohonanCetak')->name('permohonanCetak');
 Route::get('/permohonan/filter', 'adminController@permohonanFilter')->name('permohonanFilter');
 Route::post('/permohonan/filter', 'adminController@permohonanFilterCetak')->name('permohonanFilterCetak');
+Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
+
 
 
 
