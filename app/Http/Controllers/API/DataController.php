@@ -146,6 +146,7 @@ class DataController extends APIController
         $inbox->data_berkala_id = $id;
         $inbox->subjek = $req->subjek;
         $inbox->keterangan = $req->keterangan;
+        $inbox->status_permohonan = $req->status_permohonan;
         $inbox->save();
     }
 

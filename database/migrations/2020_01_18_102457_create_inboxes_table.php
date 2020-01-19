@@ -20,6 +20,7 @@ class CreateInboxesTable extends Migration
             $table->text('uuid')->nullable();
             $table->string('subjek')->length(50);
             $table->text('keterangan');
+            $table->string('status_permohonan')->length(50);
             $table->tinyInteger('status')->default(0);
             $table->foreign('sekolah_id')->references('id')->on('sekolahs')->onDelete('cascade');
             $table->foreign('data_berkala_id')->references('id')->on('data_berkalas')->onDelete('cascade');
