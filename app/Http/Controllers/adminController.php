@@ -94,7 +94,11 @@ class adminController extends Controller
         $permohonan = Data_berkala::findOrFail($id);
 
         return view('admin.dataBerkala.verifikasi',compact('permohonan'));
-    }    
+    }  
+    
+    public function permohonanFilter(){
+        return view('admin.permohonan.filter');
+    }
 
     public function golonganCetak(){
         $golongan=golongan::all();
@@ -175,5 +179,23 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.karyawanKeseluruhan', ['karyawan'=>$karyawan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data karyawan Keseluruhan.pdf');
+    }
+
+    public function permohonanCetak(){
+        $permohonan = data_berkala::with('guru','pejabat_struktural')->whereIn('status',[0,2])->get();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.permohonanKeseluruhan', ['permohonan'=>$permohonan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data karyawan Keseluruhan.pdf');
+    }
+
+    public function permohonanfilterCetak(Request $request){
+        $permohonan=data_berkala::where('status',$request->status)->get();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.permohonanFilter', ['permohonan'=>$permohonan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Permohonan filter Status.pdf');
     }
 }

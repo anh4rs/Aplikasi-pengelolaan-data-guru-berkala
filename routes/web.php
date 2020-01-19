@@ -123,7 +123,11 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
 Route::get('/permohonan/index', 'adminController@dataPermohonanIndex')->name('dataPermohonanIndex');
 Route::get('/berkala/index', 'adminController@dataBerkalaIndex')->name('dataBerkalaIndex');
 Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifikasi')->name('dataBerkalaVerifikasi');
-Route::get('/permohonan/Cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
+Route::get('/permohonan/Cetak', 'adminController@permohonanCetak')->name('permohonanCetak');
+Route::get('/permohonan/filter', 'adminController@permohonanFilter')->name('permohonanFilter');
+Route::post('/permohonan/filter', 'adminController@permohonanFilterCetak')->name('permohonanFilterCetak');
+
+
 
 
 });
