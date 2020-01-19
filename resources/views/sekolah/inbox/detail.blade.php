@@ -19,8 +19,29 @@
                <h5>{{$inbox->subjek}}</h5>
                <p>{{$inbox->created_at}}</p>
                <br><br><br>
-               Kami Sudah menerima Permohonan berkala dari {{$inbox->data_berkala->guru->nama}}, setelah melakukan verifikasi data maka dengan ini kami memberiyahukan bahwa permohonan tersebut telah <strong>{{$inbox->keterangan}}</strong>.
-               <br> <br> demikian pemberitahuan ini kami sampaikan terimakasih.
+               Dengan ini kami beritahukan bahwa Kami Sudah menerima Permohonan berkala dengan keterangan sebagai berikut :<br> <br>
+               <table class="table table-hover">
+               <tr>
+               <td width="20%">Nama </td>
+               <td>:{{$inbox->data_berkala->guru->nama}}</td>
+               </tr>
+               <tr>
+               <td width="20%">Diajukan pada </td>
+               <td>:{{$inbox->data_berkala->created_at}}</td>
+               </tr>
+               </table>
+              <br>
+               setelah melakukan verifikasi data maka dengan ini kami memberiyahukan bahwa permohonan tersebut telah 
+               @if($inbox->status_permohonan == 1)
+               <strong class="text-success">Diterima</strong>.
+               @else
+               <strong class="text-danger" >Ditolak</strong>.
+               @endif <br> <br>
+              <div class="alert alert-secondary">
+              <h5>Keterangan</h5>
+              <p>{{$inbox->keterangan}}</p>
+              </div>
+               <br> demikian pemberitahuan ini kami sampaikan terimakasih.
             </div>
             <div class=" text-right card-footer">
                 <a class="btn btn-sm btn-danger" href="{{Route('inboxDelete', ['id' => $inbox->id ])}}"><i class="ti-popcorn">hapus</i></a>

@@ -25,7 +25,6 @@
                         <div class="form-group">
                             <label for="">Status</label>
                             <select name="status" id="status" class="form-control">
-                                <option value="0">Pending</option>
                                 <option value="1">Diterima</option>
                                 <option value="2">Ditolak</option>
                             </select>
