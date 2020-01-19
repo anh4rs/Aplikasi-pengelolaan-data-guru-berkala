@@ -61,8 +61,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{Route('dataBerkalaIndex')}}">
+            <a class="nav-link" href="{{Route('dataPermohonanIndex')}}">
               <i class="ni ni-archive-2"></i> Data Permohonan
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{Route('dataBerkalaIndex')}}">
+              <i class="ni ni-archive-2"></i> Data Berkala
             </a>
           </li>
           <!-- <li class="nav-item">

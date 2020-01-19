@@ -32,14 +32,15 @@
                         </div>
                         <div class="form-group">
                             <label for="">Keterangan</label>
-                            <textarea class="form-control"  name="subject" id="subject"></textarea>
+                            <textarea class="form-control"  name="keterangan" id="keterangan"></textarea>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="card-footer text-right">
                 <a class="btn btn-sm btn-danger" href="">Batal</a>
-                <button type="submit" class="btn btn-sm btn-primary"> Kirim Veifikasi  </button>
+                <button type="submit" name="submit" id="btn-form" class="btn btn-sm btn-primary"> Kirim Veifikasi  </button>
+                {{csrf_field()}}
+                </form>
             </div>
           </div>
         </div>
@@ -53,7 +54,7 @@
          $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
-                        let url = '{{route("API.guru.update", '')}}'
+                        let url = '{{route("API.data-sekolah.updateStatus", '')}}'
                         let id = $('#data_berkala_id').val();
                         $.ajax({
                             url: url+'/'+id,

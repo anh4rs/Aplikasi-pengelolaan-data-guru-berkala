@@ -120,9 +120,12 @@ Route::get('/karyawan/index', 'adminController@karyawanIndex')->name('karyawanIn
 Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCetak');
 
 //halaman data Karyawan
-Route::get('/permohonan/index', 'adminController@dataBerkalaIndex')->name('dataBerkalaIndex');
+Route::get('/permohonan/index', 'adminController@dataPermohonanIndex')->name('dataPermohonanIndex');
+Route::get('/berkala/index', 'adminController@dataBerkalaIndex')->name('dataBerkalaIndex');
 Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifikasi')->name('dataBerkalaVerifikasi');
 Route::get('/permohonan/Cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
+
+
 });
 
     Route::namespace('API')->prefix('api')->name('API.')->group(function(){
@@ -197,6 +200,12 @@ Route::get('/permohonan/Cetak', 'adminController@dataBerkalaCetak')->name('dataB
     Route::get('/adminSekolah/permohonan', 'adminSekolahController@permohonanTambah')->name('permohonanTambah');
 
     //data gajihBerkala
+
+    //halaman inbox
+    Route::get('/inbox/index', 'adminSekolahController@inboxIndex')->name('inboxIndex');
+    Route::get('/inbox/detail/{id}', 'adminSekolahController@inboxDetail')->name('inboxDetail');
+    Route::get('/inbox/delete/{id}', 'adminSekolahController@inboxDelete')->name('inboxDelete');
+
 
 //middleware sekolah
 
