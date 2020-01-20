@@ -15,7 +15,7 @@ class GajiController extends APIController
     public function get(){
         $gaji_berkala = json_decode(redis::get("gaji_berkala::all"));
         if (!$gaji_berkala) {
-            $gaji_berkala = gaji_berkala::all();
+            $gaji_berkala = gaji_berkala::with('golongan')->get();
             if (!$gaji_berkala) {
                 return $this->returnController("error", "failed get gaji_berkala gaji");
             }

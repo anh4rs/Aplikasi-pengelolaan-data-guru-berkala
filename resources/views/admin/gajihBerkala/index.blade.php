@@ -26,8 +26,9 @@
                 <thead class="thead-light">
                   <tr>
                     <th cope="col">No</th>
-                    <th scope="col">Kode gologan</th>
-                    <th scope="col">Nama </th>
+                    <th scope="col"> gologan</th>
+                    <th scope="col">MKG </th>
+                    <th scope="col">Besaran Gaji </th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -53,13 +54,19 @@
             <div class="modal-body">
                 <form action="" method="post">
                 <input type="hidden" class="form-control" name="id" id="id">
-                    <div class="form-group">
+                <div class="form-group">
                         <label for="golongan">Kode Golongan</label>
-                        <input type="text" class="form-control" name="kode_golongan" id="kode_golongan">
+                        <select class="form-control" name="golongan_id" id="golongan_id">
+                            <option value="">-- pilih golongan --</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="golongan">Nama </label>
-                        <input type="text" class="form-control" name="golongan" id="golongan">
+                        <label for="golongan">Masa Kerja Golongan (MKG)</label>
+                        <input type="number" class="form-control" name="mkg" id="mkg">
+                    </div>
+                    <div class="form-group">
+                        <label for="golongan">Besaran Gaji </label>
+                        <input type="text" class="form-control" name="besaran_gaji" id="besaran_gaji">
                     </div>
             </div>   
             <div class="modal-footer">
@@ -73,12 +80,28 @@
 @endsection
 @section('script')
     <script>
+
+            getGolongan = () =>{
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/golongan')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#golongan_id').append(
+                            '<option value="'+value.uuid+'">'+value.kode_golongan+'</option>'
+                        )
+                    })
+                }
+            })
+        }
+        getGolongan();
         //fungsi hapus
         hapus = (uuid, nama) =>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
             Swal.fire({
                         title: 'apa anda yakin?',
-                        text: " Menghapus  Data golongan " + nama,
+                        text: " Menghapus  Data gaji " + nama,
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
@@ -88,7 +111,7 @@
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : "{{ url('/api/golongan')}}" + '/' + uuid,
+                                url : "{{ url('/api/gaji')}}" + '/' + uuid,
                                 type : "POST",
                                 data : {'_method' : 'DELETE', '_token' :csrf_token},
                                 success: function (response) {
@@ -115,8 +138,9 @@
             //event btn tambah
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
-                $('#kode_golongan').val('');
-                $('#golongan').val('');  
+                $('#golongan_id').val('');
+                $('#mkg').val('');
+                $('#besaran_gaji').val('');    
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -125,13 +149,14 @@
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/golongan')}}" + '/' + uuid,
+                    url: "{{ url('/api/gaji')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
-                        $('#kode_golongan').val(returnData.data.kode_golongan);
-                        $('#golongan').val(returnData.data.golongan);
+                        $('#golongan_id').val(returnData.data.golongan.uuid);
+                        $('#mkg').val(returnData.data.mkg);
+                        $('#besaran_gaji').val(returnData.data.besaran_gaji);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
@@ -147,7 +172,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.golongan.get')}}",
+                        "url": "{{route('API.gaji.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
@@ -157,8 +182,13 @@
                         {data: null , render : function ( data, type, row, meta ) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }},
-                        {"data": "kode_golongan"},
-                        {"data": "golongan"},
+                        {"data": "golongan.kode_golongan"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                           return '<p> '+row.mkg+' tahun </p>'
+                        }},                        
+                        {data: null , render : function ( data, type, row, meta ) {
+                           return '<p> Rp.'+row.besaran_gaji+'</p>'
+                        }},  
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
                             let nama = row.nama;
@@ -174,7 +204,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.golongan.update", '')}}'
+                        let url = '{{route("API.gaji.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -198,7 +228,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.golongan.create')}}",
+                            url: "{{Route('API.gaji.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {

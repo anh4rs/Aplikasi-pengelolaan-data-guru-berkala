@@ -14,7 +14,7 @@ class Gaji_berkala extends Model
         'id','golongan_id'
     ];
 
-    public function Golongan()
+    public function golongan()
     {
      return $this->belongsTo('App\Golongan');
     }
