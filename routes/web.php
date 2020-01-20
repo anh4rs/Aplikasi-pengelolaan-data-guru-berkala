@@ -135,6 +135,10 @@ Route::get('/permohonan/filter', 'adminController@permohonanFilter')->name('perm
 Route::post('/permohonan/filter', 'adminController@permohonanFilterCetak')->name('permohonanFilterCetak');
 Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
 
+//gajihBerkala
+Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
+
+
 
 
 

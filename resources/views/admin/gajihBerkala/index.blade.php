@@ -2,6 +2,7 @@
 @section('content')    
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
+
       </div>
     </div>
     <div class="container-fluid mt--9">
@@ -10,9 +11,9 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">Tabel Data karyawan</h3>
+              <h3 class="mb-0">Tabel data Gajih berkala</h3>
               <div class="text-right">
-              <a href="{{Route('karyawanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+              <a href="{{Route('golonganCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
 	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
@@ -21,16 +22,12 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table id="datatable" class="table table-striped align-items-center table-flush text-center">
+              <table id="datatable" class="table align-items-center table-striped text-center">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">NIP</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">tanggal Lahir</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Telepon</th>
+                    <th cope="col">No</th>
+                    <th scope="col">Kode gologan</th>
+                    <th scope="col">Nama </th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -55,60 +52,33 @@
             </div>    
             <div class="modal-body">
                 <form action="" method="post">
+                <input type="hidden" class="form-control" name="id" id="id">
                     <div class="form-group">
-                        <input type="hidden" name="id" id="id">
-                        <label for="jabatan">Nama</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <label for="golongan">Kode Golongan</label>
+                        <input type="text" class="form-control" name="kode_golongan" id="kode_golongan">
                     </div>
                     <div class="form-group">
-                        <label for="jabatan">NIP</label>
-                        <input type="text" class="form-control" name="NIP" id="NIP">
+                        <label for="golongan">Nama </label>
+                        <input type="text" class="form-control" name="golongan" id="golongan">
                     </div>
-                    <div class="form-group">
-                        <label for="jabatan">Tempat Lahir</label>
-                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir">
-                    </div>                    <div class="form-group">
-                        <label for="jabatan">Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
-                    </div>                    <div class="form-group">
-                        <label for="jabatan">Alamat</label>
-                        <textarea class="form-control" name="alamat" id="alamat"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="jabatan">No HP</label>
-                        <input type="text" class="form-control" name="telepon" id="telepon">
-                    </div>
-                    <div class="form-group">
-                        <label for="jabatan">Email</label>
-                        <input type="text" class="form-control" name="email" id="email">
-                    </div>                      
-                    <div class="form-group">
-                        <label for="jabatan">Password</label>
-                        <input type="password" class="form-control" name="password" id="password">
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="jabatan">foto</label>
-                        <input type="file" class="form-control" name="password" id="password">
-                    </div>       -->
             </div>   
             <div class="modal-footer">
                 <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
                 <button type="submit" id="btn-form" class="btn btn-primary"></button>
             </div>
-        </form> 
+            </form>    
         </div>
     </div>
 </div>
 @endsection
 @section('script')
     <script>
-
         //fungsi hapus
         hapus = (uuid, nama) =>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
             Swal.fire({
                         title: 'apa anda yakin?',
-                        text: " Menghapus  Data karyawan " + nama,
+                        text: " Menghapus  Data golongan " + nama,
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
@@ -118,7 +88,7 @@
                     }).then((result) => {
                         if (result.value) {
                             $.ajax({
-                                url : "{{ url('/api/karyawan')}}" + '/' + uuid,
+                                url : "{{ url('/api/golongan')}}" + '/' + uuid,
                                 type : "POST",
                                 data : {'_method' : 'DELETE', '_token' :csrf_token},
                                 success: function (response) {
@@ -142,17 +112,11 @@
                 })
             }
 
-            //event btn tambah klik
+            //event btn tambah
             $('#tambah').click(function(){
                 $('.modal-title').text('Tambah Data');
-                $('#name').val('');
-                $('#NIP').val('');
-                $('#tempat_lahir').val('');  
-                $('#tanggal_lahir').val('');  
-                $('#almat').val('');  
-                $('#telepon').val('');  
-                $('#email').val('');
-                $('#password').val('');    
+                $('#kode_golongan').val('');
+                $('#golongan').val('');  
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -161,26 +125,20 @@
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/karyawan')}}" + '/' + uuid,
+                    url: "{{ url('/api/golongan')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
-                        $('#name').val(returnData.data.user.name);
-                        $('#NIP').val(returnData.data.NIP);
-                        $('#tempat_lahir').val(returnData.data.tempat_lahir);
-                        $('#tanggal_lahir').val(returnData.data.tanggal_lahir);
-                        $('#alamat').val(returnData.data.alamat);
-                        $('#telepon').val(returnData.data.telepon);
-                        $('#email').val(returnData.data.user.email);
-                        $('#password').val(returnData.data.user.password);
+                        $('#kode_golongan').val(returnData.data.kode_golongan);
+                        $('#golongan').val(returnData.data.golongan);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
                 })
             }
 
-            //fungsi render datatable            
+            //fungsi render datatable
             $(document).ready(function() {
                 $('#datatable').DataTable( {
                     responsive: true,
@@ -189,7 +147,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.karyawan.get')}}",
+                        "url": "{{route('API.golongan.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
@@ -199,28 +157,24 @@
                         {data: null , render : function ( data, type, row, meta ) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }},
-                        {"data": "user.name"},
-                        {"data": "NIP"},
-                        {"data": "tempat_lahir"},
-                        {"data": "tanggal_lahir"},
-                        {"data": "alamat"},
-                        {"data": "telepon"},
+                        {"data": "kode_golongan"},
+                        {"data": "golongan"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
-                            let nama = row.user.nama;
+                            let nama = row.nama;
                             return type === 'display'  ?
-                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"> edit</i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash">hapus</i></button>':
                         data;
                         }}
                     ]
                 });
-                
+
                 //event form submit            
                 $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.karyawan.update", '')}}'
+                        let url = '{{route("API.golongan.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -244,7 +198,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.karyawan.create')}}",
+                            url: "{{Route('API.golongan.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
