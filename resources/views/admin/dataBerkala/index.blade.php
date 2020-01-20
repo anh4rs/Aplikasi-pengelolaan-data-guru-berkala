@@ -11,7 +11,7 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">Tabel Data Permohonan datah Berkala</h3>
+              <h3 class="mb-0">Tabel Data Berkala</h3>
               <div class="text-right"> 
               <a href="{{Route('dataBerkalaCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
@@ -129,7 +129,7 @@
                             let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
-                            '<a href="/verifikasi/permohonan/'+ uuid +' " class="text-white btn btn-sm btn-success"> verifikasi </a>  <a class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            '<a class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]

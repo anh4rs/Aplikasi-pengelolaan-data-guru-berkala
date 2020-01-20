@@ -134,7 +134,7 @@ class DataController extends APIController
         return $this->returnController("ok", $data_berkala);
     }
 
-    public function updateStatus(Request $req)
+    public function updateStatus($id, Request $req)
     {
         $id = $req->data_berkala_id;
         $data_berkala = Data_berkala::findOrFail($id);
