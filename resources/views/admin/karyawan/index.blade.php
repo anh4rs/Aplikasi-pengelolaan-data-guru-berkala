@@ -81,10 +81,15 @@
                     <div class="form-group">
                         <label for="jabatan">Email</label>
                         <input type="text" class="form-control" name="email" id="email">
-                    </div>                      <div class="form-group">
+                    </div>                      
+                    <div class="form-group">
                         <label for="jabatan">Password</label>
                         <input type="password" class="form-control" name="password" id="password">
-                    </div>    
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="jabatan">foto</label>
+                        <input type="file" class="form-control" name="password" id="password">
+                    </div>       -->
             </div>   
             <div class="modal-footer">
                 <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
