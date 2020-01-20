@@ -44,9 +44,10 @@ class GajiController extends APIController
 
         $gaji_berkala = new gaji_berkala;
         // decrypt foreign key id
-        
+
         $gaji_berkala->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $gaji_berkala->mkg = $req->mkg;
+        $gaji_berkala->besaran_gaji = $req->besaran_gaji;
 
         $gaji_berkala->save();
 
@@ -72,6 +73,7 @@ class GajiController extends APIController
         $gaji_berkala = gaji_berkala::findOrFail($id);
         $gaji_berkala->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $gaji_berkala->mkg = $req->mkg;
+        $gaji_berkala->besaran_gaji = $req->besaran_gaji;
         $gaji_berkala->update();
         if (!$gaji_berkala) {
             return $this->returnController("error", "failed find gaji gaji_berkala");

@@ -18,6 +18,7 @@ class CreateGajiBerkalasTable extends Migration
             $table->unsignedBigInteger('golongan_id');
             $table->text('uuid')->nullable();
             $table->string('mkg')->length(100);
+            $table->double('besaran_gaji');
             $table->foreign('golongan_id')->references('id')->on('golongans')->onDelete('cascade');
             $table->timestamps();
         });

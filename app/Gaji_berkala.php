@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gaji_berkala extends Model
 {
     protected $fillable = [
-        'uuid','golongan_id','mkg',
+        'uuid','golongan_id','mkg','besaran_gaji',
     ];
 
     protected $hidden = [
