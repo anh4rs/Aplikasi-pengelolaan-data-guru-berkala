@@ -56,7 +56,7 @@ class DataController extends APIController
         }
         $data_berkala = Redis::get("data_berkala:$id");
         if (!$data_berkala) {
-            $data_berkala = data_berkala::with('guru','pejabat')->where('id',$id)->first();
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->where('id',$id)->first();
             if (!$data_berkala){
                 return $this->returnController("error", "failed find data data_berkala");
             }

@@ -31,7 +31,7 @@ class GajiController extends APIController
         }
         $gaji_berkala = Redis::get("gaji_berkala:$id");
         if (!$gaji_berkala) {
-            $gaji_berkala = gaji_berkala::findOrFail($id);
+            $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->first();
             if (!$gaji_berkala){
                 return $this->returnController("error", "failed find gaji gaji_berkala");
             }
@@ -78,7 +78,7 @@ class GajiController extends APIController
         if (!$gaji_berkala) {
             return $this->returnController("error", "failed find gaji gaji_berkala");
         }
-        $gaji_berkala = gaji_berkala::with('golongan','jabatan','sekolah','mata_pelajaran')->where('id',$id)->first();
+        $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->first();
         Redis::del("gaji_berkala:all");
         Redis::set("gaji_berkala:$id", $gaji_berkala);
         return $this->returnController("ok", $gaji_berkala);
