@@ -116,6 +116,12 @@ class adminController extends Controller
         return view('admin.diklat.index');
     }
 
+    public function diklatGuruFilter(){
+
+        $diklat = diklat::all();
+        return view('admin.diklat.filter',compact('diklat'));
+    }
+
     public function golonganCetak(){
         $golongan=golongan::all();
         $pejabat_struktural=Pejabat_struktural::all()->first();
@@ -226,6 +232,15 @@ class adminController extends Controller
 
     public function diklatCetak(){
         $diklat = diklat::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.diklatKeseluruhan', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Diklat.pdf');
+    }
+
+    public function diklatGuruCetak(){
+        $diklat = diklat::findorfail();
         $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
         $pdf =PDF::loadView('laporan.diklatKeseluruhan', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);

@@ -150,6 +150,8 @@ Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('ga
 //diklat
 Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
 Route::get('/diklat/cetak', 'adminController@diklatCetak')->name('diklatCetak');
+Route::get('/diklat/guru/filter', 'adminController@diklatguruFilter')->name('diklatGuruFilter');
+Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('diklatGuruCetak');
 
 
 });
