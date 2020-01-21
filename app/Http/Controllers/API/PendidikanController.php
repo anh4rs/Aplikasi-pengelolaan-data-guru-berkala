@@ -22,7 +22,7 @@ class PendidikanController extends APIController
         return $this->returnController("ok", $pendidikan_guru);
     }
 
-    public function getByGuru(){
+    public function getByGuru($id){
         $pendidikan_guru = json_decode(redis::get("pendidikan_guru::all"));
         if (!$pendidikan_guru) {
             $pendidikan_guru = pendidikan_guru::with('guru')->where('guru_id',$id)->get();
@@ -55,7 +55,7 @@ class PendidikanController extends APIController
         $pendidikan_guru = new pendidikan_guru;
         // decrypt foreign key id
 
-        $pendidikan_guru->guru_id = Hcrypt::decrypt($req->guru_id);
+        $pendidikan_guru->guru_id = $req->guru_id;
         $pendidikan_guru->pendidikan = $req->pendidikan;
         $pendidikan_guru->nama = $req->nama;
         $pendidikan_guru->tahun_lulus = $req->tahun_lulus;

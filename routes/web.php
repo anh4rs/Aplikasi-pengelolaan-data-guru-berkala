@@ -151,9 +151,6 @@ Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('ga
 Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
 
 
-
-
-
 });
 
     Route::namespace('API')->prefix('api')->name('API.')->group(function(){
