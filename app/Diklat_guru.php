@@ -14,4 +14,9 @@ class Diklat_guru extends Model
     {
         return $this->belongsTo('App\Diklat');
     }
+
+    public function guru()
+    {
+        return $this->belongsTo('App\Guru');
+    }
 }

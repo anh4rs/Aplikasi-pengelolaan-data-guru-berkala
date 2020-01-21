@@ -27,7 +27,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
 	        	<li class="nav-item active"><a href="{{Route('depan')}}" class="nav-link pl-0">Home</a></li>
-	        	<li class="nav-item"><a href="#" class="nav-link">Tentang Kami</a></li>
+	        	<li class="nav-item"><a href="#about" class="nav-link">Tentang Kami</a></li>
 	        	<li class="nav-item"><a href="{{Route('beritaAll')}}" class="nav-link">Berita</a></li>
 	          <li class="nav-item"><a href="{{Route('login')}}" class="nav-link">login</a></li>
 	        </ul>
@@ -51,7 +51,7 @@
       </div>
     </section>
 
-		<section class="ftco-section">
+		<section class="ftco-section" id="about">
 			<div class="container">
 				<div class="row d-flex">
 					<div class="col-md-5 order-md-last wrap-about align-items-stretch">

@@ -14,8 +14,8 @@ class Diklat extends Model
         'id'
     ];
 
-    public function diklat_karyawan()
+    public function diklat_guru()
     {
-    	return $this->belongsToMany('App\Diklat_karyawan');
+    	return $this->hasMany('App\Diklat_guru');
     }
 }

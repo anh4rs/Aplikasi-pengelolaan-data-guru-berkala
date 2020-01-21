@@ -239,12 +239,12 @@ class adminController extends Controller
         return $pdf->stream('Laporan data Diklat.pdf');
     }
 
-    public function diklatGuruCetak(){
-        $diklat = diklat::findorfail();
+    public function diklatFilterCetak(Request $request){
+        $diklat = diklat::findorfail($request->diklat_id);
         $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.diklatKeseluruhan', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.diklatFilter', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream('Laporan data Diklat.pdf');
+        return $pdf->stream('Laporan data Guru Diklat.pdf');
     }
 }
