@@ -85,7 +85,7 @@
                                 <th>No</th>
                                 <th>NPSN</th>
                                 <th>Status</th>
-                                <th>B Pendidikan</th>
+                                <th>Bentuk Pendidikan</th>
                                 <th>Status Kepemilikan</th>
                                 <th> No SK</th>
                                 <th>No SK Izin</th>
