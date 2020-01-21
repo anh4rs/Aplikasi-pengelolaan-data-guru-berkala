@@ -78,15 +78,15 @@
     </div>
     <div class="container">
         <div class="isi">
-        <h2 style="text-align:center;text-transform: uppercase;">DATA JABATAN GURU KESELURUHAN</h2>
+        <h2 style="text-align:center;text-transform: uppercase;">DATA GURU KESELURUHAN</h2>
                 <table  class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>NIP</th>
                                 <th>Nama</th>
-                                <th>NPSN Sekolah</th>
-                                <th>Telepon Jabatan</th>
+                                <th>Nama Sekolah</th>
+                                <th>Telepon</th>
                                 <th>Mata Pelajaran</th>
                             </tr>
                         </thead>
@@ -99,7 +99,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->NIP }}</td>
                                 <td>{{ $p->nama }}</td>
-                                <td>{{ $p->sekolah->NPSN }}</td>
+                                <td>{{ $p->sekolah->nama }}</td>
                                 <td>{{ $p->telepon }}</td>
                                 <td>{{ $p->mata_pelajaran->nama }}</td>
                             </tr>

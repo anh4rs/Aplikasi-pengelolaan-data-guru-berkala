@@ -29,8 +29,8 @@
                   <tr>
                   <th scope="col">No</th>
                     <th scope="col">NIP</th>
-                    <th scope="col">nama</th>
-                    <th scope="col">NPSN Sekolah</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Nama Sekolah</th>
                     <th scope="col">Telepon</th>
                     <th scope="col">Jabatan</th>
                     <th scope="col">Mata Pelajaran</th>
@@ -153,7 +153,7 @@
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
                         $('#golongan_id').append(
-                            '<option value="'+value.uuid+'">'+value.golongan+'</option>'
+                            '<option value="'+value.uuid+'">'+value.kode_golongan+'</option>'
                         )
                     })
                 }
@@ -300,7 +300,7 @@
                         }},
                         {"data": "NIP"},
                         {"data": "nama"},
-                        {"data": "sekolah.NPSN"},
+                        {"data": "sekolah.nama"},
                         {"data": "telepon"},
                         {"data": "jabatan.jabatan"},
                         {"data": "mata_pelajaran.nama"},
