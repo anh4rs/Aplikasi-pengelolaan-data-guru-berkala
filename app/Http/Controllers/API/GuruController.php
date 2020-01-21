@@ -141,7 +141,7 @@ class GuruController extends APIController
         $diklat_guru = New diklat_guru;
         
         // decrypt uuid from $req
-        $guru_id = HCrypt::decrypt($req->id);
+        $guru_id = HCrypt::decrypt($req->guru_id);
         $diklat_id = HCrypt::decrypt($req->diklat_id);
 
         $diklat_guru->guru_id      =  $guru_id;
