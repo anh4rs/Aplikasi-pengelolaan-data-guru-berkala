@@ -96,7 +96,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.data-sekolah.getData')}}",
+                        "url": "{{route('API.data-sekolah.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",

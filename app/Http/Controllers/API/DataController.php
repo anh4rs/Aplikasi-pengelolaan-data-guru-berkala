@@ -25,9 +25,10 @@ class DataController extends APIController
     }
 
     public function getPending(){
+        $sekolah_id = Auth::user()->sekolah->id;
         $data_berkala = json_decode(redis::get("data_berkala::all"));
         if (!$data_berkala) {
-            $data_berkala = data_berkala::with('guru','pejabat_struktural')->whereIn('status',[0,2])->get();
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->whereIn('status',[0,2])->get();
             if (!$data_berkala) {
                 return $this->returnController("error", "failed get data_berkala data");
             }
@@ -40,7 +41,7 @@ class DataController extends APIController
         $sekolah_id = Auth::user()->sekolah->id;
         $data_berkala = json_decode(redis::get("data_berkala::all"));
         if (!$data_berkala) {
-            $data_berkala = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->get();
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->where('status',1)->get();
             if (!$data_berkala) {
                 return $this->returnController("error", "failed get data_berkala data");
             }
