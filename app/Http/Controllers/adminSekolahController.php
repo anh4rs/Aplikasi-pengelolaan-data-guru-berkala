@@ -23,9 +23,9 @@ class adminSekolahController extends Controller
         return view('sekolah.sekolah.index');
     }
 
-    public function dataBerkalaIndex(){
+    public function permohonanIndex(){
 
-        return view('sekolah.dataBerkala.index');
+        return view('sekolah.permohonan.index');
     }
 
     public function permohonanTambah(){
@@ -50,6 +50,10 @@ class adminSekolahController extends Controller
         $inbox = inbox::findOrFail($id);
         $inbox->delete();
         return redirect('sekolah.inbox.index');
+    }
+
+    public function dataBerkalaIndex(){
+        return view('sekolah.dataBerkala.index');
     }
 
 

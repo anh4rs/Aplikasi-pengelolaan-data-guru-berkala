@@ -203,6 +203,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             });
         Route::prefix('data-sekolah')->name('data-sekolah.')->group(function(){
             Route::get('', 'DataController@getData')->name('get');
+            Route::get('/getPending', 'DataController@getPending')->name('getPending');
             Route::get('{uuid}', 'DataController@find')->name('find');
             Route::post('', 'DataController@create')->name('create');
             Route::put('/{id}', 'DataController@updateStatus')->name('updateStatus');
@@ -256,7 +257,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
     //data guru
 
     //data gajihBerkala 
-    Route::get('/adminSekolah/dataBerkala', 'adminSekolahController@dataBerkalaIndex')->name('adminSekolahDataBerkala');
+    Route::get('/adminSekolah/permohonan/index', 'adminSekolahController@permohonanIndex')->name('adminSekolahPermohonanIndex');
     Route::get('/adminSekolah/permohonan', 'adminSekolahController@permohonanTambah')->name('permohonanTambah');
 
     //data gajihBerkala
@@ -265,6 +266,10 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
     Route::get('/inbox/index', 'adminSekolahController@inboxIndex')->name('inboxIndex');
     Route::get('/inbox/detail/{id}', 'adminSekolahController@inboxDetail')->name('inboxDetail');
     Route::get('/inbox/delete/{id}', 'adminSekolahController@inboxDelete')->name('inboxDelete');
+
+    //data berkala
+    Route::get('/adminSekolah/data/index', 'adminSekolahController@dataBerkalaIndex')->name('adminSekolahDataBerkalaIndex');
+
 
 
 //middleware sekolah

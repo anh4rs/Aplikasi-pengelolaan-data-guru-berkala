@@ -32,6 +32,7 @@
                     <th scope="col">Nomor Keputusan</th>
                     <th scope="col">Gaji Baru</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -96,7 +97,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.data-sekolah.getData')}}",
+                        "url": "{{route('API.data-sekolah.getPending')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
@@ -116,7 +117,7 @@
                         }},
                         {data: null , render : function ( data, type, row, meta ) {
                             let status = row.status;
-                            if(status == 1){
+                            if(status == 0){
                                 return '<a class="btn btn-sm btn-primary"> Pending </a>';
                             }else if(status == 2){
                                 return '<a class="btn btn-sm btn-warning"> Ditolak </a>';
@@ -124,8 +125,66 @@
                                 return '<a class="btn btn-sm btn-success"> Terverifikasi </a>';
                             }
                         }},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let uuid = row.uuid;
+                            let nama = row.nama;
+                            return type === 'display'  ?
+                            '<button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class=" text-white btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
+                        data;
+                        }}
                     ]
                 });
+
+                //event form submit            
+                $("form").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                    if($('.modal-title').text() == 'Edit Data'){
+                        let url = '{{route("API.data-sekolah.update", '')}}'
+                        let id = $('#id').val();
+                        $.ajax({
+                            url: url+'/'+id,
+                            type: "put",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Tersimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }else{
+                        $.ajax({
+                            url: "{{Route('API.data-sekolah.create')}}",
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Disimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }
+                } );
                 } );
     </script>
 @endsection

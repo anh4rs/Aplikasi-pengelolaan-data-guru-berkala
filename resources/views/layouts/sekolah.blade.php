@@ -41,15 +41,15 @@
         <h6 class="navbar-heading text-muted">Berkala</h6>
         <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('adminSekolahDataBerkala')}}">
-              <i class="ni ni-satisfied"></i> Data Berkala
+            <a class="nav-link" href="{{Route('adminSekolahPermohonanIndex')}}">
+              <i class="ni ni-satisfied"></i> Permohonan Data Berkala
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ni ni-paper-diploma"></i> Jenjang karir
+          <li class="nav-item">
+            <a class="nav-link" href="{{Route('adminSekolahDataBerkalaIndex')}}">
+              <i class="ni ni-satisfied"></i> Riwayat Data Berkala
             </a>
-          </li> -->
+          </li>
         </ul>
       </div>
     </div>
@@ -86,7 +86,6 @@
               <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
-
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
               </form>
