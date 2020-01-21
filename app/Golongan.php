@@ -14,8 +14,8 @@ class Golongan extends Model
         'id'
     ];
 
-    // public function jabatan()
-    // {
-    //     return $this->HasMany('App\Jabatan');
-    // }
+    public function gaji_berkala()
+    {
+        return $this->HasMany('App\Gaji_berkala');
+    }
 }

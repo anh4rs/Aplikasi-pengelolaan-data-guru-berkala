@@ -10,8 +10,15 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Sekolah</h5>
-                      <span class="h2 font-weight-bold mb-0">{{$sekolah->count()}}</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0"> GURU SD</h5>
+                      <span class="h2 font-weight-bold mb-0">
+                      @foreach($sekolah_sd as $d)
+                        @php 
+                          $guru_sd = $d->guru->count();
+                          echo $guru_sd;
+                        @endphp
+                      @endforeach
+                      </span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -20,8 +27,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
+                  .
                   </p>
                 </div>
               </div>
@@ -31,8 +37,15 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Guru</h5>
-                      <span class="h2 font-weight-bold mb-0">{{$guru->count()}}</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0"> GURU SMP</h5>
+                      <span class="h2 font-weight-bold mb-0">                      
+                      @foreach($sekolah_smp as $d)
+                        @php 
+                          $guru_smp = $d->guru->count();
+                          echo $guru_smp;
+                        @endphp
+                      @endforeach
+                      </span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -41,8 +54,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last week</span>
+                  .
                   </p>
                 </div>
               </div>
@@ -52,8 +64,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Permohonan</h5>
-                      <span class="h2 font-weight-bold mb-0">{{$permohonan->count()}}</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Sekolah SD</h5>
+                      <span class="h2 font-weight-bold mb-0">{{$sekolah_sd->count()}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -62,8 +74,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                    <span class="text-nowrap">Since yesterday</span>
+                  .
                   </p>
                 </div>
               </div>
@@ -73,8 +84,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                      <span class="h2 font-weight-bold mb-0">49,65%</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Sekolah SMP</h5>
+                      <span class="h2 font-weight-bold mb-0">{{$sekolah_smp->count()}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -83,8 +94,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                    <span class="text-nowrap">Since last month</span>
+                  .
                   </p>
                 </div>
               </div>
@@ -100,24 +110,9 @@
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                  <h2 class="text-white mb-0">Sales value</h2>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
-                      <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                        <span class="d-none d-md-block">Month</span>
-                        <span class="d-md-none">M</span>
-                      </a>
-                    </li>
-                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
-                      <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                        <span class="d-none d-md-block">Week</span>
-                        <span class="d-md-none">W</span>
-                      </a>
-                    </li>
-                  </ul>
+                  <h6 class="text-uppercase text-light ls-1 mb-1">Karyawan</h6>
+                  <h2 class="text-white mb-0">jumlah karyawan</h2>
+                  <h4 class="text-white mb-0">{{$karyawan->count()}} Orang</h4>
                 </div>
               </div>
             </div>
@@ -131,8 +126,9 @@
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-                  <h2 class="mb-0">Total orders</h2>
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">Data Berkala</h6>
+                  <h2 class="mb-0">Permohonan Berkala</h2>
+                  <h1 class="text-success" >{{$permohonan->count()}}<small> Data Pemohonan</small></h1> 
                 </div>
               </div>
             </div>

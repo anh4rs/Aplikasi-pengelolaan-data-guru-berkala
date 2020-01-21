@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Diklat_guru;
 use App\Guru;
 use HCrypt;
+use Auth;
 
 class GuruController extends APIController
 {
@@ -14,6 +16,20 @@ class GuruController extends APIController
         $guru = json_decode(redis::get("guru::all"));
         if (!$guru) {
             $guru = guru::with('sekolah','golongan','jabatan','mata_pelajaran')->get();
+            if (!$guru) {
+                return $this->returnController("error", "failed get guru data");
+            }
+            Redis::set("guru:all", $guru);
+        }
+        return $this->returnController("ok", $guru);
+    }
+
+    // get guru filter sekolah
+    public function getGuru(){
+        $sekolah_id = Auth::user()->sekolah->id;
+        $guru = json_decode(redis::get("guru::all"));
+        if (!$guru) {
+            $guru = guru::with('sekolah','golongan','jabatan','mata_pelajaran')->where('sekolah_id',$sekolah_id)->get();
             if (!$guru) {
                 return $this->returnController("error", "failed get guru data");
             }
@@ -40,12 +56,13 @@ class GuruController extends APIController
 
     public function create(Request $req){
         // $seksi = Seksi::create($req->all());
+        $sekolah_id = Auth::user()->sekolah->id;
         $guru = new guru;
         // decrypt foreign key id
         
         $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
-        $guru->sekolah_id = Hcrypt::decrypt($req->sekolah_id);
+        $guru->sekolah_id = $sekolah_id;
         $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);   
         $guru->NIP = $req->NIP;
         $guru->nama = $req->nama;
@@ -77,9 +94,19 @@ class GuruController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $guru = guru::findOrFail($id);
-        $guru->kode_guru     = $req->kode_guru;
-        $guru->nama    = $req->nama;
-        $guru->bidang_id = Hcrypt::decrypt($req->bidang_id);
+
+        $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
+        $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
+        $guru->sekolah_id = $sekolah_id;
+        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);   
+        $guru->NIP = $req->NIP;
+        $guru->nama = $req->nama;
+        $guru->telepon = $req->telepon;
+        $guru->tempat_lahir = $req->tempat_lahir;
+        $guru->tgl_lahir = $req->tgl_lahir;
+        $guru->alamat = $req->alamat;
+        $guru->status = $req->status;
+
         $guru->update();
         if (!$guru) {
             return $this->returnController("error", "failed find data guru");
@@ -108,5 +135,48 @@ class GuruController extends APIController
         Redis::del("guru:all");
         Redis::del("guru:$id");
         return $this->returnController("ok", "success delete data guru");
+    }
+
+    public function diklat_create(Request $req){
+        $diklat_guru = New diklat_guru;
+        
+        // decrypt uuid from $req
+        $guru_id = HCrypt::decrypt($req->guru_id);
+        $diklat_id = HCrypt::decrypt($req->diklat_id);
+
+        $diklat_guru->guru_id      =  $guru_id;
+        $diklat_guru->diklat_id    =  $diklat_id;
+        $diklat_guru->waktu        =  $req->waktu;
+
+        $diklat_guru->save();
+        
+        $diklat_guru_id= $diklat_guru->id;
+        
+        $uuid = HCrypt::encrypt($diklat_guru_id);
+        $setuuid = diklat_guru::findOrFail($diklat_guru_id);
+        $setuuid->uuid = $uuid;
+            
+        $setuuid->update();
+
+        if (!$diklat_guru) {
+            return $this->returnController("error", "failed create data diklat guru");
+        }
+
+        Redis::del("diklat_guru:all");
+        Redis::set("diklat_guru:all",$diklat_guru);
+        return $this->returnController("ok", $diklat_guru);
+    }
+
+    public function diklat_get($uuid){
+        $guru_id = HCrypt::decrypt($uuid);
+        $diklat_guru = json_decode(redis::get("diklat_guru::all"));
+        if (!$diklat_guru) {
+            $diklat_guru = diklat_guru::with('diklat')->where('guru_id', $guru_id)->get();
+            if (!$diklat_guru) {
+                return $this->returnController("error", "failed get diklat diklat_guru data");
+            }
+            Redis::set("diklat_guru:all", $diklat_guru);
+        }
+        return $this->returnController("ok", $diklat_guru);
     }
 }

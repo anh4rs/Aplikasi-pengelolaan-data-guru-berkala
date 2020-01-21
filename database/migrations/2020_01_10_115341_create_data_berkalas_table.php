@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGajiBerkalasTable extends Migration
+class CreateDataBerkalasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateGajiBerkalasTable extends Migration
      */
     public function up()
     {
-        Schema::create('gaji_berkalas', function (Blueprint $table) {
+        Schema::create('data_berkalas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('sekolah_id');
             $table->unsignedBigInteger('guru_id');
             $table->unsignedBigInteger('pejabat_struktural_id');
             $table->text('uuid')->nullable();
@@ -31,6 +32,7 @@ class CreateGajiBerkalasTable extends Migration
             $table->string('mks')->length(50);
             $table->string('status')->default('0');
             $table->timestamps();
+            $table->foreign('sekolah_id')->references('id')->on('sekolahs')->onDelete('cascade');
             $table->foreign('guru_id')->references('id')->on('gurus')->onDelete('cascade');
             $table->foreign('pejabat_struktural_id')->references('id')->on('pejabat_strukturals')->onDelete('cascade');
         });

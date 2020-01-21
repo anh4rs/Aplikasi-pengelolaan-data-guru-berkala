@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sekolah">Status</label>
-                        <select name="status_sekolah" class="form-control" id="status_sekolah">
+                        <select name="status_sekolah" class="form-control" id="status_sekolah ">
                           <option value="">-- pilih status --</option>
                           <option value="Negeri">Negeri</option>
                           <option value="Swasta">Swasta</option>
@@ -81,8 +81,6 @@
                         <select name="b_pendidikan" id="b_pendidikan" class="form-control">
                             <option value="SD">SD</option>
                             <option value="SMP">SMP</option>
-                            <option value="SMA">SMA</option>
-                            <option value="SMK">SMK</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -237,8 +235,8 @@
                         {"data": "NPSN"},
                         {"data": "status_sekolah"},
                         {"data": "b_pendidikan"},
-                        {"data": "status_pemilik"},
                         {"data": "sk"},
+                        {"data": "status_pemilik"},
                         {"data": "sk_izin"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;

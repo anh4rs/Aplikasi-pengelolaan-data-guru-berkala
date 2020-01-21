@@ -93,7 +93,7 @@
         getGuru = () =>{
             $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/guru')}}",
+                    url: "{{ url('/api/guru-sekolah')}}",
                     beforeSend: false,
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
@@ -109,7 +109,7 @@
         getPejabat = () =>{
             $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/pejabat')}}",
+                    url: "{{ url('/api/pejabat-sekolah')}}",
                     beforeSend: false,
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
@@ -129,7 +129,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.gaji.update", '')}}'
+                        let url = '{{route("API.data-sekolah.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -153,20 +153,11 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.gaji.create')}}",
+                            url: "{{Route('API.data-sekolah.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                form.trigger('reset');
-                                $('#mediumModal').modal('hide');
-                                $('#datatable').DataTable().ajax.reload();
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Data Berhasil Disimpan',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
+                                window.location.replace("/adminSekolah/dataBerkala");
                             },
                             error:function(response){
                                 console.log(response);

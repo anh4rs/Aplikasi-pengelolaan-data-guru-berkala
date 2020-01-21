@@ -11,7 +11,7 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">Tabel Data Guru Sekolah x</h3>
+            <h3 class="mb-0">Tabel Data Guru Sekolah : {{ $sekolah->nama }}</h3>
               <div class="text-right"> 
               <a href="{{Route('guruKeseluruhanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
@@ -65,12 +65,12 @@
                         <label for="guru">Nama</label>
                         <input type="text" class="form-control" name="nama" id="nama">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="guru">Sekolah</label>
                         <select name="sekolah_id" class="form-control" id="sekolah_id">
                           <option value="">-- pilih sekolah --</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="guru">Golongan</label>
                         <select name="golongan_id" class="form-control" id="golongan_id">
@@ -126,20 +126,20 @@
 @section('script')
     <script>
         //get data sekolah
-        getSekolah = () =>{
-            $.ajax({
-                    type: "GET",
-                    url: "{{ url('/api/sekolah')}}",
-                    beforeSend: false,
-                    success : function(returnData) {
-                        $.each(returnData.data, function (index, value) {
-                        $('#sekolah_id').append(
-                            '<option value="'+value.uuid+'">'+value.NPSN+'</option>'
-                        )
-                    })
-                }
-            })
-        }
+        // getSekolah = () =>{
+        //     $.ajax({
+        //             type: "GET",
+        //             url: "{{ url('/api/sekolah')}}",
+        //             beforeSend: false,
+        //             success : function(returnData) {
+        //                 $.each(returnData.data, function (index, value) {
+        //                 $('#sekolah_id').append(
+        //                     '<option value="'+value.uuid+'">'+value.nama+'</option>'
+        //                 )
+        //             })
+        //         }
+        //     })
+        // }
 
         //get data golongan
         getGolongan = () =>{
@@ -189,7 +189,7 @@
             })
         }
 
-        getSekolah();
+        // getSekolah();
         getGolongan();
         getJabatan();
         getMp();
@@ -254,7 +254,7 @@
             edit = uuid =>{
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/api/guru')}}" + '/' + uuid,
+                    url: "{{ url('/api/guru-sekolah')}}" + '/' + uuid,
                     beforeSend: false,
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
@@ -283,9 +283,9 @@
                     processing: true,
                     serverSide: false,
                     searching: true,
-                    ajax: {
+                    ajax: { 
                         "type": "GET",
-                        "url": "{{route('API.guru.get')}}",
+                        "url": "{{route('API.guru-sekolah.get')}}",
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
@@ -302,7 +302,7 @@
                             let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
-                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            ' <a class="btn btn-sm btn-outline-info" href="/adminSekolah/guru/detail/'+ uuid +'">detail</a> <button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]
@@ -313,7 +313,7 @@
                     e.preventDefault()
                     let form = $('#modal-body form');
                     if($('.modal-title').text() == 'Edit Data'){
-                        let url = '{{route("API.guru.update", '')}}'
+                        let url = '{{route("API.guru-sekolah.update", '')}}'
                         let id = $('#id').val();
                         $.ajax({
                             url: url+'/'+id,
@@ -337,7 +337,7 @@
                         })
                     }else{
                         $.ajax({
-                            url: "{{Route('API.guru.create')}}",
+                            url: "{{Route('API.guru-sekolah.create')}}",
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {

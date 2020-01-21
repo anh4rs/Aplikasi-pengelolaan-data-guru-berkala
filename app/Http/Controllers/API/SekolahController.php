@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Sekolah;
 use App\User;
 use HCrypt;
+use Auth;
 use Illuminate\Support\Facades\Redis;
 
 class SekolahController extends APIController
@@ -16,6 +17,20 @@ class SekolahController extends APIController
         $sekolah = json_decode(redis::get("sekolah::all"));
         if (!$sekolah) {
             $sekolah = sekolah::with('user')->get();
+            if (!$sekolah) {
+                return $this->returnController("error", "failed get sekolah data");
+            }
+            Redis::set("sekolah:all", $sekolah);
+        }
+        return $this->returnController("ok", $sekolah);
+    }
+
+    // get sekolah by auth id
+    public function getSekolah(){
+        $sekolah_id = Auth::user()->sekolah->id;
+        $sekolah = json_decode(redis::get("sekolah::all"));
+        if (!$sekolah) {
+            $sekolah = sekolah::with('user')->where('id',$sekolah_id)->get();
             if (!$sekolah) {
                 return $this->returnController("error", "failed get sekolah data");
             }

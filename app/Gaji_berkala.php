@@ -7,21 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Gaji_berkala extends Model
 {
     protected $fillable = [
-        'uuid','guru_id','pejabat_struktural_id','no_surat','lampiran',
-        'perihal','gaji_lama','tgl_keputusan','no_keputusan',
+        'uuid','golongan_id','mkg','besaran_gaji',
     ];
 
     protected $hidden = [
-        'id','guru_id','pejabat_struktural_id'
+        'id','golongan_id'
     ];
 
-    public function guru()
+    public function golongan()
     {
-        return $this->BelongsTo('App\Guru');
-    }
-
-    public function pejabat_struktural()
-    {
-        return $this->BelongsTo('App\Pejabat_struktural');
+     return $this->belongsTo('App\Golongan');
     }
 }

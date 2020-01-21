@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table id="datatable" class="table align-items-center table-flush">
+              <table id="datatable" class=" text-center table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                   <th scope="col">No</th>
@@ -96,8 +96,8 @@
                         <label for="guru">Status</label>
                         <select name="status" class="form-control" id="status">
                           <option value="">-- pilih Status --</option>
-                          <option value="PNS">-- PNS --</option>
-                          <option value="Kontrak">-- Kontrak --</option>
+                          <option value="PNS"> PNS </option>
+                          <option value="Kontrak"> Kontrak </option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -308,7 +308,7 @@
                             let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
-                            '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            '<a class="btn btn-sm btn-outline-info" href="/guru/detail/'+ uuid +'">detail</a>  <button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"></i> Edit</button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]

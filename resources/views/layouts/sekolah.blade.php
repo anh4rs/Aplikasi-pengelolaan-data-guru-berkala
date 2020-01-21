@@ -41,13 +41,13 @@
         <h6 class="navbar-heading text-muted">Berkala</h6>
         <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('adminSekolahGajihBerkala')}}">
-              <i class="ni ni-satisfied"></i> Data Gajih Guru
+            <a class="nav-link" href="{{Route('adminSekolahDataBerkala')}}">
+              <i class="ni ni-satisfied"></i> Data Berkala
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <i class="ni ni-archive-2"></i> Permohonan Berkala
+              <i class="ni ni-archive-2"></i> Gajih Berkala
             </a>
           </li>
           <!-- <li class="nav-item">
@@ -63,6 +63,13 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Aplikasi Pengelolaan Data Berkala guru</a>
+        <a class="h4 mb-0 text-white text-uppercase  d-lg-inline-block" href="{{Route('inboxIndex')}}">                   
+        @if(Auth::user()->sekolah->inbox->where('status',0)->count() != 0)
+        <i class="ni ni-notification-70"></i> <span class="badge badge-danger header-badge">
+        {{ Auth::user()->sekolah->inbox->where('status',0)->count() }} </span>
+        @else
+        <i class="ni ni-notification-70"></i> 
+        @endif</a>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
