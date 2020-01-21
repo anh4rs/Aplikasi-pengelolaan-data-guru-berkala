@@ -54,13 +54,13 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'KaryawanController@update')->name('update');
         Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
         });  
-    // Route::prefix('admin')->name('admin.')->group(function(){
-    //     Route::get('', 'AdminController@get')->name('get');
-    //     Route::get('{uuid}', 'AdminController@find')->name('find');
-    //     Route::post('', 'AdminController@create')->name('create');
-    //     Route::put('{uuid}', 'AdminController@update')->name('update');
-    //     Route::delete('{uuid}', 'AdminController@delete')->name('delete');
-    //     });  
+    Route::prefix('diklat')->name('diklat.')->group(function(){
+        Route::get('', 'DiklatController@get')->name('get');
+        Route::get('{uuid}', 'DiklatController@find')->name('find');
+        Route::post('', 'DiklatController@create')->name('create');
+        Route::put('{uuid}', 'DiklatController@update')->name('update');
+        Route::delete('{uuid}', 'DiklatController@delete')->name('delete');
+        });  
     Route::prefix('user')->name('user.')->group(function(){
         Route::get('', 'UserController@get')->name('get');
         Route::get('{uuid}', 'UserController@find')->name('find');
