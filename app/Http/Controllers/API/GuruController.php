@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Diklat_guru;
 use App\Guru;
 use HCrypt;
 use Auth;
@@ -134,5 +135,48 @@ class GuruController extends APIController
         Redis::del("guru:all");
         Redis::del("guru:$id");
         return $this->returnController("ok", "success delete data guru");
+    }
+
+    public function diklat_create(Request $req){
+        $diklat_guru = New diklat_guru;
+        
+        // decrypt uuid from $req
+        $guru_id = HCrypt::decrypt($req->id);
+        $diklat_id = HCrypt::decrypt($req->diklat_id);
+
+        $diklat_guru->guru_id      =  $guru_id;
+        $diklat_guru->diklat_id    =  $diklat_id;
+        $diklat_guru->waktu        =  $req->waktu;
+
+        $diklat_guru->save();
+        
+        $diklat_guru_id= $diklat_guru->id;
+        
+        $uuid = HCrypt::encrypt($diklat_guru_id);
+        $setuuid = diklat_guru::findOrFail($diklat_guru_id);
+        $setuuid->uuid = $uuid;
+            
+        $setuuid->update();
+
+        if (!$diklat_guru) {
+            return $this->returnController("error", "failed create data diklat guru");
+        }
+
+        Redis::del("diklat_guru:all");
+        Redis::set("diklat_guru:all",$diklat_guru);
+        return $this->returnController("ok", $diklat_guru);
+    }
+
+    public function diklat_get($uuid){
+        $guru_id = HCrypt::decrypt($uuid);
+        $diklat_guru = json_decode(redis::get("diklat_guru::all"));
+        if (!$diklat_guru) {
+            $diklat_guru = diklat_guru::with('diklat')->where('guru_id', $guru_id)->get();
+            if (!$diklat_guru) {
+                return $this->returnController("error", "failed get diklat diklat_guru data");
+            }
+            Redis::set("diklat_guru:all", $diklat_guru);
+        }
+        return $this->returnController("ok", $diklat_guru);
     }
 }

@@ -22,6 +22,18 @@ class PendidikanController extends APIController
         return $this->returnController("ok", $pendidikan_guru);
     }
 
+    public function getByGuru(){
+        $pendidikan_guru = json_decode(redis::get("pendidikan_guru::all"));
+        if (!$pendidikan_guru) {
+            $pendidikan_guru = pendidikan_guru::with('guru')->where('guru_id',$id)->get();
+            if (!$pendidikan_guru) {
+                return $this->returnController("error", "failed get pendidikan_guru gaji");
+            }
+            Redis::set("pendidikan_guru:all", $pendidikan_guru);
+        }
+        return $this->returnController("ok", $pendidikan_guru);
+    }
+
     public function find($uuid){
         $id = HCrypt::decrypt($uuid);
         if (!$id) {
@@ -70,7 +82,7 @@ class PendidikanController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $pendidikan_guru = pendidikan_guru::findOrFail($id);
-        
+
         $pendidikan_guru->guru_id = Hcrypt::decrypt($req->guru_id);
         $pendidikan_guru->pendidikan = $req->pendidikan;
         $pendidikan_guru->nama = $req->nama;

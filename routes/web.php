@@ -83,6 +83,14 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'GajiController@update')->name('update');
         Route::delete('{uuid}', 'GajiController@delete')->name('delete');
         });  
+    Route::prefix('pendidikan')->name('pendidikan.')->group(function(){
+        Route::get('', 'PendidikanController@get')->name('get');
+        Route::get('/{id}', 'PendidikanController@getByGuru')->name('getByGuru');
+        Route::get('{uuid}', 'PendidikanController@find')->name('find');
+        Route::post('', 'PendidikanController@create')->name('create');
+        Route::put('{uuid}', 'PendidikanController@update')->name('update');
+        Route::delete('{uuid}', 'PendidikanController@delete')->name('delete');
+        });  
 
 });
 
@@ -201,6 +209,7 @@ Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('ga
             });  
         Route::prefix('pendidikan-sekolah')->name('pendidikan-sekolah.')->group(function(){
             Route::get('', 'PendidikanController@get')->name('get');
+            Route::get('/{id}', 'PendidikanController@getByGuru')->name('getByGuru');
             Route::get('{uuid}', 'PendidikanController@find')->name('find');
             Route::post('', 'PendidikanController@create')->name('create');
             Route::put('{uuid}', 'PendidikanController@update')->name('update');
