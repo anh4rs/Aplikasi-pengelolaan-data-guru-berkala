@@ -264,14 +264,53 @@
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
                         $('#pendidikanList').append(
-                            '<li >'+value.pendidikan+' - '+value.nama+'</li> <a href="#" class="btn btn-sm btn-danger">hapus</a>'
+                            '<li >'+value.pendidikan+' - '+value.nama+'</li> <a onClick="hapus(\'' + value.uuid + '\',\'' + value.nama + '\')" class=" text-white btn btn-sm btn-danger">hapus</a>'
                         )
                     })
                 }
             })
         }
-
         getPendidikan();
+
+               //fungsi hapus
+               hapus = (uuid, nama) =>{
+            let csrf_token=$('meta[name="csrf_token"]').attr('content');
+            Swal.fire({
+                        title: 'apa anda yakin?',
+                        text: " Menghapus  Data sekolah " + nama,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'hapus data',
+                        cancelButtonText: 'batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                url : "{{ url('/api/pendidikan-sekolah')}}" + '/' + uuid,
+                                type : "POST",
+                                data : {'_method' : 'DELETE', '_token' :csrf_token},
+                                success: function (response) {
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Dihapus',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                location.reload();
+                        },
+                    })
+                    } else if (result.dismiss === swal.DismissReason.cancel) {
+                        Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                        )
+                    }
+                })
+            }
+
      //fungsi render datatable
      $(document).ready(function() {
                 $('#datatable').DataTable( {
@@ -302,7 +341,7 @@
 
 
            //event form submit        
-           $("form").submit(function (e) {
+           $("#form1").submit(function (e) {
                 e.preventDefault()
                 let form = $('#modal-body form');
                     $.ajax({
@@ -315,19 +354,35 @@
                         success: function (response) {
                             form.trigger('reset');
                             $('#tambahPendidikan').modal('hide');
-                            $('#pendidikanList').getPendidikan().ajax.reload();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Data Berhasil Disimpan',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
+                            location.reload();
                         },
                         error:function(response){
                             console.log(response);
                         }
                     })
             } );
+            
+             //event form submit        
+           $("#form2").submit(function (e) {
+                e.preventDefault()
+                let form = $('#modal-body form');
+                    $.ajax({
+                        url: "{{Route('API.pendidikan-sekolah.create')}}",
+                        type: "post",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (response) {
+                            form.trigger('reset');
+                            $('#tambahPendidikan').modal('hide');
+                            location.reload();
+                        },
+                        error:function(response){
+                            console.log(response);
+                        }
+                    })
+            } );
+
     </script>
 @endsection
