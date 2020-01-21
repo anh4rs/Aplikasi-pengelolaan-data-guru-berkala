@@ -91,6 +91,14 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::put('{uuid}', 'PendidikanController@update')->name('update');
         Route::delete('{uuid}', 'PendidikanController@delete')->name('delete');
         });  
+    Route::prefix('sekolah')->name('sekolah.')->group(function(){
+        Route::get('', 'SekolahController@getSekolah')->name('get');
+        Route::get('{uuid}', 'SekolahController@find')->name('find');
+        Route::post('', 'SekolahController@create')->name('create');
+        Route::put('{uuid}', 'SekolahController@update')->name('update');
+        Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
+        });    
+        
 
 });
 
