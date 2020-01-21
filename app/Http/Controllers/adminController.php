@@ -12,6 +12,7 @@ Use App\Berita;
 Use App\Pejabat_struktural;
 Use App\Data_berkala;
 Use App\Karyawan;
+Use App\Diklat;
 use HCrypt;
 
 
@@ -220,5 +221,14 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.dataBerkalaKeseluruhan', ['dataBerkala'=>$dataBerkala,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data berkala.pdf');
+    }
+
+    public function diklatCetak(){
+        $diklat = diklat::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.diklatKeseluruhan', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Diklat.pdf');
     }
 }

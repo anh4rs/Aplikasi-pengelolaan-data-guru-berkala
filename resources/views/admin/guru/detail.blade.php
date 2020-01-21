@@ -219,7 +219,7 @@
                     </div>                    
                     <div class="form-group">
                         <label for="berita">Tahun Lulus </label>
-                        <input type="date" class="form-control" name="tahun" id="tahun" ></input>
+                        <input type="date" class="form-control" name="tahun_lulus" id="tahun_lulus" ></input>
                     </div> 
             </div>   
             <div class="modal-footer">

@@ -149,6 +149,7 @@ Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('ga
 
 //diklat
 Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
+Route::get('/diklat/cetak', 'adminController@diklatCetak')->name('diklatCetak');
 
 
 });
@@ -221,6 +222,10 @@ Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
               Route::post('', 'GuruController@diklat_create')->name('create');
               Route::delete('{uuid}', 'GuruController@diklat_delete')->name('delete');
             });
+
+        Route::prefix('diklat')->name('diklat.')->group(function(){
+            Route::get('', 'DiklatController@get')->name('get');
+        });  
     });    
 
 //middleware sekolah
@@ -231,6 +236,8 @@ Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
 
     //data guru 
     Route::get('/adminSekolah/sekolah', 'adminSekolahController@sekolahIndex')->name('adminDataSekolahIndex');
+    Route::get('adminSekolah/guru/detail/{uuid}', 'adminController@guruDetail')->name('adminSekolahGuruDetail');
+
     //data guru
 
     //data guru 
