@@ -216,6 +216,7 @@ Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
             Route::delete('{uuid}', 'PendidikanController@delete')->name('delete');
             });  
         Route::prefix('diklat_sekolah')->name('diklat_sekolah.')->group(function(){
+              Route::get('', 'DiklatController@get')->name('get');
               Route::get('{uuid}', 'GuruController@diklat_get')->name('get');
               Route::post('', 'GuruController@diklat_create')->name('create');
               Route::delete('{uuid}', 'GuruController@diklat_delete')->name('delete');
