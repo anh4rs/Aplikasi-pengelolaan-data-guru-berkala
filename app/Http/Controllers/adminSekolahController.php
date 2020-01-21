@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Inbox;
+use App\data_berkala;
+
 
 class adminSekolahController extends Controller
 {
     public function index(){
-
-        return view('sekolah.index');
+        $sekolah = Auth::user()->sekolah;
+        $sekolah_id = $sekolah->id;
+        $data = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->where('status',1)->get();
+        return view('sekolah.index',compact('sekolah','data'));
     }
 
     public function guruIndex(){
