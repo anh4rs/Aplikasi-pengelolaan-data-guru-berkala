@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::group(['middleware' => 'admin'], function() {
 Route::namespace('API')->prefix('api')->name('API.')->group(function(){
     Route::prefix('golongan')->name('golongan.')->group(function(){
@@ -270,6 +260,8 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
     //data berkala
     Route::get('/adminSekolah/data/index', 'adminSekolahController@dataBerkalaIndex')->name('adminSekolahDataBerkalaIndex');
 
+    //gaji berkala
+    Route::get('/adminSekolah/gaji/index', 'adminSekolahController@gajiIndex')->name('adminSekolahGaji');
 
 
 //middleware sekolah

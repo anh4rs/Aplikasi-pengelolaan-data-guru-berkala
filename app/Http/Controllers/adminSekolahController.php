@@ -56,5 +56,9 @@ class adminSekolahController extends Controller
         return view('sekolah.dataBerkala.index');
     }
 
+    public function gajiIndex(){
+        return view('sekolah.gaji.index');
+    }
+
 
 }
