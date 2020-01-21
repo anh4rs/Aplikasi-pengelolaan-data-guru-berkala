@@ -87,7 +87,6 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
@@ -154,17 +153,30 @@
                 <!-- Description -->
                 <h6 class="heading-small text-muted mb-4">Diklat</h6>
                 <div class="pl-lg-4">
-                <div class="text-right">
-                <button class="btn btn-sm btn-primary" id="btnDiklat" >+ tambah Diklat</button>
-                </div>
                   <div class="form-group">
-                    <label>Tebel Diklat</label>
+                    <form id="form2" action="" method="post">
+                      <input type="hidden" class="form-control" name="guru_id" id="guru_id2" value="{{$guru->uuid}}">
+                        <div class="form-group">
+                            <label for="judul">Diklat</label>
+                            <select class="form-control" name="diklat_id" id="diklat_id" required >
+                              <option value="">-- Pilih Diklat --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="berita">Tahun </label>
+                            <input type="date" class="form-control" name="waktu" id="waktu"></input>
+                        </div>                    
+                    </div>   
+                <div class="modal-footer">
+                  <button type="submit" name="submit" class="btn btn-sm btn-primary">+ tambahkan diklat</button>
+                </div>
+                </form>    
                     <table id="datatable" class="table align-items-center table-striped text-center">
                         <thead class="thead-light">
                             <tr>
                                 <th cope="col">No</th>
-                                <th scope="col">Kode gologan</th>
-                                <th scope="col">Nama </th>
+                                <th scope="col">Diklat</th>
+                                <th scope="col">tahun</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -173,16 +185,15 @@
                     </table>                  
                 </div>
                 </div>
-              </form>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="tambahPendidikan" aria-labelledby="modal-default" >
+      <div class="modal fade" id="tambahPendidikan" >
     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-title"></h5>
+                <h5 class="modal-title" id="modal-title1"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
@@ -219,38 +230,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="tambahDiklat" aria-labelledby="modal-default" >
-    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
-                </button>
-            </div>    
-            <div class="modal-body">
-                <form action="" method="post">
-                <input type="hidden" class="form-control" name="guru_id" id="guru_id2" value="{{$guru->id}}">
-                    <div class="form-group">
-                        <label for="judul">Diklat</label>
-                        <select class="form-control" name="diklat_id" id="diklat_id">
-                          <option value="">-- Pilih Diklat --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="berita">Tahun </label>
-                        <input class="form-control" name="tahun" id="tahun" ></input>
-                    </div>                    
-            </div>   
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
-                <button type="submit" id="btn-form-2" class="btn btn-primary"></button>
-            </div>
-            </form>    
-        </div>
-    </div>
-</div>
 @endsection
 @section('script')
     <script>
@@ -271,6 +250,23 @@
             })
         }
         getPendidikan();
+
+          //get data Diklat
+          getDiklat = () => {
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/diklat')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#diklat_id').append(
+                          '<option value="'+ value.uuid +'">'+ value.nama +'</option>'
+                        )
+                    })
+                }
+            })
+        }
+        getDiklat();
 
                //fungsi hapus
                hapus = (uuid, nama) =>{
@@ -311,34 +307,47 @@
                 })
             }
 
-     //fungsi render datatable
-     $(document).ready(function() {
+      //fungsi render datatable            
+        $(document).ready(function() {
+          let uuid = $('#guru_id2').val();        
                 $('#datatable').DataTable( {
                     responsive: true,
                     processing: true,
                     serverSide: false,
                     searching: true,
+                    ajax: {
+                        "type": "GET",
+                        "url": "{{ url('/api/diklat_sekolah')}}" + '/' + uuid,
+                        "dataSrc": "data",
+                        "contentType": "application/json; charset=utf-8",
+                        "dataType": "json",
+                        "processData": true
+                    },
+                    columns: [
+                      {data: null , render : function ( data, type, row, meta ) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }},
+                        {"data": "diklat.nama"},
+                        {"data": "waktu"},
+                        {data: null , render : function ( data, type, row, meta ) {
+                            let uuid = row.uuid;
+                            let nama = row.nama;
+                            return type === 'display'  ?
+                            '<button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash"></i>Hapus</button>':
+                        data;
+                        }}
+                    ]
                 });
-            });
+              });
 
         $('#btnPendidikan').click(function(){
-            $('.modal-title').text('Tambah Data Pendidikan');
+            $('.modal-title1').text('Tambah Data Pendidikan');
             $('#pendidikan').val('');
             $('#nama').val('');        
             $('#tahun_lulus').val('');
             $('#btn-form1').text('Simpan Berita');
             $('#tambahPendidikan').modal('show');
         })
-
-        $('#btnDiklat').click(function(){
-            $('.modal-title').text('Tambah Data Pendidikan');
-            $('#diklat_id').val('');
-            $('#tahun').val('');        
-            $('#btn-form-2').text('Simpan Diklat');
-            $('#tambahPendidikan').modal('show');
-        })
-
-
 
            //event form submit        
            $("#form1").submit(function (e) {
@@ -363,11 +372,11 @@
             } );
             
              //event form submit        
-           $("#form2").submit(function (e) {
+             $("#form2").submit(function (e) {
                 e.preventDefault()
                 let form = $('#modal-body form');
                     $.ajax({
-                        url: "{{Route('API.pendidikan-sekolah.create')}}",
+                        url: "{{Route('API.diklat_sekolah.create')}}",
                         type: "post",
                         data: new FormData(this),
                         contentType: false,
@@ -375,7 +384,6 @@
                         processData: false,
                         success: function (response) {
                             form.trigger('reset');
-                            $('#tambahPendidikan').modal('hide');
                             location.reload();
                         },
                         error:function(response){

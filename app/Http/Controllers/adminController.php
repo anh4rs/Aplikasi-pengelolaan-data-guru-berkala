@@ -12,6 +12,7 @@ Use App\Berita;
 Use App\Pejabat_struktural;
 Use App\Data_berkala;
 Use App\Karyawan;
+Use App\Diklat;
 use HCrypt;
 
 
@@ -30,7 +31,8 @@ class adminController extends Controller
         $sekolah_sd = sekolah::where('b_pendidikan','SD')->get();
         $sekolah_smp = sekolah::where('b_pendidikan','SMP')->get();
         $permohonan = data_berkala::all();
-        return view('admin.index',compact('sekolah_sd','sekolah_smp','permohonan'));
+        $karyawan = karyawan::all();
+        return view('admin.index',compact('sekolah_sd','sekolah_smp','permohonan','karyawan'));
     }
 
     public function golonganIndex(){
@@ -220,5 +222,14 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.dataBerkalaKeseluruhan', ['dataBerkala'=>$dataBerkala,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data berkala.pdf');
+    }
+
+    public function diklatCetak(){
+        $diklat = diklat::all();
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.diklatKeseluruhan', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Diklat.pdf');
     }
 }

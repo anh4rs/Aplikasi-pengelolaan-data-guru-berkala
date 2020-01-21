@@ -12,7 +12,7 @@
             <div class="card-header border-0">
               <h3 class="mb-0">Tabel Data Diklat</h3>
               <div class="text-right">
-              <a href="{{Route('beritaCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+              <a href="{{route('diklatCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
 	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
@@ -29,7 +29,6 @@
                     <th scope="col">Nama </th>
                     <th scope="col">tempat</th>
                     <th scope="col">penyelenggara</th>
-                    <th scope="col">tempat</th>
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -60,15 +59,15 @@
                         <input type="text" class="form-control" name="kode_diklat" id="kode_diklat">
                     </div>
                     <div class="form-group">
-                        <label for="berita">Nama Diklat </label>
+                        <label for="diklat">Nama Diklat </label>
                         <input type="text" class="form-control" name="nama" id="nama">
                     </div>
                     <div class="form-group">
-                        <label for="berita">Tempat </label>
+                        <label for="diklat">Tempat </label>
                         <input type="text" class="form-control" name="tempat" id="tempat">
                     </div>       
                     <div class="form-group">
-                        <label for="berita">Penyelenggara</label>
+                        <label for="diklat">Penyelenggara</label>
                         <input type="text" class="form-control" name="penyelenggara" id="penyelenggara">
                     </div>                   
             </div>   
@@ -88,7 +87,7 @@
         let csrf_token=$('meta[name="csrf_token"]').attr('content');
         Swal.fire({
                     title: 'apa anda yakin?',
-                    text: " Menghapus  Data berita " + nama,
+                    text: " Menghapus  Data Diklat " + nama,
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
@@ -98,7 +97,7 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url : "{{ url('/api/berita')}}" + '/' + uuid,
+                            url : "{{ url('/api/diklat')}}" + '/' + uuid,
                             type : "POST",
                             data : {'_method' : 'DELETE', '_token' :csrf_token},
                             success: function (response) {
@@ -129,14 +128,14 @@
             $('#tempat').val('');
             $('#penyelenggara').val('');
             $('#tempat').val('');
-            $('#btn-form').text('Simpan Berita');
+            $('#btn-form').text('Simpan diklat');
             $('#mediumModal').modal('show');
         })
         //event btn edit klik
         edit = uuid =>{
             $.ajax({
                 type: "GET",
-                url: "{{ url('/api/berita')}}" + '/' + uuid,
+                url: "{{ url('/api/diklat')}}" + '/' + uuid,
                 beforeSend: false,
                 success : function(returnData) {
                     $('.modal-title').text('Edit Data');
@@ -160,7 +159,7 @@
                 paging    : true,
                 ajax: {
                     "type": "GET",
-                    "url": "{{route('API.berita.get')}}",
+                    "url": "{{route('API.diklat.get')}}",
                     "dataSrc": "data",
                     "contentType": "application/json; charset=utf-8",
                     "dataType": "json",
@@ -170,8 +169,10 @@
                     {data: null , render : function ( data, type, row, meta ) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }},
-                    {"data": "judul"},
-                    {"data": "created_at"},
+                    {"data": "kode_diklat"},
+                    {"data": "nama"},
+                    {"data": "tempat"},
+                    {"data": "penyelenggara"},
                     {data: null , render : function ( data, type, row, meta ) {
                         let uuid = row.uuid;
                         let nama = row.nama;
@@ -181,62 +182,56 @@
                     }}
                 ]
             });
-            //event form submit        
+            //event form submit            
             $("form").submit(function (e) {
-                e.preventDefault()
-                let form = $('#modal-body form');
-                if($('.modal-title').text() == 'Edit Data'){
-                    let url = '{{route("API.berita.update", '')}}'
-                    let id = $('#id').val();
-                    $.ajax({
-                        url: url+'/'+id,
-                        type: "post",
-                        data: new FormData(this),
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function (response) {
-                            form.trigger('reset');
-                            $('#mediumModal').modal('hide');
-                            $('#datatable').DataTable().ajax.reload();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Data Berhasil Tersimpan',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        },
-                        error:function(response){
-                            console.log(response);
-                        }
-                    })
-                }else{
-                    $.ajax({
-                        url: "{{Route('API.berita.create')}}",
-                        type: "post",
-                        data: new FormData(this),
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function (response) {
-                            form.trigger('reset');
-                            $('#mediumModal').modal('hide');
-                            $('#datatable').DataTable().ajax.reload();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Data Berhasil Disimpan',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        },
-                        error:function(response){
-                            console.log(response);
-                        }
-                    })
-                }
-            } );
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                    if($('.modal-title').text() == 'Edit Data'){
+                        let url = '{{route("API.diklat.update", '')}}'
+                        let id = $('#id').val();
+                        $.ajax({
+                            url: url+'/'+id,
+                            type: "put",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Tersimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }else{
+                        $.ajax({
+                            url: "{{Route('API.diklat.create')}}",
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                $('#datatable').DataTable().ajax.reload();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Disimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                    }
+                } );
             } );
     </script>
 @endsection
