@@ -110,6 +110,10 @@ class adminController extends Controller
         return view('admin.gajihBerkala.index');
     }
 
+    public function diklatIndex(){
+        return view('admin.diklat.index');
+    }
+
     public function golonganCetak(){
         $golongan=golongan::all();
         $pejabat_struktural=Pejabat_struktural::all()->first();

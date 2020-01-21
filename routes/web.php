@@ -139,6 +139,8 @@ Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('data
 //gajihBerkala
 Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
 
+//diklat
+Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
 
 
 
