@@ -202,6 +202,13 @@ Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
         Route::prefix('gaji-sekolah')->name('gaji-sekolah.')->group(function(){
             Route::get('', 'GajiController@get')->name('get');
             });  
+        Route::prefix('pendidikan-sekolah')->name('pendidikan-sekolah.')->group(function(){
+            Route::get('', 'PendidikanController@get')->name('get');
+            Route::get('{uuid}', 'PendidikanController@find')->name('find');
+            Route::post('', 'PendidikanController@create')->name('create');
+            Route::put('{uuid}', 'PendidikanController@update')->name('update');
+            Route::delete('{uuid}', 'PendidikanController@delete')->name('delete');
+            });  
     });    
 
 //middleware sekolah

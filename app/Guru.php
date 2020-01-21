@@ -39,4 +39,9 @@ class Guru extends Model
         return $this->HasMany('App\Data_berkala');
     }
 
+    public function pendidikan_guru()
+    {
+        return $this->HasMany('App\Pendidikan_guru');
+    }
+
 }
