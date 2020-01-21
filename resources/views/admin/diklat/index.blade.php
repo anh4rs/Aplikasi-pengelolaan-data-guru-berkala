@@ -2,7 +2,6 @@
 @section('content')    
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
-
       </div>
     </div>
     <div class="container-fluid mt--9">
@@ -84,10 +83,6 @@
 @endsection
 @section('script')
 <script>
-    $(function () {
-    // Summernote
-    $('#isi').summernote()
-  })
     //fungsi hapus
     hapus = (uuid, nama)=>{
         let csrf_token=$('meta[name="csrf_token"]').attr('content');
@@ -126,7 +121,6 @@
                 }
             })
         }
-        
         //event btn klik
         $('#tambah').click(function(){
             $('.modal-title').text('Tambah Data');
