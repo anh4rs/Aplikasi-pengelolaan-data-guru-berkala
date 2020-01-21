@@ -53,6 +53,12 @@ class adminController extends Controller
         return view('admin.guru.index');
     }
 
+    public function guruDetail($uuid){
+        $id = HCrypt::decrypt($uuid);
+        $guru = guru::findOrFail($id);
+        return view('admin.guru.detail',compact('guru'));
+    }
+
     public function guruFilter(){
         $sekolah = sekolah::all();
         return view('admin.guru.filter',compact('sekolah'));
@@ -102,6 +108,10 @@ class adminController extends Controller
 
     public function gajihBerkalaIndex(){
         return view('admin.gajihBerkala.index');
+    }
+
+    public function diklatIndex(){
+        return view('admin.diklat.index');
     }
 
     public function golonganCetak(){

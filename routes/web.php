@@ -116,6 +116,7 @@ Route::get('/mp/cetak', 'adminController@mpCetak')->name('mpCetak');
 
 //halaman data Mata Pelajaran
 Route::get('/guru/index', 'adminController@guruIndex')->name('guruIndex');
+Route::get('/guru/detail/{uuid}', 'adminController@guruDetail')->name('guruDetail');
 Route::get('/guru/keseluruhanCetak', 'adminController@guruKeseluruhanCetak')->name('guruKeseluruhanCetak');
 Route::get('/guru/filter', 'adminController@guruFilter')->name('guruFilter');
 Route::post('/guru/filter', 'adminController@guruFilterCetak')->name('guruFilterCetak');
@@ -146,6 +147,8 @@ Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('data
 //gajihBerkala
 Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
 
+//diklat
+Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
 
 
 

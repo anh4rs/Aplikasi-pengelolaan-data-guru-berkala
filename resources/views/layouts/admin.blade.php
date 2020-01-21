@@ -51,6 +51,11 @@
               <i class="ni ni-single-02 "></i> Guru
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{Route('diklatIndex')}}">
+              <i class="ni ni-single-02 "></i> Program Diklat
+            </a>
+          </li>
         </ul>
         <hr class="my-3">
         <h6 class="navbar-heading text-muted">Berkala</h6>
