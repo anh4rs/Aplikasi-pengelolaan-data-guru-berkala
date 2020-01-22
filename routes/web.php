@@ -251,6 +251,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
     //data gajihBerkala 
     Route::get('/adminSekolah/permohonan/index', 'adminSekolahController@permohonanIndex')->name('adminSekolahPermohonanIndex');
     Route::get('/adminSekolah/permohonan', 'adminSekolahController@permohonanTambah')->name('permohonanTambah');
+    Route::get('/adminSekolah/permohonan/cetak', 'adminSekolahController@permohonanCetak')->name('permohonanSekolahCetak');
 
     //data gajihBerkala
 

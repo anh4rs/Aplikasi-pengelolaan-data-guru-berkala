@@ -13,7 +13,7 @@
             <div class="card-header border-0">
               <h3 class="mb-0">Tabel Data Permohonan datah Berkala</h3>
               <div class="text-right"> 
-              <a href="#" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+              <a href="{{Route('permohonanSekolahCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <a href="{{Route('permohonanTambah')}}" class="btn btn-icon btn-sm btn-outline-primary"  >
 	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>

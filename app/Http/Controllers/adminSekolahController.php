@@ -77,7 +77,18 @@ class adminSekolahController extends Controller
         $pejabat_struktural=Pejabat_struktural::all()->first();
         $pdf =PDF::loadView('laporan.guruSekolah', ['sekolah'=>$sekolah,'guru'=>$guru,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream('Laporan data Guru Diklat.pdf');
+        return $pdf->stream('Laporan data Guru.pdf');
+    }
+
+    public function permohonanCetak(){
+        $sekolah_id = Auth::user()->sekolah->id;
+        $sekolah = sekolah::findOrFail($sekolah_id);
+        $data = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->whereIn('status',[0,2])->get();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.permohonanSekolah', ['sekolah'=>$sekolah,'data'=>$data,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Permohonan Berkala.pdf');
     }
 
 }
