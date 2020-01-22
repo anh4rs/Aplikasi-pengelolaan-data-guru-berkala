@@ -15,10 +15,6 @@
               <div class="text-right"> 
               <a href="{{Route('dataBerkalaCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
-              <a href="{{Route('permohonanTambah')}}" class="btn btn-icon btn-sm btn-outline-primary"  >
-	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-                <span class="btn-inner--text">Tambah Data</span>
-              </a>
               </div>
             </div>
             <div class="table-responsive">

@@ -40,7 +40,7 @@ class adminSekolahController extends Controller
 
     public function permohonanTambah(){
 
-        return view('sekolah.dataBerkala.permohonan');
+        return view('sekolah.permohonan.permohonan');
     }
 
     public function inboxIndex(){
