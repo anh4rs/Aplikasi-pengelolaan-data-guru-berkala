@@ -7,6 +7,7 @@ use Auth;
 use App\Inbox;
 use App\Data_berkala;
 use App\Guru;
+use App\Gaji_berkala;
 use App\Sekolah;
 Use App\Pejabat_struktural;
 use PDF;
@@ -89,6 +90,26 @@ class adminSekolahController extends Controller
         $pdf =PDF::loadView('laporan.permohonanSekolah', ['sekolah'=>$sekolah,'data'=>$data,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Permohonan Berkala.pdf');
+    }
+
+    public function databerkalaCetak(){
+        $sekolah_id = Auth::user()->sekolah->id;
+        $sekolah = sekolah::findOrFail($sekolah_id);
+        $data = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->where('status',1 )->get();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.dataBerkalaSekolah', ['sekolah'=>$sekolah,'data'=>$data,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan Data Berkala.pdf');
+    }
+
+    public function gajiCetak(){
+        $gaji = Gaji_berkala::all();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.gajiKeseluruhan', ['gaji'=>$gaji,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Gaji.pdf');
     }
 
 }

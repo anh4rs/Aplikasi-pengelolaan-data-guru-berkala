@@ -144,6 +144,7 @@ Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('data
 
 //gajihBerkala
 Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
+Route::get('/gajiBerkala/cetak', 'adminSekolahController@gajiCetak')->name('gajiCetak');
 
 //diklat
 Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');
@@ -262,9 +263,12 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
 
     //data berkala
     Route::get('/adminSekolah/data/index', 'adminSekolahController@dataBerkalaIndex')->name('adminSekolahDataBerkalaIndex');
+    Route::get('/adminSekolah/data/cetak', 'adminSekolahController@dataBerkalaCetak')->name('dataBerkalaSekolahCetak');
 
     //gaji berkala
     Route::get('/adminSekolah/gaji/index', 'adminSekolahController@gajiIndex')->name('adminSekolahGaji');
+    Route::get('/adminSekolah/gaji/cetak', 'adminSekolahController@gajiCetak')->name('gajiSekolahCetak');
+
 
 
 //middleware sekolah
