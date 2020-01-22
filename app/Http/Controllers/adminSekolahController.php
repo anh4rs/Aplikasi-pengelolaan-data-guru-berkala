@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Inbox;
-use App\data_berkala;
+use App\Data_berkala;
+use App\Guru;
+use App\Sekolah;
+Use App\Pejabat_struktural;
+use PDF;
+use Carbon\Carbon;
 
 
 class adminSekolahController extends Controller
@@ -64,5 +69,15 @@ class adminSekolahController extends Controller
         return view('sekolah.gaji.index');
     }
 
+    public function guruCetak(){
+        $sekolah_id = Auth::user()->sekolah->id;
+        $sekolah = sekolah::findOrFail($sekolah_id);
+        $guru = guru::with('sekolah','golongan','jabatan','mata_pelajaran')->where('sekolah_id',$sekolah_id)->get();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $pdf =PDF::loadView('laporan.guruSekolah', ['sekolah'=>$sekolah,'guru'=>$guru,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Guru Diklat.pdf');
+    }
 
 }

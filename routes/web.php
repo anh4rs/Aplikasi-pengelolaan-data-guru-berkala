@@ -244,6 +244,8 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
 
     //data guru 
     Route::get('/adminSekolah/guru', 'adminSekolahController@guruIndex')->name('adminSekolahGuru');
+    Route::get('/adminSekolah/guru/cetak', 'adminSekolahController@guruCetak')->name('guruSekolahCetak');
+
     //data guru
 
     //data gajihBerkala 
