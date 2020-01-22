@@ -17,10 +17,6 @@
                 <span class="btn-inner--text">Filter Cetak</span></a>
               <a href="{{Route('guruKeseluruhanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
-              <button class="btn btn-icon btn-sm btn-outline-primary" id="tambah" type="button" >
-	            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-                <span class="btn-inner--text">Tambah Data</span>
-              </button>
               </div>
             </div>
             <div class="table-responsive">
