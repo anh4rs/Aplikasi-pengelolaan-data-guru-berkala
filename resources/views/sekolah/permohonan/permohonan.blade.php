@@ -46,13 +46,17 @@
                         <input type="text" class="form-control" name="gaji_lama" id="gaji_lama" placeholder="Gajih Sebelumnya" required>
                     </div>
                     <div class="form-group">
+                        <label for="guru">Tanggal Keputusan</label>
+                        <input type="date" class="form-control" name="tgl_keputusan" id="tgl_keputusan" placeholder="Tanggal Keputusan" required>
+                    </div>
+                    <div class="form-group">
                         <label for="guru">Nomor Keputusan</label>
                         <input type="text" class="form-control" name="no_keputusan" id="no_keputusan" placeholder="Nomor Keputusan" required>
                     </div>                    
                     <div class="form-group">
-                        <label for="guru">Tanggal Keputusan</label>
-                        <input type="date" class="form-control" name="tgl_keputusan" id="tgl_keputusan" placeholder="Tanggal Keputusan" required>
-                    </div>
+                        <label for="guru">MKG Pada Tanggal Tersebut</label>
+                        <input type="text" class="form-control" name="mkg" id="mkg" placeholder="MKG" required>
+                    </div>                    
                     <div class="form-group">
                         <label for="guru">Gajih Baru (Rp.)</label>
                         <input type="text" class="form-control" name="gaji_baru" id="gaji_baru" placeholder="Gajih Sebelumnya" required>
@@ -63,14 +67,11 @@
                     </div>
                     <div class="form-group">
                         <label for="guru">Tanggal Gajih Berlaku</label>
-                        <input type="date" class="form-control" name="tgl_gaji_berlaku" id="tgl_gaji_berlaku" placeholder="Tanggal Keputusan" required>
+                        <input type="date" class="form-control" name="tgl_gaji_berlaku" id="tgl_gaji_berlaku" placeholder="Tanggal Gaji Berlaku" required>
                     </div>
                     <div class="form-group">
-                        <label for="guru">MKG</label>
-                        <input type="text" class="form-control" name="mkg" id="mkg" placeholder="MKG" required>
-                    </div>                    <div class="form-group">
-                        <label for="guru">MKS</label>
-                        <input type="text" class="form-control" name="mks" id="mks" placeholder="MKS" required>
+                        <label for="guru">Kenaikan Gaji Berikutnya</label>
+                        <input type="date" class="form-control" name="tgl_gaji_berikut" id="tgl_gaji_berikut" placeholder="Kenaikan Gaji Berikutnya" required>
                     </div>
             </div>   
             </div>
@@ -157,7 +158,7 @@
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                window.location.replace("/adminSekolah/dataBerkala");
+                                window.location.replace("/adminSekolah/permohonan/index");
                             },
                             error:function(response){
                                 console.log(response);

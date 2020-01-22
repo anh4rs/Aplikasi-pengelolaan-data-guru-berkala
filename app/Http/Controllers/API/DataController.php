@@ -37,6 +37,18 @@ class DataController extends APIController
         return $this->returnController("ok", $data_berkala);
     }
 
+    public function getPendingAdmin(){
+        $data_berkala = json_decode(redis::get("data_berkala::all"));
+        if (!$data_berkala) {
+            $data_berkala = data_berkala::with('guru','pejabat_struktural')->whereIn('status',[0,2])->get();
+            if (!$data_berkala) {
+                return $this->returnController("error", "failed get data_berkala data");
+            }
+            Redis::set("data_berkala:all", $data_berkala);
+        }
+        return $this->returnController("ok", $data_berkala);
+    }
+
     public function getData(){
         $sekolah_id = Auth::user()->sekolah->id;
         $data_berkala = json_decode(redis::get("data_berkala::all"));
@@ -87,7 +99,7 @@ class DataController extends APIController
         $data_berkala->mkg = $req->mkg;
         $data_berkala->gaji_baru = $req->gaji_baru;
         $data_berkala->terbilang = $req->terbilang;
-        $data_berkala->mks = $req->mks;
+        $data_berkala->tgl_gaji_berikut = $req->tgl_gaji_berikut;
 
         $data_berkala->save();
 
@@ -124,7 +136,7 @@ class DataController extends APIController
         $data_berkala->mkg = $req->mkg;
         $data_berkala->gaji_baru = $req->gaji_baru;
         $data_berkala->terbilang = $req->terbilang;
-        $data_berkala->mks = $req->mks;
+        $data_berkala->tgl_gaji_berikut = $req->tgl_gaji_berikut;
         $data_berkala->update();
         if (!$data_berkala) {
             return $this->returnController("error", "failed find data data_berkala");

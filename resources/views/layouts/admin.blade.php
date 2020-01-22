@@ -19,7 +19,7 @@
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button> 
+      </button>
       <a class="navbar-brand pt-0" href="{{Route('adminIndex')}}">
         <img src="{{asset('img/logo.png')}}" class="navbar-brand-img" alt="..."> Disdik Tapin
       </a>

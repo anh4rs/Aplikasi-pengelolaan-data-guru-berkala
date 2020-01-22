@@ -29,7 +29,7 @@ class CreateDataBerkalasTable extends Migration
             $table->string('mkg')->length(50);
             $table->string('gaji_baru')->length(100);
             $table->string('terbilang')->length(100);
-            $table->string('mks')->length(50);
+            $table->date('tgl_gaji_berikut');
             $table->string('status')->default('0');
             $table->timestamps();
             $table->foreign('sekolah_id')->references('id')->on('sekolahs')->onDelete('cascade');

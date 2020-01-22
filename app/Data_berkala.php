@@ -8,7 +8,7 @@ class Data_berkala extends Model
 {
     protected $fillable = [
         'uuid','sekolah_id','guru_id','pejabat_struktural_id','no_surat','lampiran',
-        'perihal','gaji_lama','tgl_keputusan','no_keputusan',
+        'perihal','gaji_lama','tgl_keputusan','no_keputusan','tgl_gaji_berikut',
     ];
 
     protected $hidden = [
