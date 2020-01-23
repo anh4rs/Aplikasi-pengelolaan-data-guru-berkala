@@ -108,6 +108,12 @@ class adminController extends Controller
         return view('admin.permohonan.filter');
     }
 
+    public function permohonanDetail($uuid){
+        $id = HCrypt::decrypt($uuid);
+        $permohonan = data_berkala::findOrFail($id);
+        return view('admin.permohonan.detail',compact('permohonan'));
+    }
+
     public function gajihBerkalaIndex(){
         return view('admin.gajihBerkala.index');
     }
@@ -246,5 +252,14 @@ class adminController extends Controller
         $pdf =PDF::loadView('laporan.diklatFilter', ['diklat'=>$diklat,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Guru Diklat.pdf');
+    }
+
+    public function permohonanDetailCetak($id){
+        $permohonan = data_berkala::findOrFail($id);
+        $pejabat_struktural=Pejabat_struktural::all()->first();
+        $tgl= Carbon::now()->format('d-m-Y');
+        $pdf =PDF::loadView('laporan.permohonanDetail', ['permohonan'=>$permohonan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('Laporan data Detail Permohonan.pdf');
     }
 }

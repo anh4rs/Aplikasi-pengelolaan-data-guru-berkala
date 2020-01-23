@@ -136,6 +136,8 @@ Route::get('/karyawan/Cetak', 'adminController@karyawanCetak')->name('karyawanCe
 //halaman data Karyawan
 Route::get('/permohonan/index', 'adminController@dataPermohonanIndex')->name('dataPermohonanIndex');
 Route::get('/berkala/index', 'adminController@dataBerkalaIndex')->name('dataBerkalaIndex');
+Route::get('/permohonan/detail/{uuid}', 'adminController@permohonanDetail')->name('permohonanDetail');
+Route::get('/permohonan/detail/cetak/{uuid}', 'adminController@permohonanDetailCetak')->name('permohonanDetailCetak');
 Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifikasi')->name('dataBerkalaVerifikasi');
 Route::get('/permohonan/Cetak', 'adminController@permohonanCetak')->name('permohonanCetak');
 Route::get('/permohonan/filter', 'adminController@permohonanFilter')->name('permohonanFilter');

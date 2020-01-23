@@ -127,7 +127,7 @@
                             let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
-                            '<a href="/verifikasi/permohonan/'+ uuid +' " class="text-white btn btn-sm btn-success"> verifikasi </a>  <a class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
+                            '<a href="/verifikasi/permohonan/'+ uuid +' " class="text-white btn btn-sm btn-success"> verifikasi </a>  <a  href="/permohonan/detail/'+ uuid +' " class="btn btn-sm btn-primary text-white"> Detail</a><button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-danger" > <i class="ti-trash"></i>Hapus</button>':
                         data;
                         }}
                     ]
