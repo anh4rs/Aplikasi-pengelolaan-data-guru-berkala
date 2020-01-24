@@ -78,11 +78,10 @@
     </div>
     <div class="container">
         <div class="isi">
-        <h2 style="text-align:center;text-transform: uppercase;">DATA GAJI BERKALA</h2>
+        <h2 style="text-align:center;text-transform: uppercase;">DATA GAJI BERKALA MENURUT PERATURAN PEMERINTAH REPUBLIK INDONESIA NOMOR 30 TAHUN 2015</h2>
                 <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>No</th>
                                 <th>Kode golongan</th>
                                 <th>MKG</th>
                                 <th>Besaran Gaji</th>
@@ -91,12 +90,8 @@
                         <tbody>
                             @foreach($gaji as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
                                 <td>{{ $p->golongan->kode_golongan }}</td>
-                                <td>{{ $p->mkg }}</td>
+                                <td>{{ $p->mkg }} Tahun</td>
                                 <td>Rp.{{ $p->besaran_gaji }}</td>
                             </tr>
                             @endforeach
