@@ -97,7 +97,7 @@ class DataController extends APIController
             $tgl_berlaku = carbon::parse($tgl_last)->format('Y');
             $tgl = $tgl_berlaku+2;
             $now = Carbon::now()->format('Y');
-            $max = $now+2;
+            $max = $now;
 
             $message = 'Guru belum bisa melakukan permohonan sampai tahun '.$max;
             if($tgl_berlaku != $max)
