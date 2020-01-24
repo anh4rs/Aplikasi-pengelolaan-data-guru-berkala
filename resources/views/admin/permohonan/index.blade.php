@@ -16,7 +16,9 @@
               <a href="{{Route('permohonanCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
               <a href="{{Route('permohonanFilter')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
-                <span class="btn-inner--text">filter Laporan</span></a>
+                <span class="btn-inner--text">filter Laporan Status</span></a>
+              <a href="{{Route('permohonanFilterTahun')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+                <span class="btn-inner--text">filter Laporan Tahun</span></a>
               </div>
             </div>
             <div class="table-responsive">

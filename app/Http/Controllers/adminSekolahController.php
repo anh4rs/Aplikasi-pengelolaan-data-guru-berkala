@@ -29,14 +29,16 @@ class adminSekolahController extends Controller
     }
 
     public function sekolahIndex(){
+        $sekolah = Auth::user()->sekolah;;
 
-        return view('sekolah.sekolah.index');
+        return view('sekolah.sekolah.index',compact('sekolah'));
     }
 
     public function permohonanIndex(){
 
         return view('sekolah.permohonan.index');
     }
+
 
     public function permohonanTambah(){
 

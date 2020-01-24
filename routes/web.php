@@ -142,6 +142,7 @@ Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifika
 Route::get('/permohonan/Cetak', 'adminController@permohonanCetak')->name('permohonanCetak');
 Route::get('/permohonan/filter', 'adminController@permohonanFilter')->name('permohonanFilter');
 Route::post('/permohonan/filter', 'adminController@permohonanFilterCetak')->name('permohonanFilterCetak');
+Route::get('/permohonan/filter/tahun', 'adminController@permohonanFilterTahun')->name('permohonanFilterTahun'); 
 Route::post('/permohonan/filter/tahun', 'adminController@permohonanFilterTahunCetak')->name('permohonanFilterTahunCetak'); 
 Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
 

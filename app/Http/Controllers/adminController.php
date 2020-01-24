@@ -108,6 +108,10 @@ class adminController extends Controller
         return view('admin.permohonan.filter');
     }
 
+    public function permohonanFilterTahun(){
+        return view('admin.permohonan.filterTahun');
+    }
+
     public function permohonanDetail($uuid){
         $id = HCrypt::decrypt($uuid);
         $permohonan = data_berkala::findOrFail($id);
@@ -229,9 +233,10 @@ class adminController extends Controller
 
     public function permohonanfiltertahunCetak(Request $request){
         $permohonan=data_berkala::whereYear('created_at',$request->tahun)->get();
+        $tahun = $request->tahun;
         $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
-        $pdf =PDF::loadView('laporan.permohonanFiltertahun', ['permohonan'=>$permohonan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
+        $pdf =PDF::loadView('laporan.permohonanFilterTahun', ['tahun'=>$tahun, 'permohonan'=>$permohonan,'pejabat_struktural'=>$pejabat_struktural,'tgl'=>$tgl]);
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Permohonan filter Tahun.pdf');
     }
