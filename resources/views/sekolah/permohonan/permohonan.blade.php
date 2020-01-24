@@ -59,7 +59,9 @@
                     </div>                    
                     <div class="form-group">
                         <label for="guru">Gajih Baru (Rp.)</label>
-                        <input type="text" class="form-control" name="gaji_baru" id="gaji_baru" placeholder="Gajih Sebelumnya" required>
+                        <select name="gaji_baru" id="gaji_baru" class="form-control">
+                            <option value=""> -- pilih jaih baru --</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="guru">Terbilang</label>
@@ -121,9 +123,25 @@
                 }
             })
         }
+             //get data golongan
+             getGaji = () =>{
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/gaji-sekolah')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#gaji_baru').append(
+                            '<option value="'+value.besaran_gaji+'">'+value.golongan.kode_golongan+' - Rp.'+ value.besaran_gaji +'</option>'
+                        )
+                    })
+                }
+            })
+        }
 
         getGuru();
         getPejabat();
+        getGaji();
 
                 //event form submit            
                 $("form").submit(function (e) {
