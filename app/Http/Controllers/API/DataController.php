@@ -89,7 +89,7 @@ class DataController extends APIController
             'guru_id' => 'required|unique:data_berkalas',
 
         ]);
-        //belum fix
+        
         $data_berkala =  data_berkala::where('guru_id',$req->guru_id)->orderBy('id','DESC')->first();
         $tgl_last = $data_berkala->tgl_gaji_berlaku;
         $tgl_berlaku = carbon::parse($tgl_last)->format('Y');

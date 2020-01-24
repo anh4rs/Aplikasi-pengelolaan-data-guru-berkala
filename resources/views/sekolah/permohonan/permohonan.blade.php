@@ -176,11 +176,20 @@
 
                                     });
 
-                                }
-                                // window.location.replace("/adminSekolah/permohonan/index");
+                                }else{
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data Berhasil Disimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                
+                                window.location.replace("/adminSekolah/permohonan/index");
+                            }
                             },
                             error:function(response){
-                                // console.log(response);
+                                
                             }
                         })
                     }

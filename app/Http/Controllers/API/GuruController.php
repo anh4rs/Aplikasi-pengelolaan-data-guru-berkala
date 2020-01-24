@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Request as ApiRequest;
 use App\Diklat_guru;
 use App\Guru;
 use HCrypt;
@@ -57,6 +59,20 @@ class GuruController extends APIController
     public function create(Request $req){
         // $seksi = Seksi::create($req->all());
         $sekolah_id = Auth::user()->sekolah->id;
+
+        $cekValidasi = Validator::make(ApiRequest::all(), [
+
+            'NIP' => 'required|unique:gurus',
+
+        ]);
+
+        $message = 'NIP tidak boleh sama ';
+        if ($cekValidasi->fails()) {
+            return response()->json([
+                'Error' => $message
+            ],202);
+        }
+
         $guru = new guru;
         // decrypt foreign key id
         

@@ -344,6 +344,19 @@
                                 form.trigger('reset');
                                 $('#mediumModal').modal('hide');
                                 $('#datatable').DataTable().ajax.reload();
+                                if (response.Error) {
+                                    
+                                    var array = $.map(response, function(value, index) {
+                                                        return [value];
+                                                    });
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: response.Error,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }else{
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
@@ -351,9 +364,9 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
+                            }
                             },
                             error:function(response){
-                                console.log(response);
                             }
                         })
                     }
