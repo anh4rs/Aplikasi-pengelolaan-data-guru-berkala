@@ -13,7 +13,7 @@
   <link href="{{asset('admin/js/plugins/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
   <link href="{{asset('admin/css/argon-dashboard.css?v=1.1.0')}}" rel="stylesheet" />
   <link href="{{asset('css/datatable/datatable.css')}}" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+  <link href="{{asset('datepicker/bootstrapDatePicker.min.css')}}" rel="stylesheet"/>
 </head>
 <body class="">
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -175,7 +175,7 @@
   <script src="{{asset('js/datatable/dataTable.bootstrap.js')}}"></script>
   <script src="{{asset('js/datatable/jquery.dataTable.js')}}"></script>
   <script src="{{asset('js/sweetalert/sweetalert.all.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+  <script src="{{asset('datepicker/bootstapDatePicker.min.js')}}"></script>
 
 
 @yield('script')
