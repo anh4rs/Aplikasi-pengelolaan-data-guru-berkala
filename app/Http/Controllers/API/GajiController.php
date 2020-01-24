@@ -41,7 +41,7 @@ class GajiController extends APIController
     }
 
     public function create(Request $req){
-
+        
         $gaji_berkala = new gaji_berkala;
         // decrypt foreign key id
 

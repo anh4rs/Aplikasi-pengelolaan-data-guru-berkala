@@ -76,7 +76,7 @@
             </div>   
             </div>
             <div class="card-footer text-right">
-                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
+            <a href="{{route('adminSekolahPermohonanIndex')}}" class="btn btn-link " data-dismiss="modal">Close</a> 
                 <button type="submit" id="btn-form" class="btn btn-primary">Kirim Permohonan</button>
             </div>
             </form> 
@@ -99,7 +99,7 @@
                     success : function(returnData) {
                         $.each(returnData.data, function (index, value) {
                         $('#guru_id').append(
-                            '<option value="'+value.uuid+'">'+value.nama+'</option>'
+                            '<option value="'+value.id+'">'+value.nama+'</option>'
                         )
                     })
                 }
@@ -158,10 +158,29 @@
                             type: "post",
                             data: $(this).serialize(),
                             success: function (response) {
-                                window.location.replace("/adminSekolah/permohonan/index");
+                                if (response.Error) {
+                                    
+                                    var array = $.map(response, function(value, index) {
+                                                        return [value];
+                                                    });
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: response.Error,
+                                    showConfirmButton: false,
+                                    timer: 5000
+                                })
+                                    $.each(array, function(index, val){
+
+                                        console.log(index);
+
+                                    });
+
+                                }
+                                // window.location.replace("/adminSekolah/permohonan/index");
                             },
                             error:function(response){
-                                console.log(response);
+                                // console.log(response);
                             }
                         })
                     }

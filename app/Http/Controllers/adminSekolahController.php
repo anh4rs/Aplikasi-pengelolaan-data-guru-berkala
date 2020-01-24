@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 class adminSekolahController extends Controller
 {
-    public function index(){
+    public function index(){        
         $sekolah = Auth::user()->sekolah;
         $sekolah_id = $sekolah->id;
         $data = data_berkala::with('guru','pejabat_struktural')->where('sekolah_id',$sekolah_id)->where('status',1)->get();

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Request as ApiRequest;
 use App\Data_berkala;
+use Carbon\Carbon;
 use App\Inbox;
 use HCrypt;
 use Auth;
@@ -80,13 +83,39 @@ class DataController extends APIController
 
     public function create(Request $req){
         // $seksi = Seksi::create($req->all());
+
+        $cekValidasi = Validator::make(ApiRequest::all(), [
+
+            'guru_id' => 'required|unique:data_berkalas',
+
+        ]);
+        //belum fix
+        $data_berkala =  data_berkala::where('guru_id',$req->guru_id)->orderBy('id','DESC')->first();
+        $tgl_last = $data_berkala->tgl_gaji_berlaku;
+        $tgl_berlaku = carbon::parse($tgl_last)->format('Y');
+        $now = Carbon::now()->format('Y');
+        $max = $now+2;
+
+        $message = 'Guru belum bisa melakukan permohonan sampai tahun '.$max;
+        if($tgl_berlaku < $max)
+        {
+            return response()->json([
+                'Error' => $message
+            ],202);
+        }
+        
+        // if ($cekValidasi->fails()) {
+        //     return response()->json([
+        //         'Error' => $cekValidasi->errors()->toJson()
+        //     ],202);
+        // }
         $sekolah_id = Auth::user()->sekolah->id;
 
         $data_berkala = new data_berkala;
         // decrypt foreign key id
         
         $data_berkala->sekolah_id = $sekolah_id;
-        $data_berkala->guru_id = Hcrypt::decrypt($req->guru_id);
+        $data_berkala->guru_id = $req->guru_id;
         $data_berkala->pejabat_struktural_id = Hcrypt::decrypt($req->pejabat_struktural_id);
         $data_berkala->nomor_surat = $req->nomor_surat;
         $data_berkala->lampiran = $req->lampiran;

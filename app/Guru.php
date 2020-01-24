@@ -10,9 +10,9 @@ class Guru extends Model
         'golongan_id','sekolah_id','jabatan_id','mata_pelajaran_id','uuid','telepon','tempat_lahir', 'tgl_lahir','alamat','status'
     ];
 
-    protected $hidden = [
-        'id'
-    ];
+    // protected $hidden = [
+    //     'id'
+    // ];
 
     public function sekolah()
     {
