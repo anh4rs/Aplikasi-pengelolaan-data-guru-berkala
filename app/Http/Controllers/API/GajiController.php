@@ -24,10 +24,10 @@ class GajiController extends APIController
         return $this->returnController("ok", $gaji_berkala);
     }
 
-    public function getByTahun(Request $req){
+    public function getByTahun($tahun){
         $gaji_berkala = json_decode(redis::get("gaji_berkala::all"));
         if (!$gaji_berkala) {
-            $gaji_berkala = gaji_berkala::with('golongan')->where('tahun',$req->tahun)->get();
+            $gaji_berkala = gaji_berkala::with('golongan')->where('tahun',$tahun)->get();
             if (!$gaji_berkala) {
                 return $this->returnController("error", "failed get gaji_berkala gaji");
             }

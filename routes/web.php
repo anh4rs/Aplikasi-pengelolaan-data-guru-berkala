@@ -68,7 +68,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         });  
     Route::prefix('gaji')->name('gaji.')->group(function(){
         Route::get('', 'GajiController@get')->name('get');
-        Route::get('', 'GajiController@getByTahun')->name('getByTahun');
+        Route::get('/{tahun}', 'GajiController@getByTahun')->name('getByTahun');
         Route::get('{uuid}', 'GajiController@find')->name('find');
         Route::post('', 'GajiController@create')->name('create');
         Route::put('{uuid}', 'GajiController@update')->name('update');
@@ -148,8 +148,12 @@ Route::post('/permohonan/filter/tahun', 'adminController@permohonanFilterTahunCe
 Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
 
 //gajihBerkala
-Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
+// Route::get('/gajihBerkala/index', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
 Route::get('/gajiBerkala/cetak', 'adminSekolahController@gajiCetak')->name('gajiCetak');
+Route::get('/gajiBerkala/filter', 'adminController@gajiFilter')->name('gajiFilterTahun');
+Route::post('/gajiBerkala/filter', 'adminController@gajihBerkalaIndex')->name('gajihBerkalaIndex');
+
+
 
 //diklat
 Route::get('/diklat/index', 'adminController@diklatIndex')->name('diklatIndex');

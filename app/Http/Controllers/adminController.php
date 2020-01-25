@@ -118,8 +118,13 @@ class adminController extends Controller
         return view('admin.permohonan.detail',compact('permohonan'));
     }
 
-    public function gajihBerkalaIndex(){
-        return view('admin.gajihBerkala.index');
+    public function gajihBerkalaIndex(Request $request){
+        $tahun = $request->tahun;
+        return view('admin.gajihBerkala.index', compact('tahun'));
+    }
+
+    public function gajiFilter(){
+        return view('admin.gajihBerkala.filter');
     }
 
     public function diklatIndex(){

@@ -11,7 +11,7 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">TABEL GAJIH BERKALA MENURUT PERATURAN PEMERINTAH REPUBLIK INDONESIA NOMOR 30 TAHUN 2015 </h3>
+              <h3 class="mb-0">TABEL GAJIH TAHUN {{$tahun}} </h3>
                 <br>
               <div class="text-right">
               <a href="{{Route('gajiCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
@@ -54,6 +54,7 @@
             </div>    
             <div class="modal-body">
                 <form action="" method="post">
+                <input type="text" class="form-control" name="tahun" id="tahun" value="{{$tahun}}">
                 <input type="hidden" class="form-control" name="id" id="id">
                 <div class="form-group">
                         <label for="golongan">Kode Golongan</label>
@@ -166,6 +167,7 @@
 
             //fungsi render datatable
             $(document).ready(function() {
+                let tahun =  $('#tahun').val();
                 $('#datatable').DataTable( {
                     responsive: true,
                     processing: true,
@@ -173,7 +175,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url": "{{route('API.gaji.get')}}",
+                        "url":  "{{ url('/api/gaji')}}" + '/' + tahun,
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",

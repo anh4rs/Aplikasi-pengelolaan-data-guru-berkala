@@ -62,7 +62,7 @@
         <h6 class="navbar-heading text-muted">Berkala</h6>
         <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('gajihBerkalaIndex')}}">
+            <a class="nav-link" href="{{Route('gajiFilterTahun')}}">
               <i class="ni ni-satisfied"></i> Data Gajih Guru
             </a>
           </li>
