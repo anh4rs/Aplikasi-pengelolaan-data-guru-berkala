@@ -206,13 +206,27 @@
                                 form.trigger('reset');
                                 $('#mediumModal').modal('hide');
                                 $('#datatable').DataTable().ajax.reload();
-                                Swal.fire({
+                                if (response.Error) {
+                                    
+                                    var array = $.map(response, function(value, index) {
+                                                        return [value];
+                                                    });
+                                    Swal.fire({
                                     position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Data Berhasil Disimpan',
+                                    icon: 'error',
+                                    title: response.Error,
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
+                                }else{
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Data Berhasil Disimpan',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                })
+                                }
                             },
                             error:function(response){
                                 console.log(response);

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Request as ApiRequest;
 use App\Jabatan;
 use HCrypt;
 use Illuminate\Support\Facades\Redis;
@@ -39,6 +41,19 @@ class JabatanController extends APIController
     }
 
     public function create(Request $req){
+        $cekValidasi = Validator::make(ApiRequest::all(), [
+
+            'kode_jabatan' => 'required|unique:jabatans',
+
+        ]);
+
+        $message = 'Kode jabatan tidak boleh sama ';
+        if ($cekValidasi->fails()) {
+            return response()->json([
+                'Error' => $message
+            ],202);
+        }
+
         $jabatan = jabatan::create($req->all());
         
         //set uuid
