@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{Route('adminSekolahGaji')}}">
+            <a class="nav-link " href="{{Route('SekolahGajiFilter')}}">
               <i class="ni ni-single-02 "></i> Daftar Gajih Berkala
             </a>
           </li>

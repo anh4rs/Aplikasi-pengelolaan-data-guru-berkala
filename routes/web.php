@@ -219,7 +219,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             });   
         Route::prefix('gaji-sekolah')->name('gaji-sekolah.')->group(function(){
             Route::get('', 'GajiController@get')->name('get');
-            Route::get('', 'GajiController@getByTahun')->name('getByTahun');
+            Route::get('/{tahun}', 'GajiController@getByTahun')->name('getByTahun');
             });  
         Route::prefix('pendidikan-sekolah')->name('pendidikan-sekolah.')->group(function(){
             Route::get('', 'PendidikanController@get')->name('get');
@@ -276,8 +276,11 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
     Route::get('/adminSekolah/data/cetak', 'adminSekolahController@dataBerkalaCetak')->name('dataBerkalaSekolahCetak');
 
     //gaji berkala
-    Route::get('/adminSekolah/gaji/index', 'adminSekolahController@gajiIndex')->name('adminSekolahGaji');
+    // Route::get('/adminSekolah/gaji/index', 'adminSekolahController@gajiIndex')->name('adminSekolahGaji');
     Route::get('/adminSekolah/gaji/cetak', 'adminSekolahController@gajiCetak')->name('gajiSekolahCetak');
+    Route::get('/adminSekolah/gaji/filter', 'adminSekolahController@gajiFilter')->name('SekolahGajiFilter');
+    Route::post('/adminSekolah/gaji/filter', 'adminSekolahController@gajiIndex')->name('adminSekolahGaji');
+
 
 
 

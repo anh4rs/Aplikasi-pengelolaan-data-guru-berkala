@@ -68,8 +68,13 @@ class adminSekolahController extends Controller
         return view('sekolah.dataBerkala.index');
     }
 
-    public function gajiIndex(){
-        return view('sekolah.gaji.index');
+    public function gajiIndex(Request $request){ 
+        $tahun = $request->tahun;
+        return view('sekolah.gaji.index',compact('tahun'));
+    }
+
+    public function gajiFilter(){
+        return view('sekolah.gaji.filter');
     }
 
     public function guruCetak(){
