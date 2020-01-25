@@ -68,6 +68,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         });  
     Route::prefix('gaji')->name('gaji.')->group(function(){
         Route::get('', 'GajiController@get')->name('get');
+        Route::get('', 'GajiController@getByTahun')->name('getByTahun');
         Route::get('{uuid}', 'GajiController@find')->name('find');
         Route::post('', 'GajiController@create')->name('create');
         Route::put('{uuid}', 'GajiController@update')->name('update');
@@ -214,6 +215,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             });   
         Route::prefix('gaji-sekolah')->name('gaji-sekolah.')->group(function(){
             Route::get('', 'GajiController@get')->name('get');
+            Route::get('', 'GajiController@getByTahun')->name('getByTahun');
             });  
         Route::prefix('pendidikan-sekolah')->name('pendidikan-sekolah.')->group(function(){
             Route::get('', 'PendidikanController@get')->name('get');

@@ -24,6 +24,18 @@ class GajiController extends APIController
         return $this->returnController("ok", $gaji_berkala);
     }
 
+    public function getByTahun(Request $req){
+        $gaji_berkala = json_decode(redis::get("gaji_berkala::all"));
+        if (!$gaji_berkala) {
+            $gaji_berkala = gaji_berkala::with('golongan')->where('tahun',$req->tahun)->get();
+            if (!$gaji_berkala) {
+                return $this->returnController("error", "failed get gaji_berkala gaji");
+            }
+            Redis::set("gaji_berkala:all", $gaji_berkala);
+        }
+        return $this->returnController("ok", $gaji_berkala);
+    }
+
     public function find($uuid){
         $id = HCrypt::decrypt($uuid);
         if (!$id) {
@@ -48,6 +60,7 @@ class GajiController extends APIController
         $gaji_berkala->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $gaji_berkala->mkg = $req->mkg;
         $gaji_berkala->besaran_gaji = $req->besaran_gaji;
+        $gaji_berkala->tahun = $req->tahun;
 
         $gaji_berkala->save();
 
@@ -74,6 +87,7 @@ class GajiController extends APIController
         $gaji_berkala->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $gaji_berkala->mkg = $req->mkg;
         $gaji_berkala->besaran_gaji = $req->besaran_gaji;
+        $gaji_berkala->tahun = $req->tahun;
         $gaji_berkala->update();
         if (!$gaji_berkala) {
             return $this->returnController("error", "failed find gaji gaji_berkala");
