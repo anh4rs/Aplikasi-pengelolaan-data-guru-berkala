@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sekolah">Status</label>
-                        <select name="status_sekolah" class="form-control" id="status_sekolah ">
+                        <select name="status_sekolah" class="form-control" id="status_sekolah">
                           <option value="">-- pilih status --</option>
                           <option value="Negeri">Negeri</option>
                           <option value="Swasta">Swasta</option>
