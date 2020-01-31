@@ -94,10 +94,7 @@
                         <tbody>
                             @foreach($karyawan as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->user->name }}</td>
                                 <td>{{ $p->NIP }}</td>
                                 <td>{{ $p->tempat_lahir }}</td>

@@ -82,6 +82,7 @@
                 <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Kode golongan</th>
                                 <th>MKG</th>
                                 <th>Besaran Gaji</th>
@@ -90,6 +91,7 @@
                         <tbody>
                             @foreach($gaji as $p)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->golongan->kode_golongan }}</td>
                                 <td>{{ $p->mkg }} Tahun</td>
                                 <td>Rp.{{ $p->besaran_gaji }}</td>

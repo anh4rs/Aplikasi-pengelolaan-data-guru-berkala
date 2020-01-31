@@ -90,10 +90,7 @@
                         <tbody>
                             @foreach($golongan as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->kode_golongan }}</td>
                                 <td>{{ $p->golongan }}</td>
                             </tr>

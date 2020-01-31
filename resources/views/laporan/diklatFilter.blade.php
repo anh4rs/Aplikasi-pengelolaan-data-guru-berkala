@@ -93,10 +93,7 @@
                         <tbody>
                             @foreach($diklat->diklat_guru as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->guru->NIP }}</td>
                                 <td>{{ $p->guru->nama }}</td>
                                 <td>{{ $p->guru->sekolah->NPSN }}</td>

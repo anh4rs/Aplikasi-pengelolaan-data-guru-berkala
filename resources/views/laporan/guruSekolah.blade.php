@@ -92,10 +92,7 @@
                         <tbody>
                             @foreach($guru as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->NIP }}</td>
                                 <td>{{ $p->nama }}</td>
                                 <td>{{ $p->telepon }}</td>
