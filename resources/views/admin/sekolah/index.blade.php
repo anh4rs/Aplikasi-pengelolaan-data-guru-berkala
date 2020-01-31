@@ -175,7 +175,7 @@
                 $('.modal-title').text('Tambah Data');
                 $('#nama').val('');
                 $('#NPSN').val('');
-                $('#status').val('');
+                $('#status_sekolah').val('');
                 $('#b_pendidikan').val('');
                 $('#status_pemilik').val('');
                 $('#sk').val('');
@@ -196,7 +196,7 @@
                         $('#id').val(returnData.data.uuid);
                         $('#nama').val(returnData.data.nama);
                         $('#NPSN').val(returnData.data.NPSN);
-                        $('#status').val(returnData.data.status_sekolah);
+                        $('#status_sekolah').val(returnData.data.status_sekolah);
                         $('#b_pendidikan').val(returnData.data.b_pendidikan);
                         $('#status_pemilik').val(returnData.data.status_pemilik);
                         $('#sk').val(returnData.data.sk);
