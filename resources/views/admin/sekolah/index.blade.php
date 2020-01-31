@@ -76,7 +76,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="hidden" name="id" id="id">
                         <label for="sekolah">Bentuk Pendidikan</label>
                         <select name="b_pendidikan" id="b_pendidikan" class="form-control">
                             <option value="SD">SD</option>

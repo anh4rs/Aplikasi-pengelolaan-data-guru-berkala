@@ -45,8 +45,8 @@ class SekolahController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $sekolah = Redis::get("sekolah:$id");
+        $sekolah = sekolah::with('user')->where('id', $id)->first();
         if (!$sekolah) {
-            $sekolah = sekolah::with('user')->where('id', $id)->first();
             if (!$sekolah){
                 return $this->returnController("error", "failed find data sekolah");
             }
@@ -80,7 +80,7 @@ class SekolahController extends APIController
         $setuuid->update();
 
         $sekolah = $user->sekolah()->create($req->all());
-        
+
         //set uuid
         $sekolah_id = $sekolah->id;
         $uuid = HCrypt::encrypt($sekolah_id);
