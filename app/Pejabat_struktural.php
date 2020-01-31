@@ -29,4 +29,9 @@ class Pejabat_struktural extends Model
     {
         return $this->HasMany('App\Data_berkala');
     }
+
+    public function golongan()
+    {
+        return $this->BelongsTo('App\Golongan');
+    }
 }

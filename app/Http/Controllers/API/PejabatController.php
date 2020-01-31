@@ -13,7 +13,7 @@ class PejabatController extends APIController
     public function get(){
         $pejabat_struktural = json_decode(redis::get("pejabat_struktural::all"));
         if (!$pejabat_struktural) {
-            $pejabat_struktural = pejabat_struktural::all();
+            $pejabat_struktural = pejabat_struktural::with('golongan')->get();
             if (!$pejabat_struktural) {
                 return $this->returnController("error", "failed get pejabat_struktural data");
             }
@@ -29,7 +29,7 @@ class PejabatController extends APIController
         }
         $pejabat_struktural = Redis::get("pejabat_struktural:$id");
         if (!$pejabat_struktural) {
-            $pejabat_struktural = pejabat_struktural::find($id);
+            $pejabat_struktural = pejabat_struktural::with('golongan')->where('id',$id);
             if (!$pejabat_struktural){
                 return $this->returnController("error", "failed find data pejabat_struktural");
             }
@@ -46,6 +46,7 @@ class PejabatController extends APIController
         $uuid = HCrypt::encrypt($pejabat_struktural_id);
         $setuuid = pejabat_struktural::findOrFail($pejabat_struktural_id);
         $setuuid->uuid = $uuid;
+        $setuuid->golongan_id = HCrypt::decrypt($req->golongan_id);
         $setuuid->update();
         if (!$pejabat_struktural) {
             return $this->returnController("error", "failed create data pejabat_struktural");
@@ -62,6 +63,8 @@ class PejabatController extends APIController
         }
 
         $pejabat_struktural = pejabat_struktural::findOrFail($id);
+        $pejabat_struktural->golongan_id = HCrypt::decrypt($req->golongan_id);
+        $pejabat_struktural->update();
 
         if (!$pejabat_struktural) {
             return $this->returnController("error", "failed find data pejabat_struktural");

@@ -15,10 +15,12 @@ class CreatePejabatStrukturalsTable extends Migration
     {
         Schema::create('pejabat_strukturals', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('golongan_id')->nullable();
             $table->text('uuid')->nullable();
             $table->string('NIP')->length(50);
             $table->string('nama')->length(100);
             $table->string('jabatan')->length(50);
+            $table->foreign('golongan_id')->references('id')->on('golongans')->onDelete('cascade');
             $table->timestamps();
         });
     }

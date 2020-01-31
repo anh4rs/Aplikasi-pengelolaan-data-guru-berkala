@@ -18,4 +18,9 @@ class Golongan extends Model
     {
         return $this->HasMany('App\Gaji_berkala');
     }
+
+    public function pejabat_struktural()
+    {
+        return $this->HasMany('App\Pejabat_struktural');
+    }
 }
