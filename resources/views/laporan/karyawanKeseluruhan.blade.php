@@ -112,11 +112,12 @@
                       <br>
                       <div class="ttd">
                         <h5> <p>Tapin, {{$tgl}}</p></h5>
-                      <h5>{{ $pejabat_struktural->jabatan }}</h5>
-                      <br>
-                      <br>
-                      <h5 style="text-decoration:underline;">{{ $pejabat_struktural->nama }}</h5>
-                      <h5>{{ $pejabat_struktural->NIP }}</h5>
+                        <h5>{{ $pejabat_struktural->jabatan }}</h5>
+                        <br>
+                        <br>
+                        <h5 style="text-decoration:underline;">{{ $pejabat_struktural->nama }}</h5>
+                        <h5>{{ $pejabat_struktural->golongan->golongan }} / {{ $pejabat_struktural->golongan->kode_golongan}}}</h5>
+                        <h5>NIP.{{ $pejabat_struktural->NIP }}</h5>
                       </div>
                     </div>
         </div>

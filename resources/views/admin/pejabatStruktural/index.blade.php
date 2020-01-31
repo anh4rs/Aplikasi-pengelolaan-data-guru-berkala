@@ -28,6 +28,7 @@
                     <th scope="col">No</th>
                     <th scope="col">NIP</th>
                     <th scope="col">Nama</th>
+                    <th scope="col">Golongan</th>
                     <th scope="col">Jabatan</th>
                     <th scope="col">Aksi</th>
                   </tr>
@@ -63,6 +64,12 @@
                         <input type="text" class="form-control" name="nama" id="nama">
                     </div>
                     <div class="form-group">
+                        <label for="guru">Golongan</label>
+                        <select name="golongan_id" class="form-control" id="golongan_id">
+                          <option value="">-- pilih golongan --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="pejabat">Jabatan</label>
                         <select class="form-control" name="jabatan" id="jabatan">
                             <option value="Kepala Dinas">Kepala Dinas</option>
@@ -81,6 +88,23 @@
 @endsection
 @section('script')
     <script>
+          
+           //get data mata pelajar
+           getGolongan = () => {
+            $.ajax({
+                    type: "GET",
+                    url: "{{ url('/api/golongan')}}",
+                    beforeSend: false,
+                    success : function(returnData) {
+                        $.each(returnData.data, function (index, value) {
+                        $('#golongan_id').append(
+                            '<option value="'+value.uuid+'">'+ value.kode_golongan +' - '+value.golongan+'</option>'
+                        )
+                    })
+                }
+            })
+        }
+        getGolongan();
         //fungsi hapus
         hapus = (uuid, nama) =>{
             let csrf_token=$('meta[name="csrf_token"]').attr('content');
@@ -125,7 +149,8 @@
                 $('.modal-title').text('Tambah Data');
                 $('#NIP').val('');
                 $('#nama').val('');
-                $('#jabatan').val('');    
+                $('#jabatan').val('');
+                $('#golongan').val('');        
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -142,6 +167,7 @@
                         $('#NIP').val(returnData.data.NIP);
                         $('#nama').val(returnData.data.nama);
                         $('#jabatan').val(returnData.data.jabatan);
+                        $('#golongan').val(returnData.data.golongan.uuid);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
@@ -169,6 +195,7 @@
                         }},
                         {"data": "NIP"},
                         {"data": "nama"},
+                        {"data": "golongan.kode_golongan"},
                         {"data": "jabatan"},
                         {data: null , render : function ( data, type, row, meta ) {
                             let uuid = row.uuid;
@@ -231,5 +258,6 @@
                     }
                 } );
                 } );
+                 
     </script>
 @endsection 
