@@ -94,10 +94,7 @@
                         <tbody>
                             @foreach($sekolah as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->NPSN }}</td>
                                 <td>{{ $p->status }}</td>
                                 <td>{{ $p->b_pendidikan }}</td>

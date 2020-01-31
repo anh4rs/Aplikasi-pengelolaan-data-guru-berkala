@@ -90,10 +90,7 @@
                         <tbody>
                             @foreach($berita as $p)
                             <tr>
-                                @php
-                                $no=1;
-                                @endphp
-                                <td>{{ $no++ }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->judul }}</td>
                                 <td>{{ $p->created_at }}</td>
                             </tr>
