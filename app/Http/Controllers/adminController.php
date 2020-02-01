@@ -241,7 +241,7 @@ class adminController extends Controller
     }
 
     public function permohonanfiltertahunCetak(Request $request){
-        $permohonan=data_berkala::whereYear('created_at',$request->tahun)->get();
+        $permohonan=data_berkala::whereIn('status',[0,2])->whereYear('created_at',$request->tahun)->get();
         $tahun = $request->tahun;
         $pejabat_struktural=Pejabat_struktural::all()->first();
         $tgl= Carbon::now()->format('d-m-Y');
