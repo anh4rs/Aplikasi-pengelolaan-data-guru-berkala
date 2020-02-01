@@ -29,13 +29,11 @@ class KaryawanController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $karyawan = Redis::get("karyawan:$id");
+        $karyawan = karyawan::with('user')->where('id', $id)->first();
         if (!$karyawan) {
-            $karyawan = karyawan::with('user')->where('id', $id)->first();
-            if (!$karyawan){
                 return $this->returnController("error", "failed find data karyawan");
             }
             Redis::set("karyawan:$id", $karyawan);
-        }
         return $this->returnController("ok", $karyawan);
     }
 
