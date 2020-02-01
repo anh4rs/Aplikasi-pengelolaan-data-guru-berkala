@@ -42,6 +42,7 @@ class GajiController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $gaji_berkala = Redis::get("gaji_berkala:$id");
+        $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->get();
         if (!$gaji_berkala) {
                 return $this->returnController("error", "failed find gaji gaji_berkala");
             }
