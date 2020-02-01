@@ -28,13 +28,11 @@ class PejabatController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $pejabat_struktural = Redis::get("pejabat_struktural:$id");
+        $pejabat_struktural = pejabat_struktural::with('golongan')->where('id',$id);
         if (!$pejabat_struktural) {
-            $pejabat_struktural = pejabat_struktural::with('golongan')->where('id',$id);
-            if (!$pejabat_struktural){
                 return $this->returnController("error", "failed find data pejabat_struktural");
             }
             Redis::set("pejabat_struktural:$id", $pejabat_struktural);
-        }
         return $this->returnController("ok", $pejabat_struktural);
     }
 
