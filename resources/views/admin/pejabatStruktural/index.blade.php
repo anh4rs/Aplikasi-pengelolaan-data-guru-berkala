@@ -11,7 +11,7 @@
         <div class="col">
           <div class="card shadow" style="padding:10px;">
             <div class="card-header border-0">
-              <h3 class="mb-0">Tabel Data mata Pelajaran</h3>
+              <h3 class="mb-0">Tabel Data Pejabat Struktural</h3>
               <div class="text-right">
               <a href="{{Route('pejabatCetak')}}" class="btn btn-icon btn-sm btn-outline-info"><span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
                 <span class="btn-inner--text">Cetak Laporan</span></a>
@@ -167,7 +167,7 @@
                         $('#NIP').val(returnData.data.NIP);
                         $('#nama').val(returnData.data.nama);
                         $('#jabatan').val(returnData.data.jabatan);
-                        $('#golongan').val(returnData.data.golongan.uuid);
+                        $('#golongan_id').val(returnData.data.golongan.uuid);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }

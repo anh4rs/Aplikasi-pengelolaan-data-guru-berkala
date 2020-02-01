@@ -13,14 +13,14 @@ class PejabatController extends APIController
     public function get(){
         $pejabat_struktural = json_decode(redis::get("pejabat_struktural::all"));
         if (!$pejabat_struktural) {
-            $pejabat_struktural = pejabat_struktural::with('golongan')->get();
+            $pejabat_struktural = Pejabat_struktural::with('golongan')->get();
             if (!$pejabat_struktural) {
                 return $this->returnController("error", "failed get pejabat_struktural data");
             }
             Redis::set("pejabat_struktural:all", $pejabat_struktural);
         }
         return $this->returnController("ok", $pejabat_struktural);
-    }
+        }
 
     public function find($uuid){
         $id = HCrypt::decrypt($uuid);
@@ -28,23 +28,36 @@ class PejabatController extends APIController
             return $this->returnController("error", "failed decrypt uuid");
         }
         $pejabat_struktural = Redis::get("pejabat_struktural:$id");
-        $pejabat_struktural = pejabat_struktural::with('golongan')->where('id',$id);
         if (!$pejabat_struktural) {
+            $pejabat_struktural = pejabat_struktural::with('golongan')->where('id',$id)->first();
+            if (!$pejabat_struktural){
                 return $this->returnController("error", "failed find data pejabat_struktural");
             }
             Redis::set("pejabat_struktural:$id", $pejabat_struktural);
+        }
         return $this->returnController("ok", $pejabat_struktural);
     }
 
     public function create(Request $req){
-        $pejabat_struktural = pejabat_struktural::create($req->all());
+        $cekValidasi = Validator::make(ApiRequest::all(), [
 
+            'kode_pejabat_struktural' => 'required|unique:pejabat_strukturals',
+
+        ]);
+
+        $message = 'Kode pejabat_struktural tidak boleh sama ';
+        if ($cekValidasi->fails()) {
+            return response()->json([
+                'Error' => $message
+            ],202);
+        }
+
+        $pejabat_struktural = pejabat_struktural::create($req->all());
         //set uuid
         $pejabat_struktural_id = $pejabat_struktural->id;
         $uuid = HCrypt::encrypt($pejabat_struktural_id);
         $setuuid = pejabat_struktural::findOrFail($pejabat_struktural_id);
         $setuuid->uuid = $uuid;
-        $setuuid->golongan_id = HCrypt::decrypt($req->golongan_id);
         $setuuid->update();
         if (!$pejabat_struktural) {
             return $this->returnController("error", "failed create data pejabat_struktural");
@@ -61,13 +74,11 @@ class PejabatController extends APIController
         }
 
         $pejabat_struktural = pejabat_struktural::findOrFail($id);
-        $pejabat_struktural->golongan_id = HCrypt::decrypt($req->golongan_id);
-        $pejabat_struktural->update();
 
         if (!$pejabat_struktural) {
             return $this->returnController("error", "failed find data pejabat_struktural");
         }
-
+        
         $pejabat_struktural->fill($req->all())->save();
 
         Redis::del("pejabat_struktural:all");
