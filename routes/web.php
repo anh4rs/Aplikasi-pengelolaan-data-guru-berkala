@@ -34,7 +34,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::get('', 'BeritaController@get')->name('get');
         Route::get('{uuid}', 'BeritaController@find')->name('find');
         Route::post('', 'BeritaController@create')->name('create');
-        Route::put('{uuid}', 'BeritaController@update')->name('update');
+        Route::post('edit/{uuid}', 'BeritaController@update')->name('update');
         Route::delete('{uuid}', 'BeritaController@delete')->name('delete');
         });    
     Route::prefix('karyawan')->name('karyawan.')->group(function(){
