@@ -11,6 +11,7 @@ Use App\Guru;
 Use App\Berita;
 Use App\Pejabat_struktural;
 Use App\Data_berkala;
+Use App\Gaji_berkala;
 Use App\Karyawan;
 Use App\Diklat;
 use HCrypt;
@@ -95,15 +96,15 @@ class adminController extends Controller
     public function dataBerkalaIndex(){
         return view('admin.dataBerkala.index');
     }
-    
+
     public function dataBerkalaVerifikasi($uuid){
         $id = HCrypt::decrypt($uuid);
 
         $permohonan = Data_berkala::findOrFail($id);
 
         return view('admin.dataBerkala.verifikasi',compact('permohonan'));
-    }  
-    
+    }
+
     public function permohonanFilter(){
         return view('admin.permohonan.filter');
     }
@@ -120,6 +121,9 @@ class adminController extends Controller
 
     public function gajihBerkalaIndex(Request $request){
         $tahun = $request->tahun;
+        // $id =1;
+        // $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->first();
+        // dd($gaji_berkala);
         return view('admin.gajihBerkala.index', compact('tahun'));
     }
 
@@ -245,7 +249,7 @@ class adminController extends Controller
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('Laporan data Permohonan filter Tahun.pdf');
     }
-    
+
     public function dataBerkalaCetak(){
         $dataBerkala = data_berkala::with('guru','pejabat_struktural')->where('status',1)->get();
         $pejabat_struktural=Pejabat_struktural::all()->first();

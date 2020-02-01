@@ -41,12 +41,30 @@ class GajiController extends APIController
         if (!$id) {
             return $this->returnController("error", "failed decrypt uuid");
         }
+        $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->first();
         $gaji_berkala = Redis::get("gaji_berkala:$id");
-        $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->get();
         if (!$gaji_berkala) {
+            if (!$gaji_berkala){
                 return $this->returnController("error", "failed find gaji gaji_berkala");
             }
             Redis::set("gaji_berkala:$id", $gaji_berkala);
+        }
+        return $this->returnController("ok", $gaji_berkala);
+    }
+
+    public function findBaru($uuid){
+        $id = HCrypt::decrypt($uuid);
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+        $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->where('tahun',2020)->first();
+        $gaji_berkala = Redis::get("gaji_berkala:$id");
+        if (!$gaji_berkala) {
+            if (!$gaji_berkala){
+                return $this->returnController("error", "failed find gaji gaji_berkala");
+            }
+            Redis::set("gaji_berkala:$id", $gaji_berkala);
+        }
         return $this->returnController("ok", $gaji_berkala);
     }
 

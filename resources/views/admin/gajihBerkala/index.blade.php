@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('content')    
+@section('content')
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
 
@@ -45,13 +45,13 @@
       <div class="modal fade" id="mediumModal"  role="dialog" aria-labelledby="modal-default" >
     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
         <div class="modal-content">
-        	
+
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
-            </div>    
+            </div>
             <div class="modal-body">
                 <form action="" method="post">
                 <input type="text" class="form-control" name="tahun" id="tahun" value="{{$tahun}}">
@@ -70,12 +70,12 @@
                         <label for="golongan">Besaran Gaji </label>
                         <input type="text" class="form-control" name="besaran_gaji" id="besaran_gaji">
                     </div>
-            </div>   
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
+                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button>
                 <button type="submit" id="btn-form" class="btn btn-primary"></button>
             </div>
-            </form>    
+            </form>
         </div>
     </div>
 </div>
@@ -142,7 +142,7 @@
                 $('.modal-title').text('Tambah Data');
                 $('#golongan_id').val('');
                 $('#mkg').val('');
-                $('#besaran_gaji').val('');    
+                $('#besaran_gaji').val('');
                 $('#btn-form').text('Simpan Data');
                 $('#mediumModal').modal('show');
             })
@@ -156,7 +156,6 @@
                     success : function(returnData) {
                         $('.modal-title').text('Edit Data');
                         $('#id').val(returnData.data.uuid);
-                        $('#golongan_id').val(returnData.data.golongan.uuid);
                         $('#mkg').val(returnData.data.mkg);
                         $('#besaran_gaji').val(returnData.data.besaran_gaji);
                         $('#btn-form').text('Ubah Data');
@@ -188,12 +187,12 @@
                         {"data": "golongan.kode_golongan"},
                         {data: null , render : function ( data, type, row, meta ) {
                            return '<p> '+row.mkg+' tahun </p>'
-                        }},                        
+                        }},
                         {data: null , render : function ( data, type, row, meta ) {
                            return '<p> Rp.'+row.besaran_gaji+'</p>'
-                        }},  
+                        }},
                         {data: null , render : function ( data, type, row, meta ) {
-                            let uuid = row.uuid;
+                            let uuid = row.golongan.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
                             '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"> edit</i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash">hapus</i></button>':
@@ -202,7 +201,7 @@
                     ]
                 });
 
-                //event form submit            
+                //event form submit
                 $("form").submit(function (e) {
                     e.preventDefault()
                     let form = $('#modal-body form');

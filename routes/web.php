@@ -15,57 +15,58 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::post('', 'JabatanController@create')->name('create');
         Route::put('{uuid}', 'JabatanController@update')->name('update');
         Route::delete('{uuid}', 'JabatanController@delete')->name('delete');
-        });    
+        });
     Route::prefix('pejabat')->name('pejabat.')->group(function(){
         Route::get('', 'PejabatController@get')->name('get');
         Route::get('{uuid}', 'PejabatController@find')->name('find');
         Route::post('', 'PejabatController@create')->name('create');
         Route::put('{uuid}', 'PejabatController@update')->name('update');
         Route::delete('{uuid}', 'PejabatController@delete')->name('delete');
-        });    
+        });
     Route::prefix('guru')->name('guru.')->group(function(){
         Route::get('', 'GuruController@get')->name('get');
         Route::get('{uuid}', 'GuruController@find')->name('find');
         Route::post('', 'GuruController@create')->name('create');
         Route::put('{uuid}', 'GuruController@update')->name('update');
         Route::delete('{uuid}', 'GuruController@delete')->name('delete');
-        });    
+        });
     Route::prefix('berita')->name('berita.')->group(function(){
         Route::get('', 'BeritaController@get')->name('get');
         Route::get('{uuid}', 'BeritaController@find')->name('find');
         Route::post('', 'BeritaController@create')->name('create');
         Route::post('edit/{uuid}', 'BeritaController@update')->name('update');
         Route::delete('{uuid}', 'BeritaController@delete')->name('delete');
-        });    
+        });
     Route::prefix('karyawan')->name('karyawan.')->group(function(){
         Route::get('', 'KaryawanController@get')->name('get');
         Route::get('{uuid}', 'KaryawanController@find')->name('find');
         Route::post('', 'KaryawanController@create')->name('create');
         Route::put('{uuid}', 'KaryawanController@update')->name('update');
         Route::delete('{uuid}', 'KaryawanController@delete')->name('delete');
-        });  
+        });
     Route::prefix('diklat')->name('diklat.')->group(function(){
         Route::get('', 'DiklatController@get')->name('get');
         Route::get('{uuid}', 'DiklatController@find')->name('find');
         Route::post('', 'DiklatController@create')->name('create');
         Route::put('{uuid}', 'DiklatController@update')->name('update');
         Route::delete('{uuid}', 'DiklatController@delete')->name('delete');
-        });  
+        });
     Route::prefix('user')->name('user.')->group(function(){
         Route::get('', 'UserController@get')->name('get');
         Route::get('{uuid}', 'UserController@find')->name('find');
         Route::post('', 'UserController@create')->name('create');
         Route::put('{uuid}', 'UserController@update')->name('update');
         Route::delete('{uuid}', 'UserController@delete')->name('delete');
-        });  
+        });
     Route::prefix('data')->name('data.')->group(function(){
         Route::get('', 'DataController@get')->name('get');
         Route::get('/getPending', 'DataController@getPendingAdmin')->name('getPending');
         Route::get('{uuid}', 'DataController@find')->name('find');
+        Route::get('/baru/{uuid}', 'DataController@findBaru')->name('findBaru');
         Route::post('', 'DataController@create')->name('create');
         Route::put('{uuid}', 'DataController@update')->name('update');
         Route::delete('{uuid}', 'DataController@delete')->name('delete');
-        });  
+        });
     Route::prefix('gaji')->name('gaji.')->group(function(){
         Route::get('', 'GajiController@get')->name('get');
         Route::get('/{tahun}', 'GajiController@getByTahun')->name('getByTahun');
@@ -73,7 +74,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::post('', 'GajiController@create')->name('create');
         Route::put('{uuid}', 'GajiController@update')->name('update');
         Route::delete('{uuid}', 'GajiController@delete')->name('delete');
-        });  
+        });
     Route::prefix('pendidikan')->name('pendidikan.')->group(function(){
         Route::get('', 'PendidikanController@get')->name('get');
         Route::get('/{id}', 'PendidikanController@getByGuru')->name('getByGuru');
@@ -81,15 +82,15 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         Route::post('', 'PendidikanController@create')->name('create');
         Route::put('{uuid}', 'PendidikanController@update')->name('update');
         Route::delete('{uuid}', 'PendidikanController@delete')->name('delete');
-        });  
+        });
     Route::prefix('sekolah')->name('sekolah.')->group(function(){
         Route::get('', 'SekolahController@get')->name('get');
         Route::get('{uuid}', 'SekolahController@find')->name('find');
         Route::post('', 'SekolahController@create')->name('create');
         Route::put('{uuid}', 'SekolahController@update')->name('update');
         Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
-        });    
-        
+        });
+
 
 });
 
@@ -143,8 +144,8 @@ Route::get('/verifikasi/permohonan/{uuid}', 'adminController@dataBerkalaVerifika
 Route::get('/permohonan/Cetak', 'adminController@permohonanCetak')->name('permohonanCetak');
 Route::get('/permohonan/filter', 'adminController@permohonanFilter')->name('permohonanFilter');
 Route::post('/permohonan/filter', 'adminController@permohonanFilterCetak')->name('permohonanFilterCetak');
-Route::get('/permohonan/filter/tahun', 'adminController@permohonanFilterTahun')->name('permohonanFilterTahun'); 
-Route::post('/permohonan/filter/tahun', 'adminController@permohonanFilterTahunCetak')->name('permohonanFilterTahunCetak'); 
+Route::get('/permohonan/filter/tahun', 'adminController@permohonanFilterTahun')->name('permohonanFilterTahun');
+Route::post('/permohonan/filter/tahun', 'adminController@permohonanFilterTahunCetak')->name('permohonanFilterTahunCetak');
 Route::get('/dataBerkala/cetak', 'adminController@dataBerkalaCetak')->name('dataBerkalaCetak');
 
 //gajihBerkala
@@ -172,28 +173,28 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             Route::post('', 'GuruController@create')->name('create');
             Route::put('{uuid}', 'GuruController@update')->name('update');
             Route::delete('{uuid}', 'GuruController@delete')->name('delete');
-            });    
+            });
         Route::prefix('sekolah-data')->name('sekolah-data.')->group(function(){
             Route::get('', 'SekolahController@getSekolah')->name('get');
             Route::get('{uuid}', 'SekolahController@find')->name('find');
             Route::post('', 'SekolahController@create')->name('create');
             Route::put('{uuid}', 'SekolahController@update')->name('update');
             Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
-            });    
+            });
         Route::prefix('mapel')->name('mapel.')->group(function(){
             Route::get('', 'MPController@get')->name('get');
             Route::get('{uuid}', 'MPController@find')->name('find');
             Route::post('', 'MPController@create')->name('create');
             Route::put('{uuid}', 'MPController@update')->name('update');
             Route::delete('{uuid}', 'MPController@delete')->name('delete');
-            });    
+            });
         Route::prefix('jabatan')->name('jabatan.')->group(function(){
             Route::get('', 'JabatanController@get')->name('get');
             Route::get('{uuid}', 'JabatanController@find')->name('find');
             Route::post('', 'JabatanController@create')->name('create');
             Route::put('{uuid}', 'JabatanController@update')->name('update');
             Route::delete('{uuid}', 'JabatanController@delete')->name('delete');
-            });    
+            });
         Route::prefix('golongan')->name('golongan.')->group(function(){
             Route::get('', 'GolonganController@get')->name('get');
             Route::get('{uuid}', 'GolonganController@find')->name('find');
@@ -209,18 +210,18 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             Route::put('/{id}', 'DataController@updateStatus')->name('updateStatus');
             Route::put('{uuid}', 'DataController@update')->name('update');
             Route::delete('{uuid}', 'DataController@delete')->name('delete');
-            }); 
+            });
         Route::prefix('pejabat-sekolah')->name('pejabat-sekolah.')->group(function(){
             Route::get('', 'PejabatController@get')->name('get');
             Route::get('{uuid}', 'PejabatController@find')->name('find');
             Route::post('', 'PejabatController@create')->name('create');
             Route::put('{uuid}', 'PejabatController@update')->name('update');
             Route::delete('{uuid}', 'PejabatController@delete')->name('delete');
-            });   
+            });
         Route::prefix('gaji-sekolah')->name('gaji-sekolah.')->group(function(){
             Route::get('', 'GajiController@get')->name('get');
             Route::get('/{tahun}', 'GajiController@getByTahun')->name('getByTahun');
-            });  
+            });
         Route::prefix('pendidikan-sekolah')->name('pendidikan-sekolah.')->group(function(){
             Route::get('', 'PendidikanController@get')->name('get');
             Route::get('/{id}', 'PendidikanController@getByGuru')->name('getByGuru');
@@ -228,7 +229,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             Route::post('', 'PendidikanController@create')->name('create');
             Route::put('{uuid}', 'PendidikanController@update')->name('update');
             Route::delete('{uuid}', 'PendidikanController@delete')->name('delete');
-            });  
+            });
         Route::prefix('diklat_sekolah')->name('diklat_sekolah.')->group(function(){
               Route::get('', 'DiklatController@get')->name('getDiklat');
               Route::get('{uuid}', 'GuruController@diklat_get')->name('get');
@@ -238,8 +239,8 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
 
         Route::prefix('diklat')->name('diklat.')->group(function(){
             Route::get('', 'DiklatController@get')->name('get');
-        });  
-    });    
+        });
+    });
 
 //middleware sekolah
 
@@ -247,19 +248,19 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
     Route::get('/adminSekolah/index', 'adminSekolahController@index')->name('adminSekolahIndex');
     //beranda admin sekolah
 
-    //data guru 
+    //data guru
     Route::get('/adminSekolah/sekolah', 'adminSekolahController@sekolahIndex')->name('adminDataSekolahIndex');
     Route::get('adminSekolah/guru/detail/{uuid}', 'adminController@guruDetail')->name('adminSekolahGuruDetail');
 
     //data guru
 
-    //data guru 
+    //data guru
     Route::get('/adminSekolah/guru', 'adminSekolahController@guruIndex')->name('adminSekolahGuru');
     Route::get('/adminSekolah/guru/cetak', 'adminSekolahController@guruCetak')->name('guruSekolahCetak');
 
     //data guru
 
-    //data gajihBerkala 
+    //data gajihBerkala
     Route::get('/adminSekolah/permohonan/index', 'adminSekolahController@permohonanIndex')->name('adminSekolahPermohonanIndex');
     Route::get('/adminSekolah/permohonan', 'adminSekolahController@permohonanTambah')->name('permohonanTambah');
     Route::get('/adminSekolah/permohonan/cetak', 'adminSekolahController@permohonanCetak')->name('permohonanSekolahCetak');
@@ -292,4 +293,3 @@ Route::get('/home', 'DashboardController@index')->name('home');
 Route::get('/berita/all', 'adminController@beritaAll')->name('beritaAll');
 Route::get('/berita/detail/{id}', 'adminController@beritaDetail')->name('beritaDetail');
 
- 
