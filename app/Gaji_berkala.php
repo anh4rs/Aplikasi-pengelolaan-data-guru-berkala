@@ -11,7 +11,7 @@ class Gaji_berkala extends Model
     ];
 
     protected $hidden = [
-        'id','golongan_id'
+        'id'
     ];
 
     public function golongan()

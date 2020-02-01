@@ -54,7 +54,7 @@
             </div>
             <div class="modal-body">
                 <form action="" method="post">
-                <input type="text" class="form-control" name="tahun" id="tahun" value="{{$tahun}}">
+                <input type="hidden" class="form-control" name="tahun" id="tahun" value="{{$tahun}}">
                 <input type="hidden" class="form-control" name="id" id="id">
                 <div class="form-group">
                         <label for="golongan">Kode Golongan</label>
@@ -158,6 +158,8 @@
                         $('#id').val(returnData.data.uuid);
                         $('#mkg').val(returnData.data.mkg);
                         $('#besaran_gaji').val(returnData.data.besaran_gaji);
+                        $('#tahun').val(returnData.data.tahun);
+                        $('#golongan_id').val(returnData.data.golongan.uuid);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }
@@ -192,7 +194,7 @@
                            return '<p> Rp.'+row.besaran_gaji+'</p>'
                         }},
                         {data: null , render : function ( data, type, row, meta ) {
-                            let uuid = row.golongan.uuid;
+                            let uuid = row.uuid;
                             let nama = row.nama;
                             return type === 'display'  ?
                             '<button onClick="edit(\''+uuid+'\')" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#editmodal"><i class="ti-pencil"> edit</i></button> <button onClick="hapus(\'' + uuid + '\',\'' + nama + '\')" class="btn btn-sm btn-outline-danger" > <i class="ti-trash">hapus</i></button>':

@@ -69,7 +69,7 @@ Route::namespace('API')->prefix('api')->name('API.')->group(function(){
         });
     Route::prefix('gaji')->name('gaji.')->group(function(){
         Route::get('', 'GajiController@get')->name('get');
-        Route::get('/{tahun}', 'GajiController@getByTahun')->name('getByTahun');
+        Route::get('tahun/{tahun}', 'GajiController@getByTahun')->name('getByTahun');
         Route::get('{uuid}', 'GajiController@find')->name('find');
         Route::post('', 'GajiController@create')->name('create');
         Route::put('{uuid}', 'GajiController@update')->name('update');
