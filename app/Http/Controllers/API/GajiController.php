@@ -43,17 +43,14 @@ class GajiController extends APIController
         }
         $gaji_berkala = Redis::get("gaji_berkala:$id");
         if (!$gaji_berkala) {
-            $gaji_berkala = gaji_berkala::with('golongan')->where('id',$id)->first();
-            if (!$gaji_berkala){
                 return $this->returnController("error", "failed find gaji gaji_berkala");
             }
             Redis::set("gaji_berkala:$id", $gaji_berkala);
-        }
         return $this->returnController("ok", $gaji_berkala);
     }
 
     public function create(Request $req){
-        
+
         $gaji_berkala = new gaji_berkala;
         // decrypt foreign key id
 
