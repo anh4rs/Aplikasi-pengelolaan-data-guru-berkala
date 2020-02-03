@@ -176,7 +176,7 @@
                     searching: true,
                     ajax: {
                         "type": "GET",
-                        "url":  "{{ url('/api/gaji')}}" + '/' + tahun,
+                        "url":  "{{ url('/api/gaji/tahun')}}" + '/' + tahun,
                         "dataSrc": "data",
                         "contentType": "application/json; charset=utf-8",
                         "dataType": "json",
