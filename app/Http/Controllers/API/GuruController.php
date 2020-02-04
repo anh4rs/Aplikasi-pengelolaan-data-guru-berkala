@@ -75,11 +75,11 @@ class GuruController extends APIController
 
         $guru = new guru;
         // decrypt foreign key id
-        
+
         $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
         $guru->sekolah_id = $sekolah_id;
-        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);   
+        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);
         $guru->NIP = $req->NIP;
         $guru->nama = $req->nama;
         $guru->telepon = $req->telepon;
@@ -114,7 +114,7 @@ class GuruController extends APIController
         $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
         $guru->sekolah_id = $sekolah_id;
-        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);   
+        $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);
         $guru->NIP = $req->NIP;
         $guru->nama = $req->nama;
         $guru->telepon = $req->telepon;
@@ -155,23 +155,34 @@ class GuruController extends APIController
 
     public function diklat_create(Request $req){
         $diklat_guru = New diklat_guru;
-        
+
         // decrypt uuid from $req
         $guru_id = HCrypt::decrypt($req->guru_id);
         $diklat_id = HCrypt::decrypt($req->diklat_id);
 
+        if($req->sertifikat != null)
+        {
+            $img = $req->file('sertifikat');
+            $FotoExt  = $img->getClientOriginalExtension();
+            $FotoName = $guru_id.' Diklat ';
+            $foto   = $FotoName.'.'.$FotoExt;
+            $img->move('file/diklat', $foto);
+            $setuuid->diklat       = $foto;
+        }else{
+            $setuuid->diklat      = $setuuid->foto;
+        }
         $diklat_guru->guru_id      =  $guru_id;
         $diklat_guru->diklat_id    =  $diklat_id;
         $diklat_guru->waktu        =  $req->waktu;
 
         $diklat_guru->save();
-        
+
         $diklat_guru_id= $diklat_guru->id;
-        
+
         $uuid = HCrypt::encrypt($diklat_guru_id);
         $setuuid = diklat_guru::findOrFail($diklat_guru_id);
         $setuuid->uuid = $uuid;
-            
+
         $setuuid->update();
 
         if (!$diklat_guru) {
