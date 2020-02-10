@@ -46,9 +46,14 @@
                 <tr>
                   <td>SK Izin</td>
                   <td>: {{$sekolah->sk_izin}}</td>
-                </tr>                <tr>
+                </tr>                
+                <tr>
                   <td>Tanggal SK Izin</td>
                   <td>: {{$sekolah->tgl_sk_izin}}</td>
+                </tr>
+                <tr>
+                  <td>password</td>
+                  <td>: <button id="tambah" class="btn btn-sm btn-primary">ganti password</button></td>
                 </tr>
               </table>
             </div>
@@ -62,7 +67,81 @@
       </div>
       <br>
       <br>
+      <div class="modal fade" id="mediumModal"  role="dialog" aria-labelledby="modal-default" >
+    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+        	
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>    
+            <div class="modal-body">
+                <form action="" method="post">
+                <input type="hidden" class="form-control" name="id" id="id">
+                    <div class="form-group">
+                        <label for="golongan">Password Baru </label>
+                        <input type="text" class="form-control" name="password" id="password">
+                    </div>
+            </div>   
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
+                <button type="submit" id="btn-form" class="btn btn-primary"></button>
+            </div>
+            </form>    
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
-   
+   <script>
+            //event btn tambah
+            $('#tambah').click(function(){
+                $('.modal-title').text('Tambah Data');
+                $('#password').val('');
+                $('#btn-form').text('Simpan Data');
+                $('#mediumModal').modal('show');
+            })
+
+
+                //event form submit            
+                $("form").submit(function (e) {
+                    e.preventDefault()
+                    let form = $('#modal-body form');
+                        $.ajax({
+                            url: "{{Route('API.sekolah-data.updatePassword')}}",
+                            type: "post",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                form.trigger('reset');
+                                $('#mediumModal').modal('hide');
+                                if (response.Error) {
+                                    
+                                    var array = $.map(response, function(value, index) {
+                                    return [value];
+                                    });
+                                    Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: response.Error,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                }else{
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Data Berhasil Disimpan',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                })
+                                }
+                            },
+                            error:function(response){
+                                console.log(response);
+                            }
+                        })
+                } );
+   </script>
 @endsection

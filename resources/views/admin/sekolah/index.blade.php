@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sekolah"> Password</label>
-                        <input type="password" class="form-control" name="password" id="password">
+                        <input type="text" class="form-control" name="password" id="password">
                     </div>
             </div>
             <div class="modal-footer">
@@ -205,6 +205,7 @@
                         $('#tgl_sk_izin').val(returnData.data.tgl_sk_izin);
                         $('#name').val(returnData.data.user.name);
                         $('#email').val(returnData.data.user.email);
+                        $('#password').val(returnData.data.user.password);
                         $('#btn-form').text('Ubah Data');
                         $('#mediumModal').modal('show');
                     }

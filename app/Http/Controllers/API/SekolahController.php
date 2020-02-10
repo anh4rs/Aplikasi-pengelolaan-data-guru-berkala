@@ -156,6 +156,34 @@ class SekolahController extends APIController
         return $this->returnController("ok", $merge);
     }
 
+    public function updatePassword(request $req){
+        $id = Auth::id();
+
+        if (!$id) {
+            return $this->returnController("error", "failed decrypt uuid");
+        }
+
+        $user = User::findOrFail($id);
+        if (!$user){
+                return $this->returnController("error", "failed find data sekolah");
+            }
+        if($req->foto != null){
+            if($req->password != null){
+                $password       = Hash::make($req->password);
+                $user->password = $password;
+            }else{
+                $user->password = $user->password;
+            }
+
+           $user->update();
+
+        Redis::del("user:all");
+        Redis::set("user:$id", $user);
+
+        return $this->returnController("ok", $user);
+    }
+}
+
     public function delete($uuid){
         $id = HCrypt::decrypt($uuid);
         if (!$id) {

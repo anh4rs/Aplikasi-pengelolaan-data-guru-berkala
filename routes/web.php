@@ -179,6 +179,7 @@ Route::get('/diklat/guru/cetak', 'adminController@diklatGuruCetak')->name('dikla
             Route::get('{uuid}', 'SekolahController@find')->name('find');
             Route::post('', 'SekolahController@create')->name('create');
             Route::put('{uuid}', 'SekolahController@update')->name('update');
+            Route::post('/change-password', 'SekolahController@updatePassword')->name('updatePassword');
             Route::delete('{uuid}', 'SekolahController@delete')->name('delete');
             });
         Route::prefix('mapel')->name('mapel.')->group(function(){
