@@ -167,7 +167,7 @@ class SekolahController extends APIController
         if (!$user){
                 return $this->returnController("error", "failed find data sekolah");
             }
-        if($req->foto != null){
+
             if($req->password != null){
                 $password       = Hash::make($req->password);
                 $user->password = $password;
@@ -182,7 +182,6 @@ class SekolahController extends APIController
 
         return $this->returnController("ok", $user);
     }
-}
 
     public function delete($uuid){
         $id = HCrypt::decrypt($uuid);
