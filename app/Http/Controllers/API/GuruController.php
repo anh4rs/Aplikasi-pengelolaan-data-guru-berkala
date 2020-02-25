@@ -113,7 +113,6 @@ class GuruController extends APIController
 
         $guru->golongan_id = Hcrypt::decrypt($req->golongan_id);
         $guru->jabatan_id = Hcrypt::decrypt($req->jabatan_id);
-        $guru->sekolah_id = $sekolah_id;
         $guru->mata_pelajaran_id = Hcrypt::decrypt($req->mata_pelajaran_id);
         $guru->NIP = $req->NIP;
         $guru->nama = $req->nama;
