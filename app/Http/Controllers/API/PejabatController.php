@@ -39,24 +39,13 @@ class PejabatController extends APIController
     }
 
     public function create(Request $req){
-        $cekValidasi = Validator::make(ApiRequest::all(), [
-
-            'kode_pejabat_struktural' => 'required|unique:pejabat_strukturals',
-
-        ]);
-
-        $message = 'Kode pejabat_struktural tidak boleh sama ';
-        if ($cekValidasi->fails()) {
-            return response()->json([
-                'Error' => $message
-            ],202);
-        }
 
         $pejabat_struktural = pejabat_struktural::create($req->all());
         //set uuid
         $pejabat_struktural_id = $pejabat_struktural->id;
         $uuid = HCrypt::encrypt($pejabat_struktural_id);
         $setuuid = pejabat_struktural::findOrFail($pejabat_struktural_id);
+        $setuuid->golongan_id = HCrypt::decrypt($req->golongan_id);
         $setuuid->uuid = $uuid;
         $setuuid->update();
         if (!$pejabat_struktural) {
@@ -78,7 +67,7 @@ class PejabatController extends APIController
         if (!$pejabat_struktural) {
             return $this->returnController("error", "failed find data pejabat_struktural");
         }
-        
+
         $pejabat_struktural->fill($req->all())->save();
 
         Redis::del("pejabat_struktural:all");
