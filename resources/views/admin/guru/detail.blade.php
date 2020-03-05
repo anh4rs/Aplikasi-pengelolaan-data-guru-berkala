@@ -36,7 +36,7 @@
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-             
+
                   </div>
                 </div>
               </div>
@@ -68,9 +68,9 @@
                 <h3>
                   Data Pendidikan<span class="font-weight-light"></span>
                 </h3>
-                <div> 
+                <div>
                 <ul id="pendidikanList">
-                
+
                 </ul>
                 </div>
                 <hr class="my-4" />
@@ -155,6 +155,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <form id="form2" action="" method="post">
+                    {{ csrf_field() }}
                       <input type="hidden" class="form-control" name="guru_id" id="guru_id2" value="{{$guru->uuid}}">
                         <div class="form-group">
                             <label for="judul">Diklat</label>
@@ -165,12 +166,12 @@
                         <div class="form-group">
                             <label for="berita">Tahun </label>
                             <input type="date" class="form-control" name="waktu" id="waktu"></input>
-                        </div>                    
-                    </div>   
+                        </div>
+                    </div>
                 <div class="modal-footer">
                   <button type="submit" name="submit" class="btn btn-sm btn-primary">+ tambahkan diklat</button>
                 </div>
-                </form>    
+                </form>
                     <table id="datatable" class="table align-items-center table-striped text-center">
                         <thead class="thead-light">
                             <tr>
@@ -182,7 +183,7 @@
                         </thead>
                         <tbody>
                         </tbody>
-                    </table>                  
+                    </table>
                 </div>
                 </div>
             </div>
@@ -197,7 +198,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
-            </div>    
+            </div>
             <div class="modal-body">
                 <form id="form1" action="" method="post">
                 <input type="hidden" class="form-control" name="guru_id" id="guru_id1" value="{{$guru->id}}">
@@ -216,17 +217,17 @@
                     <div class="form-group">
                         <label for="berita">Nama Sekolah </label>
                         <input type="text" class="form-control" name="nama" id="nama" ></input>
-                    </div>                    
+                    </div>
                     <div class="form-group">
                         <label for="berita">Tahun Lulus </label>
                         <input type="date" class="form-control" name="tahun_lulus" id="tahun_lulus" ></input>
-                    </div> 
-            </div>   
+                    </div>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button> 
+                <button type="button" class="btn btn-link " data-dismiss="modal">Close</button>
                 <button type="submit" id="btn-form1" class="btn btn-primary"></button>
             </div>
-            </form>    
+            </form>
         </div>
     </div>
 </div>
@@ -235,7 +236,7 @@
     <script>
         //get data mata pelajar
         getPendidikan = () => {
-          let id = $('#guru_id1').val();        
+          let id = $('#guru_id1').val();
             $.ajax({
                     type: "GET",
                     url: "{{ url('/api/pendidikan-sekolah')}}" + '/' + id,
@@ -307,9 +308,9 @@
                 })
             }
 
-      //fungsi render datatable            
+      //fungsi render datatable
         $(document).ready(function() {
-          let uuid = $('#guru_id2').val();        
+          let uuid = $('#guru_id2').val();
                 $('#datatable').DataTable( {
                     responsive: true,
                     processing: true,
@@ -343,13 +344,13 @@
         $('#btnPendidikan').click(function(){
             $('.modal-title1').text('Tambah Data Pendidikan');
             $('#pendidikan').val('');
-            $('#nama').val('');        
+            $('#nama').val('');
             $('#tahun_lulus').val('');
             $('#btn-form1').text('Simpan Berita');
             $('#tambahPendidikan').modal('show');
         })
 
-           //event form submit        
+           //event form submit
            $("#form1").submit(function (e) {
                 e.preventDefault()
                 let form = $('#modal-body form');
@@ -370,8 +371,8 @@
                         }
                     })
             } );
-            
-             //event form submit        
+
+             //event form submit
              $("#form2").submit(function (e) {
                 e.preventDefault()
                 let form = $('#modal-body form');
