@@ -159,17 +159,6 @@ class GuruController extends APIController
         $guru_id = HCrypt::decrypt($req->guru_id);
         $diklat_id = HCrypt::decrypt($req->diklat_id);
 
-        if($req->sertifikat != null)
-        {
-            $img = $req->file('sertifikat');
-            $FotoExt  = $img->getClientOriginalExtension();
-            $FotoName = $guru_id.' Diklat ';
-            $foto   = $FotoName.'.'.$FotoExt;
-            $img->move('file/diklat', $foto);
-            $setuuid->diklat       = $foto;
-        }else{
-            $setuuid->diklat      = $setuuid->foto;
-        }
         $diklat_guru->guru_id      =  $guru_id;
         $diklat_guru->diklat_id    =  $diklat_id;
         $diklat_guru->waktu        =  $req->waktu;
